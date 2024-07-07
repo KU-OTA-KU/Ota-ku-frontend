@@ -14,6 +14,25 @@ export default defineComponent({
       progress: 0,
     };
   },
+
+  setup() {
+    useHead({
+      meta: [
+        { name: 'author', content: 'ota-ku' },
+        { name: 'language', content: 'RU' },
+        { property: 'og:image:width', content: '1200'},
+        { property: 'og:image:height', content: '600'},
+        { property: 'ot:image:type', content: 'image/png'},
+        { property: 'og:type', content: 'website' },
+        { property: 'og:locale', content: 'ru' },
+        { name: 'topic', content: 'ota-ku, аниме смотреть, аниме, лучшие аниме онлайн бесплатно, ота-ку, сайт аниме отаку, лучшие топ аниме смотреть'},
+        { name: 'keywords', content: 'Ota-ku - Твой Личный Портал в Мир Аниме, аниме смотреть, аниме, лучшие аниме онлайн бесплатно, ота-ку, сайт аниме отаку, лучшие топ аниме смотреть'},
+      ]
+    });
+
+    return{};
+  },
+
   mounted() {
     // watch(
     //     () => this.$route,
