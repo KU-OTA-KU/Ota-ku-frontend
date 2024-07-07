@@ -1,9 +1,9 @@
 <template>
-  <v-layout style="height: 70px;" class="header-navigation">
-    <v-app-bar tag="header" color="black" scroll-behavior="elevate" height="70">
+  <v-layout style="height: 65px;" class="header-navigation">
+    <v-app-bar tag="header" scroll-behavior="elevate" elevation="4" height="65">
       <v-container class="d-flex pa-0" style="max-width: var(--ota-ku-max-width)">
         <v-col align-self="center" class="d-flex">
-          <v-toolbar-title style="max-width: 130px; min-width: 130px; margin-right: 20px" @click="navigateToHome"
+          <v-toolbar-title style="max-width: 120px; min-width: 120px; margin-right: 20px" @click="navigateToHome"
                            class="cursor-pointer">
             <v-img class="ota-ku-ru-icon user-select-none"
                    src="/ota-kashima/ota-ku-kashima.png"
@@ -12,51 +12,58 @@
             ></v-img>
           </v-toolbar-title>
           <v-toolbar-items class="header-toolbar-items ga-2 align-center d-flex">
-            <v-btn :variant="getButtonVariant('/catalog')" theme="customDark" class="text-capitalize" active
+            <v-btn :variant="getButtonVariant('/catalog')" class="text-capitalize font-weight-regular"
                    to="/catalog"
-                   rounded="lg" size="small" height="30">
+                   rounded="lg" size="small" height="35">
               Каталог
             </v-btn>
-            <v-btn :variant="getButtonVariant('/releases')" theme="customDark" class="text-capitalize" active
+            <v-btn :variant="getButtonVariant('/releases')" class="text-capitalize font-weight-regular"
                    to="/releases"
-                   rounded="lg" size="small" disabled height="30">
+                   rounded="lg" size="small" disabled height="35">
               Релизы
             </v-btn>
-            <v-btn :variant="getButtonVariant('/schedule')" theme="customDark" class="text-capitalize" active
+            <v-btn :variant="getButtonVariant('/schedule')" class="text-capitalize font-weight-regular"
                    to="/schedule"
-                   rounded="lg" size="small" disabled height="30">
+                   rounded="lg" size="small" disabled height="35">
               Расписание
             </v-btn>
           </v-toolbar-items>
         </v-col>
         <v-spacer></v-spacer>
         <v-col class="d-flex justify-end ga-1">
-          <v-btn theme="customDarkTheme" icon="mdi-dice-multiple" variant="text"
-                 @click="this.$router.push('anime?animeId=' + Math.floor(Math.random() * 1000))"></v-btn>
-          <v-btn theme="customDarkTheme" icon="mdi-magnify" variant="text" disabled></v-btn>
-          <v-btn theme="customDarkTheme" icon="mdi-account" variant="text" disabled></v-btn>
+          <v-btn density="comfortable" icon="mdi-dice-multiple" variant="text"
+                 @click="this.$router.push('openAnimeView?animeId=' + Math.floor(Math.random() * 1000))"></v-btn>
+          <v-btn density="comfortable" icon="mdi-magnify" variant="text" disabled></v-btn>
+          <v-btn density="comfortable" icon="mdi-theme-light-dark" variant="text" @click="changeTheme()"></v-btn>
+          <v-btn density="comfortable" icon="mdi-account" variant="text" disabled></v-btn>
         </v-col>
       </v-container>
     </v-app-bar>
   </v-layout>
   <v-layout class="bottom-navigation">
-    <v-bottom-navigation tag="nav" class="pa-1 d-flex ga-3" :elevation="5" grow
-                         style="background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);"
+    <v-bottom-navigation tag="nav" elevation="4" class="pa-1 d-flex ga-2" grow
+                         style="backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);"
                          color="surface">
-      <v-btn value="recent" width="120px" rounded="xl" :variant="getButtonVariant('/schedule')" disabled
-             theme="customDark">
+      <v-btn disabled :loading="loading.schedule" value="recent" width="120px" rounded="xl"
+             :variant="getButtonVariant('/schedule')"
+             @click="openBottomNavigationRoute('schedule')">
         <v-icon>mdi-history</v-icon>
         <span>Сегодня</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn value="favorites" rounded="xl" width="120px" :variant="getButtonVariant('/catalog')" to="/catalog"
-             theme="customDark">
+      <v-btn :loading="loading.catalog" value="catalog" rounded="xl" width="120px"
+             color="blue"
+             to="/catalog"
+             :variant="getButtonVariant('/catalog')"
+             @click="openBottomNavigationRoute('catalog')"
+      >
         <v-icon>mdi-movie-filter</v-icon>
         <span>Каталог</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn value="nearby" width="120px" rounded="xl" :variant="getButtonVariant('/releases')" disabled
-             theme="customDark">
+      <v-btn disabled :loading="loading.releases" value="nearby" width="120px" rounded="xl"
+             :variant="getButtonVariant('/releases')"
+             @click="openBottomNavigationRoute('nearby')">
         <v-icon>mdi-filmstrip-box-multiple</v-icon>
         <span>Библиотека</span>
       </v-btn>
@@ -65,17 +72,41 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from "vue";
+import {defineComponent, reactive} from "vue";
+import {useTheme} from 'vuetify';
+import {openBottomNavigationRoute} from "~/ts/goTo";
 
 export default defineComponent({
   name: "PrimaryHeader",
 
+  data() {
+    return {
+      openBottomNavigationRoute,
+      loading: reactive({
+        schedule: false,
+        catalog: false,
+        releases: false
+      }),
+    };
+  },
+  setup() {
+    const theme = useTheme();
+
+    const changeTheme = () => {
+      console.log("Changing theme");
+      theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
+    };
+
+    return {
+      changeTheme
+    };
+  },
   methods: {
     navigateToHome() {
       this.$router.push('/');
     },
     getButtonVariant(route: string) {
-      return this.$route.path === route ? 'flat' : 'text';
+      return this.$route.path === route ? 'tonal' : 'plain';
     }
   }
 });
