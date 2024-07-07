@@ -5,6 +5,10 @@ export default defineNuxtConfig({
     '~/assets/variables.scss',
   ],
 
+  generate: {
+    routes: ['/', '/catalog', '/openAnimeView']
+  },
+
   build: {
     transpile: ['vuetify'],
   },
