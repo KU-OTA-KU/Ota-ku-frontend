@@ -15,7 +15,7 @@
         <v-card variant="text" class="ota-anime-containers pa-0">
           <v-card-title class="ota-anime-containers-v-title pa-0 d-flex justify-space-between align-center">
             {{ category.title }}
-            <v-btn size="small" rounded="xl" color="white" @click="this.$router.push(`catalog?${category.moreLink}`)">
+            <v-btn size="small" rounded="xl" variant="flat" color="primary" class="text-capitalize" @click="this.$router.push(`catalog?${category.moreLink}`)">
               Больше
             </v-btn>
           </v-card-title>
