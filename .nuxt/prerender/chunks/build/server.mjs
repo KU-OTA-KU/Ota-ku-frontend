@@ -587,7 +587,7 @@ const _routes = [
   {
     name: "catalog",
     path: "/catalog",
-    component: () => import('./catalog-BeVD1OQg.mjs').then((m) => m.default || m)
+    component: () => import('./catalog-B8-y3BzL.mjs').then((m) => m.default || m)
   },
   {
     name: "doc-authors_ru",
@@ -607,12 +607,12 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-CUqWMH7z.mjs').then((m) => m.default || m)
+    component: () => import('./index-Bv92T1-j.mjs').then((m) => m.default || m)
   },
   {
     name: "OpenAnimeView",
     path: "/OpenAnimeView",
-    component: () => import('./OpenAnimeView-wU1INFQK.mjs').then((m) => m.default || m)
+    component: () => import('./OpenAnimeView-Btfo3vCQ.mjs').then((m) => m.default || m)
   },
   {
     name: "releases",
@@ -3751,16 +3751,16 @@ function inject(key) {
     return provides[key];
   }
 }
-const customDark = {
-  dark: true,
+const myCustomLightTheme = {
+  dark: false,
   colors: {
-    background: "#ffffff",
-    surface: "#1763b1",
-    primary: "#0047ff",
-    "primary-darken-1": "#afa5df",
-    secondary: "#212121",
+    background: "#FFFFFF",
+    surface: "#FFFFFF",
+    primary: "#6200EE",
+    "primary-darken-1": "#3700B3",
+    secondary: "#03DAC6",
     "secondary-darken-1": "#018786",
-    error: "#0337bc",
+    error: "#B00020",
     info: "#2196F3",
     success: "#4CAF50",
     warning: "#FB8C00"
@@ -3771,7 +3771,7 @@ const vuetify_7h9QAQEssH = /* @__PURE__ */ defineNuxtPlugin((app) => {
     theme: {
       defaultTheme: "dark",
       themes: {
-        customDark
+        myCustomLightTheme
       }
     }
   });
