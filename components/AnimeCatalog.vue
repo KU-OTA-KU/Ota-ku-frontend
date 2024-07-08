@@ -5,8 +5,9 @@
     </v-card-subtitle>
     <v-row no-gutters class="mt-2 flex-nowrap">
       <v-form @submit.prevent="submitForm" class="w-100">
-        <v-text-field label="Что будем искать в мире аниме?" variant="solo-filled" hide-details density="comfortable"
-                      autocomplete="off"
+        <v-text-field label="Что будем искать в мире аниме?" placeholder="например. Атака титанов"
+                      hide-details density="comfortable"
+                      autocomplete="off" clearable
                       v-model="searchQuery"></v-text-field>
       </v-form>
       <v-btn :icon="sidebarVisible ? 'mdi-close' : 'mdi-filter'" rounded="" class="ml-2" variant="tonal"
