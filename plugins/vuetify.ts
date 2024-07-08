@@ -2,6 +2,7 @@
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 import {createVuetify, type ThemeDefinition} from 'vuetify'
+import colors from 'vuetify/util/colors';
 
 const dark: ThemeDefinition = {
     dark: true,
@@ -62,8 +63,7 @@ export default defineNuxtPlugin((app) => {
         theme: {
             defaultTheme: 'dark',
             themes: {
-                dark,
-                light,
+                
             }
         }
     })

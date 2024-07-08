@@ -1,6 +1,6 @@
 <template>
   <v-layout style="height: 65px;" class="header-navigation">
-    <v-app-bar tag="header" scroll-behavior="elevate" elevation="4" height="65">
+    <v-app-bar tag="header" scroll-behavior="elevate" height="65">
       <v-container class="d-flex pa-0" style="max-width: var(--ota-ku-max-width)">
         <v-col align-self="center" class="d-flex">
           <v-toolbar-title style="max-width: 120px; min-width: 120px; margin-right: 20px" @click="navigateToHome"
@@ -12,21 +12,28 @@
             ></v-img>
           </v-toolbar-title>
           <v-toolbar-items class="header-toolbar-items ga-2 align-center d-flex">
-            <v-btn :variant="getButtonVariant('/catalog')" class="text-capitalize font-weight-regular"
+            <v-btn variant="flat" class="text-capitalize font-weight-regular"
                    to="/catalog"
                    rounded="lg" size="small" height="35">
               Каталог
             </v-btn>
-            <v-btn :variant="getButtonVariant('/releases')" class="text-capitalize font-weight-regular"
+            <v-btn class="text-capitalize font-weight-regular"
                    to="/releases"
-                   rounded="lg" size="small" disabled height="35">
+                   disabled
+                   rounded="lg" size="small"  height="35">
               Релизы
             </v-btn>
-            <v-btn :variant="getButtonVariant('/schedule')" class="text-capitalize font-weight-regular"
+            <v-btn class="text-capitalize font-weight-regular"
                    to="/schedule"
-                   rounded="lg" size="small" disabled height="35">
+                   disabled
+                   rounded="lg" size="small"  height="35">
               Расписание
             </v-btn>
+<!--            <v-btn class="text-capitalize font-weight-regular"-->
+<!--                   to="/schedule"-->
+<!--                   rounded="lg" size="small"  height="35">-->
+<!--              Приложение-->
+<!--            </v-btn>-->
           </v-toolbar-items>
         </v-col>
         <v-spacer></v-spacer>
@@ -34,6 +41,7 @@
           <v-btn density="comfortable" icon="mdi-dice-multiple" variant="text"
                  @click="this.$router.push('openAnimeView?animeId=' + Math.floor(Math.random() * 1000))"></v-btn>
           <v-btn density="comfortable" icon="mdi-magnify" variant="text" disabled></v-btn>
+          <v-btn density="comfortable" icon="mdi-cog" variant="text" disabled></v-btn>
           <v-btn density="comfortable" icon="mdi-theme-light-dark" variant="text" @click="changeTheme()"></v-btn>
           <v-btn density="comfortable" icon="mdi-account" variant="text" disabled></v-btn>
         </v-col>
@@ -45,7 +53,7 @@
                          style="backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);"
                          color="surface">
       <v-btn disabled :loading="loading.schedule" value="recent" width="120px" rounded="xl"
-             :variant="getButtonVariant('/schedule')"
+
              @click="openBottomNavigationRoute('schedule')">
         <v-icon>mdi-history</v-icon>
         <span>Сегодня</span>
@@ -54,16 +62,14 @@
       <v-btn :loading="loading.catalog" value="catalog" rounded="xl" width="120px"
              color="blue"
              to="/catalog"
-             :variant="getButtonVariant('/catalog')"
              @click="openBottomNavigationRoute('catalog')"
       >
         <v-icon>mdi-movie-filter</v-icon>
         <span>Каталог</span>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn disabled :loading="loading.releases" value="nearby" width="120px" rounded="xl"
-             :variant="getButtonVariant('/releases')"
-             @click="openBottomNavigationRoute('nearby')">
+      <v-btn disabled :loading="loading.releases" value="releases" width="120px" rounded="xl"
+             @click="openBottomNavigationRoute('releases')">
         <v-icon>mdi-filmstrip-box-multiple</v-icon>
         <span>Библиотека</span>
       </v-btn>
@@ -106,7 +112,7 @@ export default defineComponent({
       this.$router.push('/');
     },
     getButtonVariant(route: string) {
-      return this.$route.path === route ? 'tonal' : 'plain';
+      return this.$route.path === route ? 'tonal' : 'text';
     }
   }
 });
