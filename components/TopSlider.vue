@@ -1,6 +1,6 @@
 <template>
-  <v-container class="d-flex"
-               style="max-width: var(--ota-ku-max-width); padding: 20px 10px 0 10px; align-items: center">
+  <v-container class="d-flex pa-2"
+               style="max-width: var(--ota-ku-max-width);">
     <v-skeleton-loader
         v-if="topSliderAnimeList.length === 0"
         type="list-item-three-line, list-item-three-line, list-item-three-line, list-item-three-line"
@@ -33,19 +33,21 @@
         >
 
         </v-img>
-        <v-card class="pa-2 d-flex flex-column justify-center top-slider-anime-card" hover color="" link
-                :ripple="false">
-          <v-card-title class="fill-height align-end text-wrap top-slider-anime-title" v-text="anime.russian"
-                        style=""></v-card-title>
-          <v-card-subtitle class="pt-0">Оценка {{ anime.score }}</v-card-subtitle>
-          <v-card-text class="top-slider-anime-cart-text">
+        <v-card class="pa-4 d-flex flex-column justify-center top-slider-anime-card" hover link :ripple="false"
+        >
+          <v-card-title class="pa-0 fill-height align-end text-wrap top-slider-anime-title"
+                        v-text="anime.russian"></v-card-title>
+          <v-card-subtitle class="pa-0">Оценка {{ anime.score }}</v-card-subtitle>
+          <v-card-subtitle class="pa-0 top-slider-anime-cart-text">
             <p>{{ cleanDescription(anime.description) }}</p>
-          </v-card-text>
-          <v-card-actions class="pa-4">
-            <v-btn variant="tonal" prepend-icon="mdi-play" :loading="loading"
+          </v-card-subtitle>
+          <v-card-actions class="pa-0">
+            <v-btn variant="flat" color="white" prepend-icon="mdi-play" :loading="loading"
                    @click="openAnime(anime.id)">
               Смотреть
             </v-btn>
+            <v-btn icon="mdi-bookmark-outline" variant="tonal" rounded="lg" size="x-small"></v-btn>
+            <v-btn icon="mdi-dots-vertical" variant="tonal" rounded="lg" size="x-small"></v-btn>
           </v-card-actions>
         </v-card>
       </v-carousel-item>
@@ -54,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, computed, ref, onMounted} from "vue";
+import {defineComponent, ref} from "vue";
 import axios from "axios";
 import {Storage} from "@capacitor/storage";
 import {cleanDescription} from "~/ts/cleanDescription";
@@ -160,11 +162,11 @@ export default defineComponent({
   width: 48%
 
 .top-slider-anime-title
-  font-size: 2.5em
   font-weight: 600
   font-family: 'Kashima', sans-serif
-  letter-spacing: 8px
+  letter-spacing: 5px
   line-height: 100%
+  font-size: 2em
 
 .top-slider-anime-cart-text
   width: 70%
@@ -174,7 +176,6 @@ export default defineComponent({
   overflow: hidden
   max-height: 115px
   white-space: normal
-  color: #9e9e9e
   font-family: 'Inter', sans-serif
 
 @media screen and (max-width: 600px)

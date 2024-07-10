@@ -5,7 +5,11 @@
         <v-carousel style="width: 100%;" class="most-anime-dialog-modal-carousel" hide-delimiters>
           <v-carousel-item>
             <v-img cover :lazy-src="selectedAnime.poster.originalUrl" :src="selectedAnime.poster.originalUrl"
-                   :alt="selectedAnime.name" width="100%"></v-img>
+                   :alt="selectedAnime.russian" width="100%"></v-img>
+            <div class="position-absolute top-0 d-flex ga-1 ma-2">
+              <span class="top-0 pt-0 pb-0 pl-2 pr-2" style="background-color: limegreen; border-radius: 5px; font-size: 1em;" v-if="selectedAnime.score != 0">{{ selectedAnime.score }}</span>
+              <span class="top-0 pt-0 pb-0 pl-2 pr-2" style="background-color: indianred; border-radius: 5px; font-size: 1em;">720p</span>
+            </div>
           </v-carousel-item>
           <v-carousel-item v-for="video in selectedAnime.videos">
             <iframe
@@ -21,8 +25,8 @@
 
       </div>
       <div class="most-anime-dialog-modal-panel-two">
-        <v-card-title class="headline pb-0 d-flex justify-space-between mb-2" style="font-size: 1em">
-          <p class="text-wrap" >{{ selectedAnime.russian }}</p>
+        <v-card-title class="headline pb-0 d-flex justify-space-between mb-2 text-wrap" style="font-size: 1.3em">
+          {{ selectedAnime.russian }}
           <!--<v-btn variant="tonal" min-width="30px" min-height="30px" @click="closeDialog">-->
           <!--<v-icon>mdi-close</v-icon>-->
           <!--</v-btn>-->
@@ -32,17 +36,15 @@
           <span>•</span>
           <div>Оценка: {{ selectedAnime.score }}</div>
           <span>•</span>
+          <div>Эпизоды: {{ selectedAnime.episodes }}</div>
+          <span>•</span>
           <div>Год выхода: {{ selectedAnime.airedOn.year }}</div>
         </v-card-subtitle>
-        <v-card-text v-text="cleanDescription(selectedAnime.description)"
-                     style="font-family: 'Inter', sans-serif; overflow: hidden; color: #9e9e9e; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"
-                     class="mt-2 most-anime-dialog-modal-panel-text pa-0 pl-4 pr-4">
-        </v-card-text>
-        <v-card-actions class="d-flex ga-1 pa-4 most-anime-dialog-modal-panel-actions">
+        <v-card-actions class="d-flex pa-4 most-anime-dialog-modal-panel-actions">
           <v-btn prepend-icon="mdi-play" variant="flat" :loading="loading" color="primary"
                  @click="openAnime(selectedAnime.id)">Смотреть
           </v-btn>
-          <v-btn prepend-icon="mdi-bookmark" variant="tonal" disabled >В избранное
+          <v-btn prepend-icon="mdi-bookmark" variant="tonal" disabled>В избранное
           </v-btn>
         </v-card-actions>
       </div>

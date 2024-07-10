@@ -1,6 +1,6 @@
 <template>
-  <v-container class="most-anime-container"
-               style="max-width: var(--ota-ku-max-width); padding: 20px 10px 10px 10px; align-items: center;">
+  <v-container class="most-anime-container pa-2"
+               style="max-width: var(--ota-ku-max-width)">
     <div v-if="mostAnimeList.length === 0">
       <v-card variant="text" class="pa-0" v-for="n in 10" :key="n">
         <v-skeleton-loader
@@ -20,14 +20,21 @@
             </v-btn>
           </v-card-title>
           <v-card-subtitle class="ota-anime-containers-v-subtitle pa-0">{{ category.description }}</v-card-subtitle>
-          <v-row no-gutters class="most-anime-container">
+          <v-row dense class="most-anime-container mt-0">
             <v-col v-for="anime in category.anime" :key="anime.id" cols="4" xxl="2" xl="2" lg="2" md="2"
-                   sm="3" xs="4" class="most-anime-container-item pa-xxl-2 pa-xl-2 pa-lg-2 pa-md-1 pa-sm-1 pa-1">
+                   sm="3" xs="4" class="most-anime-container-item">
               <v-card variant="text" link rounded="lg" @click="openDialog(anime)">
-                <v-img :lazy-src="anime.poster.mainUrl" :src="anime.poster.mainUrl"
-                       :alt="anime.name"
-                       rounded="lg" aspect-ratio="0.7" cover
-                       style="pointer-events: none; user-select: none;"></v-img>
+                <div class="position-relative">
+                  <v-img :lazy-src="anime.poster.mainUrl" :src="anime.poster.mainUrl"
+                         :alt="anime.russian"
+                         rounded="lg" aspect-ratio="0.7" cover
+                         style="pointer-events: none; user-select: none;"></v-img>
+                  <div class="position-absolute top-0 d-flex ga-1 ma-1">
+                    <span class="top-0 pt-0 pb-0 pl-2 pr-2" style="background-color: limegreen; border-radius: 5px; font-size: 0.8em;" v-if="anime.score != 0">{{ anime.score }}</span>
+                    <span class="top-0 pt-0 pb-0 pl-2 pr-2" style="background-color: indianred; border-radius: 5px; font-size: 0.8em;">720p</span>
+                  </div>
+
+                </div>
                 <v-card-title class="font-weight-regular pa-0" style="font-size: 1em;">{{
                     anime.russian
                   }}
@@ -35,7 +42,7 @@
                 <v-card-subtitle class="pa-0 d-flex ga-1 pt-0 pb-3" style="font-size: 0.8em">
                   Тип: {{ anime.kind }}
                   <span>•</span>
-                  {{ anime.score }}
+                  Эпизоды: {{ anime.episodes }}
                   <v-icon class=""></v-icon>
                 </v-card-subtitle>
               </v-card>
@@ -104,6 +111,7 @@ export default defineComponent({
                     kind
                     score
                     description
+                    episodes
                     videos { playerUrl }
                     poster {
                       mainUrl
@@ -119,6 +127,7 @@ export default defineComponent({
                     kind
                     score
                     description
+                    episodes
                     videos { playerUrl }
                     poster {
                       mainUrl
@@ -134,6 +143,7 @@ export default defineComponent({
                     kind
                     score
                     description
+                    episodes
                     videos { playerUrl }
                     poster {
                       mainUrl
@@ -149,6 +159,7 @@ export default defineComponent({
                     kind
                     score
                     description
+                    episodes
                     videos { playerUrl }
                     poster {
                       mainUrl
@@ -164,6 +175,7 @@ export default defineComponent({
                     kind
                     score
                     description
+                    episodes
                     videos { playerUrl }
                     poster {
                       mainUrl
@@ -179,6 +191,7 @@ export default defineComponent({
                     kind
                     score
                     description
+                    episodes
                     videos { playerUrl }
                     poster {
                       mainUrl
@@ -194,6 +207,7 @@ export default defineComponent({
                     kind
                     score
                     description
+                    episodes
                     videos { playerUrl }
                     poster {
                       mainUrl

@@ -1,7 +1,7 @@
 import { defineComponent, useSSRContext, ref, watchEffect, watch, computed, createVNode, withCtx, createTextVNode, toDisplayString, openBlock, createBlock, createCommentVNode, Fragment, renderList } from 'file://Z:/Ota-ku-nuxt/node_modules/vue/index.mjs';
 import { ssrRenderComponent, ssrRenderStyle, ssrInterpolate, ssrRenderList, ssrRenderAttrs, ssrRenderAttr } from 'file://Z:/Ota-ku-nuxt/node_modules/vue/server-renderer/index.mjs';
 import { g as genericComponent, p as propsFactory, N as useDisplay, O as clamp, _ as _export_sfc } from './server.mjs';
-import { y as makeGroupItemProps, B as useGroupItem, m as makeComponentProps, al as useIntersectionObserver, K as useResizeObserver, ab as getScrollParent, u as useRender, a1 as openAnime, S as cleanDescription, $ as VImg, O as VLayout, ai as VAppBar, Z as VBtn, P as VMain, Q as VContainer, U as VCard, W as VCardTitle, X as VCardSubtitle, a0 as VCardText, Y as VRow, a7 as VCol, _ as VSkeletonLoader } from './VMain-D64eYTiE.mjs';
+import { y as makeGroupItemProps, B as useGroupItem, m as makeComponentProps, al as useIntersectionObserver, K as useResizeObserver, ab as getScrollParent, u as useRender, a1 as openAnime, S as cleanDescription, $ as VImg, O as VLayout, ai as VAppBar, Z as VBtn, P as VMain, Q as VContainer, U as VCard, W as VCardTitle, X as VCardSubtitle, a0 as VCardText, Y as VRow, a5 as VCol, _ as VSkeletonLoader } from './VMain-D64eYTiE.mjs';
 import { a as VSlideGroupSymbol, V as VSlideGroup } from './VSlideGroup-BSvi5iFT.mjs';
 import axios from 'file://Z:/Ota-ku-nuxt/node_modules/axios/index.js';
 import moment from 'file://Z:/Ota-ku-nuxt/node_modules/moment-timezone/index.js';

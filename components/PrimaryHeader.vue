@@ -20,20 +20,20 @@
             <v-btn class="text-capitalize font-weight-regular"
                    to="/releases"
                    disabled
-                   rounded="lg" size="small"  height="35">
+                   rounded="lg" size="small" height="35">
               Релизы
             </v-btn>
             <v-btn class="text-capitalize font-weight-regular"
                    to="/schedule"
                    disabled
-                   rounded="lg" size="small"  height="35">
+                   rounded="lg" size="small" height="35">
               Расписание
             </v-btn>
-<!--            <v-btn class="text-capitalize font-weight-regular"-->
-<!--                   to="/schedule"-->
-<!--                   rounded="lg" size="small"  height="35">-->
-<!--              Приложение-->
-<!--            </v-btn>-->
+            <!--            <v-btn class="text-capitalize font-weight-regular"-->
+            <!--                   to="/schedule"-->
+            <!--                   rounded="lg" size="small"  height="35">-->
+            <!--              Приложение-->
+            <!--            </v-btn>-->
           </v-toolbar-items>
         </v-col>
         <v-spacer></v-spacer>
@@ -42,7 +42,7 @@
                  @click="this.$router.push('openAnimeView?animeId=' + Math.floor(Math.random() * 1000))"></v-btn>
           <v-btn density="comfortable" icon="mdi-magnify" variant="text" disabled></v-btn>
           <v-btn density="comfortable" icon="mdi-cog" variant="text" disabled></v-btn>
-          <v-btn density="comfortable" icon="mdi-theme-light-dark" variant="text" @click="changeTheme()"></v-btn>
+          <v-btn density="comfortable" icon="mdi-theme-light-dark" variant="text" @click="changeTheme()" disabled></v-btn>
           <v-btn density="comfortable" icon="mdi-account" variant="text" disabled></v-btn>
         </v-col>
       </v-container>
@@ -53,7 +53,6 @@
                          style="backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);"
                          color="surface">
       <v-btn disabled :loading="loading.schedule" value="recent" width="120px" rounded="xl"
-
              @click="openBottomNavigationRoute('schedule')">
         <v-icon>mdi-history</v-icon>
         <span>Сегодня</span>

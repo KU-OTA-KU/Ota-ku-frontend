@@ -20,7 +20,7 @@
           <div v-if="animeCatalogListSkeleton">
             <v-card variant="text" class="pa-0" v-for="n in 10" :key="n">
               <v-skeleton-loader
-                  class="mb-3"
+                  class="mb-2"
                   type="list-item-three-line"
               ></v-skeleton-loader>
             </v-card>
@@ -34,16 +34,21 @@
                 rounded="0"
                 class="catalog-content-containers pa-2 pa-xs-2 pa-sm-2 pa-md-3 pa-lg-4 pa-xl-5 pa-xxl-5 pt-3 pt-xs-3 pt-sm-3 pt-md-4 pt-lg-5 pt-xl-6 pt-xxl-6 pb-3 pb-xs-3 pb-sm-3 pb-md-4 pb-lg-5 pb-xl-6 pb-xxl-6"
                 variant="text"
-                style="border-bottom: 1px solid rgba(158,158,158,0.10)"
             >
               <v-row no-gutters class="flex-nowrap">
-                <v-img
-                    :lazy-src="anime.poster.mainUrl"
-                    :src="anime.poster.mainUrl"
-                    rounded="lg"
-                    cover
-                    class="pointer-events-none user-select-none mr-3 catalog-content-containers-v-image overflow-hidden"
-                ></v-img>
+                <div class="position-relative mr-3 catalog-content-containers-v-image">
+                  <v-img
+                      :lazy-src="anime.poster.mainUrl"
+                      :src="anime.poster.mainUrl"
+                      rounded="lg"
+                      cover
+                      class="pointer-events-none user-select-none overflow-hidden"
+                  ></v-img>
+                  <div class="position-absolute top-0 d-flex ga-1 ma-1">
+                  <span class="top-0 pt-0 pb-0 pl-2 pr-2" style="background-color: limegreen; border-radius: 5px; font-size: 0.8em;" v-if="anime.score != 0">{{ anime.score }}</span>
+                    <span class="top-0 pt-0 pb-0 pl-2 pr-2" style="background-color: indianred; border-radius: 5px; font-size: 0.8em;">720p</span>
+                  </div>
+                </div>
                 <div style="width: 100%;">
                   <v-card-title class="pa-0 text-wrap" style="font-size: 1.2em; font-weight: bold">
                     {{ anime.russian }}
@@ -80,14 +85,14 @@
           </div>
         </v-list>
       </v-card>
-      <v-card v-show="sidebarVisible" width="100%" class="sidebar" rounded="lg" height="100%"
-              position="relative" style="background-color: transparent">
-        <div class="content-wrapper d-flex flex-column ga-2 pb-2">
+      <v-card v-show="sidebarVisible" width="100%" class="sidebar" rounded="lg"
+      >
+        <div class="content-wrapper d-flex flex-column">
           <v-form class="contents pt-2 position-relative"
-                  style="height: 100%; background-color: #212121; border-radius: 6px">
+                  style="height: 100%; border-radius: 6px">
             <v-card variant="text" class="anime-filter-content-v-card pl-4 pr-4" width="100%">
               <v-card-title class="pa-0" style="font-size: 1em">Статус</v-card-title>
-              <v-card-subtitle class="pa-0" style="font-size: 0.8em; white-space: normal !important;">
+              <v-card-subtitle class="pa-0" style="font-size: 0.9em; white-space: normal !important;">
                 Пожалуйста, выберите статус, в котором находится аниме, из предложенных вариантов:
               </v-card-subtitle>
               <v-select density="comfortable" variant="outlined" clearable class="mt-2"
@@ -96,7 +101,7 @@
             </v-card>
             <v-card variant="text" class="anime-filter-content-v-card pl-4 pr-4" width="100%">
               <v-card-title class="pa-0" style="font-size: 1em">Тип</v-card-title>
-              <v-card-subtitle class="pa-0" style="font-size: 0.8em; white-space: normal !important;">
+              <v-card-subtitle class="pa-0" style="font-size: 0.9em; white-space: normal !important;">
                 Пожалуйста, выберите один или несколько типов аниме из списка:
               </v-card-subtitle>
               <v-select multiple chips density="comfortable" variant="outlined" clearable class="mt-2"
@@ -105,7 +110,7 @@
             </v-card>
             <v-card variant="text" class="anime-filter-content-v-card pl-4 pr-4" width="100%">
               <v-card-title class="pa-0" style="font-size: 1em">Жанры</v-card-title>
-              <v-card-subtitle class="pa-0" style="font-size: 0.8em; white-space: normal !important;">
+              <v-card-subtitle class="pa-0" style="font-size: 0.9em; white-space: normal !important;">
                 Пожалуйста, укажите жанры для фильтрации наших релизов:
               </v-card-subtitle>
               <v-select multiple chips density="comfortable" variant="outlined" clearable class="mt-2"
@@ -114,7 +119,7 @@
             </v-card>
             <v-card variant="text" class="anime-filter-content-v-card pl-4 pr-4" width="100%">
               <v-card-title class="pa-0" style="font-size: 1em">Cортировка</v-card-title>
-              <v-card-subtitle class="pa-0" style="font-size: 0.8em; white-space: normal !important;">
+              <v-card-subtitle class="pa-0" style="font-size: 0.9em; white-space: normal !important;">
                 Пожалуйста, выберите предпочтительный порядок сортировки из списка опций:
               </v-card-subtitle>
               <v-select density="comfortable" variant="outlined" clearable class="mt-2"
@@ -123,7 +128,7 @@
             </v-card>
             <v-card variant="text" class="anime-filter-content-v-card pl-4 pr-4" width="100%">
               <v-card-title class="pa-0" style="font-size: 1em">Сезон</v-card-title>
-              <v-card-subtitle class="pa-0" style="font-size: 0.8em; white-space: normal !important;">
+              <v-card-subtitle class="pa-0" style="font-size: 0.9em; white-space: normal !important;">
                 Пожалуйста, выберите желаемый сезон из предложенных вариантов:
               </v-card-subtitle>
               <v-select density="comfortable" variant="outlined" clearable class="mt-2"
@@ -132,25 +137,25 @@
             </v-card>
             <v-card variant="text" class="anime-filter-content-v-card pl-4 pr-4" width="100%">
               <v-card-title class="pa-0" style="font-size: 1em">Оценка</v-card-title>
-              <v-card-subtitle class="pa-0" style="font-size: 0.8em; white-space: normal !important;">
+              <v-card-subtitle class="pa-0" style="font-size: 0.9em; white-space: normal !important;">
                 Выберите параметры для сортировки аниме по оценкам:
               </v-card-subtitle>
               <v-select density="comfortable" variant="outlined" clearable class="mt-2"
                         :item-props="itemProps" :items="ratingItems"
                         label="Выбирите Оценку"></v-select>
             </v-card>
-          </v-form>
-          <div class="submit-filter">
-            <div class="submit-filter-inner-container pa-4 d-flex ga-2"
-                 style="background-color: #212121; border-radius: 6px;">
-              <v-btn theme="customDark" variant="flat" prepend-icon="mdi-check-all">
-                Поиск
-              </v-btn>
-              <v-btn thtme="customDark" variant="text" prepend-icon="mdi-window-close">
-                Сбросить
-              </v-btn>
+            <div class="submit-filter">
+              <div class="submit-filter-inner-container pr-4 pl-4 d-flex ga-2 pb-2"
+                   style="border-radius: 6px;">
+                <v-btn variant="flat" color="primary" prepend-icon="mdi-check-all">
+                  Поиск
+                </v-btn>
+                <v-btn variant="tonal" color="red" prepend-icon="mdi-window-close">
+                  Сбросить
+                </v-btn>
+              </div>
             </div>
-          </div>
+          </v-form>
         </div>
       </v-card>
     </v-row>
@@ -491,7 +496,7 @@ export default {
 
 .catalog-content-containers
   .catalog-content-containers-v-image
-    max-width: 180px
+    max-width: 170px
     width: 100%
     aspect-ratio: 0.7
 
@@ -501,7 +506,7 @@ export default {
 
     @media screen and (max-width: 520px)
       &
-        max-width: 110px
+        max-width: 100px
 
   .catalog-content-container-card-text
     display: -webkit-box
@@ -509,7 +514,6 @@ export default {
     -webkit-box-orient: vertical
     overflow: hidden
     font-size: 0.9em
-    color: #9e9e9e
 
     @media screen and (max-width: 1440px)
       &
@@ -517,7 +521,7 @@ export default {
 
     @media screen and (max-width: 768px)
       &
-        -webkit-line-clamp: 4
+        -webkit-line-clamp: 3
 
     @media screen and (max-width: 425px)
 

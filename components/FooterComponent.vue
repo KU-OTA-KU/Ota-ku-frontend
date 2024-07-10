@@ -3,8 +3,8 @@
     <v-footer color="" theme="customDark" class="pa-0 pt-5 pb-10" elevation="8">
       <v-container class="most-anime-container"
                    style="max-width: var(--ota-ku-max-width); padding: 0 10px; align-items: center;">
-        <div class="mb-1 d-flex ga-4  flex-sm-column flex-md-row ">
-          <div class="d-md-block d-sm-block d-none">
+        <div class="mb-1 d-flex ga-2  flex-sm-column flex-md-row flex-column ">
+          <div class="">
             <span style="font-family: 'Inter', sans-serif; font-size: 0.9em">Весь контент на сайте предназначен исключительно для личного ознакомления. Мы используем
                               материалы из
                               свободных источников. Если какой-то контент нарушает ваши авторские права, пожалуйста, свяжитесь
@@ -16,7 +16,7 @@
                               разрешения администрации. Сайт предназначен для лиц старше 16+ лет.
                         </span>
           </div>
-          <div class="d-flex ga-2">
+          <div class="d-flex ga-2 justify-space-between">
             <div class="text-no-wrap">
               <h3>Документы</h3>
               <ul style="font-size: 0.9em; list-style: none">
@@ -46,9 +46,8 @@
             </div>
           </div>
         </div>
-        <div class="d-flex ga-3" style="font-size: 0.9em">
-          <span>© 2023 - 2024 オタ-KU OTA-KU Все права защищены. Сайт</span>
-          <a href="https://ota-ku.ru/">Ota-ku.ru</a>
+        <div class="d-flex mb-7" style="font-size: 0.9em">
+          <span>©2023-2024 OTA-KU Все права защищены.</span>
         </div>
       </v-container>
     </v-footer>

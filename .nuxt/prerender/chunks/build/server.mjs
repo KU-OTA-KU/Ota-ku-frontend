@@ -587,7 +587,7 @@ const _routes = [
   {
     name: "catalog",
     path: "/catalog",
-    component: () => import('./catalog-B8-y3BzL.mjs').then((m) => m.default || m)
+    component: () => import('./catalog-CQY_T5h4.mjs').then((m) => m.default || m)
   },
   {
     name: "doc-authors_ru",
@@ -607,7 +607,7 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-Bv92T1-j.mjs').then((m) => m.default || m)
+    component: () => import('./index-ztwNm35O.mjs').then((m) => m.default || m)
   },
   {
     name: "OpenAnimeView",
@@ -3751,28 +3751,11 @@ function inject(key) {
     return provides[key];
   }
 }
-const myCustomLightTheme = {
-  dark: false,
-  colors: {
-    background: "#FFFFFF",
-    surface: "#FFFFFF",
-    primary: "#6200EE",
-    "primary-darken-1": "#3700B3",
-    secondary: "#03DAC6",
-    "secondary-darken-1": "#018786",
-    error: "#B00020",
-    info: "#2196F3",
-    success: "#4CAF50",
-    warning: "#FB8C00"
-  }
-};
 const vuetify_7h9QAQEssH = /* @__PURE__ */ defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     theme: {
       defaultTheme: "dark",
-      themes: {
-        myCustomLightTheme
-      }
+      themes: {}
     }
   });
   app.vueApp.use(vuetify);

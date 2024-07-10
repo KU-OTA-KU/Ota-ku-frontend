@@ -1,17 +1,16 @@
 <template>
   <v-layout>
     <v-app-bar :elevation="0" color="transparent" scroll-behavior="hide">
-      <template v-slot:prepend>
-        <v-btn icon="mdi-arrow-left" variant="tonal" theme="customDarkTheme" rounded="lg" @click="goBack()">
+      <v-container class="d-flex pa-2" style="max-width: var(--ota-ku-max-width)">
+        <v-btn icon="mdi-arrow-left" variant="flat" size="small" rounded="lg" @click="goBack()">
         </v-btn>
-      </template>
-      <template v-slot:append>
-        <v-btn icon="mdi-home" variant="tonal" theme="customDarkTheme" rounded="lg" class="mr-3"
+        <v-spacer></v-spacer>
+        <v-btn icon="mdi-home" variant="flat" size="small" rounded="lg" class="mr-3"
                @click="this.$router.push('/')">
         </v-btn>
-        <v-btn icon="mdi-dots-vertical" variant="tonal" theme="customDarkTheme" rounded="lg" disabled>
+        <v-btn icon="mdi-dots-vertical" variant="flat" size="small" rounded="lg" disabled>
         </v-btn>
-      </template>
+      </v-container>
     </v-app-bar>
   </v-layout>
   <v-layout>
@@ -25,7 +24,7 @@
             class="anime-background-image"
         >
         </v-parallax>
-        <div class="anime-background-shadow position-absolute top-0">
+        <div class="anime-background-shadow position-absolute top-0 ">
         </div>
       </section>
       <!-- name and other info -->
