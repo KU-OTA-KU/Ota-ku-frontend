@@ -56,9 +56,9 @@
                   <v-card-subtitle class="pa-0 d-flex ga-1 pt-1 pb-2 text-wrap" style="font-size: 0.8em">
                     Тип: {{ anime.kind }}
                     <span>•</span>
-                    Оценка: {{ anime.score }}
+                    Эпизоды: {{ anime.episodes }}
                     <span>•</span>
-                    Год: {{ anime.airedOn.year }}
+                    Год выхода: {{ anime.airedOn.year }}
                   </v-card-subtitle>
                   <v-card-text
                       class="pa-0 catalog-content-container-card-text"
@@ -80,9 +80,9 @@
             <!--              ></v-progress-circular>-->
             <!--            </v-infinite-scroll>-->
           </div>
-          <div v-if="!animeFound ||  !animeFound && !animeFoundInitialized" class="empty-anime-message">
-            <h3>Ничего не найдено 😔</h3>
-          </div>
+          <v-card variant="tonal"v-if="!animeFound ||  !animeFound && !animeFoundInitialized" class="empty-anime-message ma-2">
+            <v-card-title class="text-center">Ничего не найдено 😔</v-card-title>
+          </v-card>
         </v-list>
       </v-card>
       <v-card v-show="sidebarVisible" width="100%" class="sidebar" rounded="lg"
@@ -448,6 +448,7 @@ export default {
                                 russian
                                 kind
                                 score
+                                episodes
                                 description
                                 airedOn {
                                     year

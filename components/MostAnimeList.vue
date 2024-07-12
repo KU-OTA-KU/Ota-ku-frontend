@@ -25,7 +25,7 @@
                    sm="3" xs="4" class="most-anime-container-item">
               <v-card variant="text" link rounded="lg" @click="openDialog(anime)">
                 <div class="position-relative">
-                  <v-img :lazy-src="anime.poster.mainUrl" :src="anime.poster.mainUrl"
+                  <v-img lazy-src="" :src="anime.poster.mainUrl"
                          :alt="anime.russian"
                          rounded="lg" aspect-ratio="0.7" cover
                          style="pointer-events: none; user-select: none;"></v-img>

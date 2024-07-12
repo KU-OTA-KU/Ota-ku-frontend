@@ -5,9 +5,9 @@ export default defineNuxtConfig({
     '~/assets/variables.scss',
   ],
 
-  generate: {
-    routes: ['/', '/catalog', '/openAnimeView']
-  },
+  // generate: {
+  //   routes: ['/', '/catalog', '/openAnimeView']
+  // },
 
   build: {
     transpile: ['vuetify'],
@@ -15,7 +15,6 @@ export default defineNuxtConfig({
 
   plugins: [
       '~/plugins/nprogress.ts',
-      '~/plugins/themeLogo.ts',
   ],
 
   modules: [
@@ -25,7 +24,6 @@ export default defineNuxtConfig({
         config.plugins.push(vuetify({ autoImport: true }))
       })
     },
-    //...
   ],
 
   vite: {
