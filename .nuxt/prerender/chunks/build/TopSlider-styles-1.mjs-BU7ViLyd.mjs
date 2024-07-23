@@ -1,0 +1,4 @@
+const TopSlider_vue_vue_type_style_index_0_scoped_ac4598fb_lang = ".top-slider-anime-card[data-v-ac4598fb]{background:linear-gradient(90deg,#0a0a0a,#0a0a0a 52%,hsla(0,0%,4%,.4));min-height:var(--top-slider-height)}.top-slider-anime-image[data-v-ac4598fb]{width:48%}.top-slider-anime-title[data-v-ac4598fb]{font-family:Kashima,sans-serif;font-size:2em;font-weight:600;letter-spacing:5px;line-height:100%}.top-slider-anime-cart-text[data-v-ac4598fb]{display:-webkit-box;width:70%;-webkit-line-clamp:5;-webkit-box-orient:vertical;font-family:Inter,sans-serif;max-height:115px;overflow:hidden;white-space:normal}@media screen and (max-width:600px){.top-slider-anime-image[data-v-ac4598fb]{width:100%}.top-slider-anime-card[data-v-ac4598fb]{background:hsla(0,0%,4%,.7)}.top-slider-anime-cart-text[data-v-ac4598fb]{width:100%}}";
+
+export { TopSlider_vue_vue_type_style_index_0_scoped_ac4598fb_lang as T };
+//# sourceMappingURL=TopSlider-styles-1.mjs-BU7ViLyd.mjs.map
