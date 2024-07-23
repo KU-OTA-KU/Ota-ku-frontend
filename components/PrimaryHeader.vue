@@ -40,7 +40,7 @@
         <v-col class="d-flex justify-end ga-1">
           <v-btn density="comfortable" icon="mdi-dice-multiple" variant="text"
                  @click="this.$router.push('openAnimeView?animeId=' + Math.floor(Math.random() * 1000))"></v-btn>
-          <v-btn density="comfortable" icon="mdi-magnify" variant="text" disabled></v-btn>
+          <!--<v-btn density="comfortable" icon="mdi-magnify" variant="text" disabled></v-btn>-->
           <v-btn density="comfortable" icon="mdi-cog" variant="text" disabled></v-btn>
           <v-btn density="comfortable" icon="mdi-theme-light-dark" variant="text" @click="changeTheme()" disabled></v-btn>
           <v-btn density="comfortable" icon="mdi-account" variant="text" disabled></v-btn>
@@ -98,7 +98,6 @@ export default defineComponent({
     const theme = useTheme();
 
     const changeTheme = () => {
-      console.log("Changing theme");
       theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark';
     };
 
