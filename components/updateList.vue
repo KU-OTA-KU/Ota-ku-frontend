@@ -1,5 +1,5 @@
 <template>
-  <section class="px-1 py-2 lg:py-4 bg-zinc-950 flex flex-col md:flex-row justify-between">
+  <section class="px-2 py-2 lg:py-4 bg-zinc-950 flex flex-col md:flex-row justify-between">
     <div class="w-full container max-w-8xl mx-auto">
       <h1 class="h2 text-4xl font-bold mb-1">
         <span class="text-blue-500">OTA</span>-KU
@@ -28,7 +28,7 @@
           и видео происходит намного быстрее, а воспроизведение видео стало более плавным и без задержек.
         </p>
       </div>
-      <button class="button button-secondary mt-2" @click="toggleShowMore">
+      <button class="transition-colors button button-secondary mt-2" @click="toggleShowMore">
         {{ showMore ? 'Скрыть' : 'Подробнее' }}
       </button>
     </div>

@@ -6,7 +6,9 @@ module.exports = {
         '8xl': '100rem',
       },
       aspectRatio: {
-        '1/3': '1/1.4',
+        '1/3': '1/1.3',
+        '1/4': '1/1.45',
+        '1/5': '1/1.5',
       },
       backgroundImage: {
         'custom-gradient-r': 'linear-gradient(90deg, rgba(9,9,11,1) 20%, rgba(9,9,11,0.3) 80%, rgba(0,0,0,0) 100%)',

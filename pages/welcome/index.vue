@@ -120,7 +120,7 @@
       </div>
     </div>
   </div>
-  <div class="absolute top-0 pt-12 pl-3 pointer-events-none select-none">
+  <div class="absolute top-0 pt-12 md:pt-2 pl-2 pointer-events-none select-none">
     <p class="text-sm text-gray-300">©2022 - 2024 OTA-KU Все права защищены.</p>
     <p class="text-sm text-gray-200">для людей старше 16 лет</p>
   </div>
@@ -137,7 +137,7 @@
         <span class="text-center text-blue-400 font-semibold font-sans text-sm">или</span>
         <NuxtLink class="link link-primary" to="/auth/signup">Создать акканут</NuxtLink>
       </div>
-      <div class="p-1 pb-12">
+      <div class="pb-12 md:pb-2">
         <p class="text-sm text-center text-gray-300 pointer-events-none select-none">Весь материал на сайте представлен исключительно для домашнего
           ознакомительного просмотра</p>
       </div>

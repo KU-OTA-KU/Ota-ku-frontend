@@ -1,7 +1,7 @@
 <template>
-  <section class="w-full bg-zinc-950 px-1 py-1 lg:py-2">
+  <section class="w-full bg-zinc-950 px-2 py-2 lg:py-4">
     <div v-for="res in data" :key="res.id"
-      class="container p-4 max-w-8xl mb-2 lg:mb-4 mx-auto flex flex-col gap-2 md:gap-5 md:flex-row">
+      class="container max-w-8xl mb-2 lg:mb-4 mx-auto flex flex-col gap-2 md:gap-5 md:flex-row">
       <div class="w-full lg:w-4/5 overflow-hidden aspect-video relative">
         <NuxtImg :src="res.image" class="h-full w-full rounded-lg" style="object-fit: cover; object-position: center;"
           loading="lazy" format="webp"></NuxtImg>
@@ -17,17 +17,17 @@
           </div>
           <p class="line-clamp-6 opacity-80 text-xs md:text-base">{{ res.descriptionRU }}</p>
           <div class="mt-4 mb-1 flex-col gap-2 md:mt-3 md:mb-3 flex md:flex-row w-full md:w-auto">
-            <a class="button button-third"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+            <NuxtLink class="transition-colors button button-third"><svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 384 512">
                 <path
                   d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80L0 432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z">
                 </path>
-              </svg>Смотреть </a><a class="button button-secondary"><svg class="w-5 h-5 fill-white"
+              </svg>Смотреть </NuxtLink><NuxtLink class="transition-colors button button-secondary"><svg class="w-5 h-5 fill-white"
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
                 <path
                   d="M0 48V487.7C0 501.1 10.9 512 24.3 512c5 0 9.9-1.5 14-4.4L192 400 345.7 507.6c4.1 2.9 9 4.4 14 4.4c13.4 0 24.3-10.9 24.3-24.3V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48z">
                 </path>
-              </svg>В избранное</a>
+              </svg>В избранное</NuxtLink>
           </div>
         </div>
       </div>

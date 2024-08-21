@@ -1,6 +1,6 @@
 <template>
-  <mainHeader :currentNav="0" :currentNavMobile="1"/>
-  <mainSlider/>
+  <MainHeader :currentNav="0" :currentNavMobile="1"/>
+  <MainSlider/>
   <LazyUpdateList/>
   <LazyGenresSlider/>
   <LazyFeedPanel/>

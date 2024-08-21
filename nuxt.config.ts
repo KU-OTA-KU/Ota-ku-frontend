@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     ssr: true,
     devtools: { enabled: true },
     target: 'static',
+    override: true,
     app: {
       // baseURL: '/Ota-ku-frontend/'
     },
