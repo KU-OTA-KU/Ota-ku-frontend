@@ -45,7 +45,7 @@ export default defineComponent({
     const fetchData = async () => {
       try {
         const response = await axios.get('/api/feedPanel.json');
-        data.value = response.data;
+        data.value = response.data.sort(() => Math.random() - 0.5);
       } catch (error) {
         console.error(error);
       }
@@ -61,15 +61,16 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.container:nth-child(2) {
+.container:nth-child(2), .container:nth-child(4) {
   @apply lg:flex-row-reverse
 }
 
-.container:nth-child(2) .container-text {
+.container:nth-child(2) .container-text, .container:nth-child(4) .container-text {
   @apply lg:text-left
 }
 
-.container:nth-child(2) .container-genres {
+.container:nth-child(2) .container-genres, .container:nth-child(4) .container-genres{
   @apply lg:justify-start
 }
+
 </style>
