@@ -6,7 +6,7 @@
         </h2>
       </div>
       <div class="w-full">
-        <Swiper :modules="[]" :loop="false" :effect="'creative'" :grab-cursor="true" :breakpoints="{
+        <Swiper :modules="[]" :loop="false" :effect="'creative'" :grab-cursor="true" :freeMode="true" :breakpoints="{
           390: {
             slidesPerView: 3,
             spaceBetween: 10
@@ -35,19 +35,25 @@
           <SwiperSlide v-if="data" v-for="res in data" :key="res.id" class="series-container">
             <div class="w-full  bg-zinc-800 relative rounded-md overflow-hidden cursor-pointer aspect-1/4">
               <NuxtImg format="webp" :src="res.image" class="w-full h-full object-cover" loading="lazy" />
-              <div class="w-full h-full flex flex-col justify-end p-2 bg-custom-series-gradient-t absolute bottom-0 transition-opacity title">
+              <div
+                class="w-full h-full flex flex-col justify-end p-2 bg-custom-series-gradient-t absolute bottom-0 transition-opacity title">
                 <h4 class="h4 mb-1 line-clamp-2">{{ res.titleRU }}</h4>
-                <span class="flex line-clamp-2 opacity-80 text-xs">{{ res.airedOnYear.year }} <span class="mx-1 hidden md:block">•</span><p class="hidden md:block">{{ res.genres[0].titleRU }}</p><span class="mx-1">•</span><p>{{ res.kind.kindRU}}</p></span>
+                <span class="flex line-clamp-2 opacity-80 text-xs">{{ res.airedOnYear.year }} <span
+                    class="mx-1 hidden md:block">•</span>
+                  <p class="hidden md:block">{{ res.genres[0].titleRU }}</p><span class="mx-1">•</span>
+                  <p>{{ res.kind.kindRU }}</p>
+                </span>
               </div>
               <div class="absolute top-0 p-2 flex gap-2 transition-opacity status-bar">
                 <div class="bg-red-500 py-0.5 text-xs md:text-sm px-3 rounded-md font-semibold">
                   <p>{{ res.resolution }}</p>
                 </div>
                 <div class="bg-green-500 py-0.5 text-xs md:text-sm px-3 rounded-md font-semibold">
-                  <p>{{ res.score}}</p>
+                  <p>{{ res.score }}</p>
                 </div>
               </div>
-              <div class="absolute top-0 w-full bg-black h-full px-2 pt-2 bg-opacity-70 opacity-0 transition-opacity description">
+              <div
+                class="absolute top-0 w-full bg-black h-full px-2 pt-2 bg-opacity-70 opacity-0 transition-opacity description">
                 <p class="line-clamp-6 text-xs opacity-60 ">{{ res.descriptionRU }}</p>
               </div>
             </div>
@@ -103,18 +109,18 @@ export default defineComponent({
 
 <style scoped lang="scss">
 .series-container {
-   &:hover {
-      .description {
-        opacity: 1;
-      }
+  &:hover {
+    .description {
+      opacity: 1;
+    }
 
-      .status-bar {
-        opacity: 0;
-      }
+    .status-bar {
+      opacity: 0;
+    }
 
-      .title {
-        opacity: 0;
-      }
-   }
+    .title {
+      opacity: 0;
+    }
+  }
 }
 </style>

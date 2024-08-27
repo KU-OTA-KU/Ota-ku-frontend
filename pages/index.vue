@@ -1,11 +1,11 @@
 <template>
-  <MainHeader :currentNav="0" :currentNavMobile="1"/>
-  <MainSlider/>
-  <LazyUpdateList/>
-  <LazyGenresSlider/>
-  <LazyFeedPanel/>
-  <LazyAboutUs/>
-  <LazyFooterComponent/>
+  <MainHeader :currentNav="0" :currentNavMobile="1" />
+  <MainSlider />
+  <LazyUpdateList />
+  <LazyGenresSlider />
+  <LazyFeedPanel />
+  <LazyAboutUs />
+  <LazyFooterComponent />
   <!-- <LazyMainSeries title="Топ аниме" subtitle="Погружайся в лучшие аниме! 🏆" apiFetchPath="testMainSeries" />
   <LazyMainSeries title="В тренде" subtitle="аниме, которое захватывает мир! 😉" apiFetchPath="testMainSeries" />
   <LazyMainSeries title="Онгоинги" subtitle="следи за сюжетом! 🌟👆" apiFetchPath="testMainSeries" />
@@ -13,7 +13,7 @@
   <LazyMainSeries title="Популярные OVA" subtitle="Погружайся в лучшие аниме! 🏆" apiFetchPath="testMainSeries" />
   <LazyMainSeries title="Анонсы" subtitle="Узнавай первым о предстоящих релизах! 1️⃣💯" apiFetchPath="testMainSeries" />
   <LazyMainSeries title="Завершенные" subtitle="В компании классических аниме! 😎🤔" apiFetchPath="testMainSeries" />
-  <LazyMainSeries title="Фильмы" subtitle="Коллекция фильмов для наслаждения! 🎥👀" apiFetchPath="testMainSeries" /> -->
+  <LazyMainSeries title="Фильмы" subtitle="Коллекция фильмов для наслаждения! 🎥👀" apiFetchPath="testMainSeries" />  -->
 </template>
 
 <script lang="ts">

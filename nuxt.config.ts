@@ -10,14 +10,7 @@ export default defineNuxtConfig({
     },
   
     plugins: ['~/plugins/nprogress.ts', '~/plugins/statusBar.ts', '~/plugins/navigationBar.ts', '~/plugins/cursor.ts'],
-    modules: [
-      "nuxt-gtag",
-      "@nuxtjs/ionic",
-      '@nuxtjs/tailwindcss',
-      '@nuxtjs/robots',
-      '@nuxt/image',
-      'nuxt-swiper',
-    ],
+    modules: ["nuxt-gtag", "@nuxtjs/ionic", '@nuxtjs/tailwindcss', '@nuxtjs/robots', '@nuxt/image', 'nuxt-swiper', 'nuxt-aos'],
 
     gtag: {
         id: 'G-XKSYJXXKPB'

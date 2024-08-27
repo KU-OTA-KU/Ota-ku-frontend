@@ -10,8 +10,8 @@
       </NuxtLink>
     </div>
     <div class="pointer-events-none select-none">
-      <NuxtImg class="mx-auto w-52 pointer-events-none select-none" preload format="webp"
-        src="/otaKu/logo.png" alt="Ota-ku Смотреть аниме в нашем платформе" />
+      <NuxtImg class="mx-auto w-52 pointer-events-none select-none" preload format="webp" src="/otaKu/logo.png"
+        alt="Ota-ku Смотреть аниме в нашем платформе" />
       <h2 class="mt-3 text-center text-lg font-semibold font-sans leading-5">Лаг Сиинг уже в пути!
       </h2>
     </div>

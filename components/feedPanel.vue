@@ -1,15 +1,15 @@
 <template>
-  <section class="w-full bg-zinc-950 px-2 py-2 lg:py-4">
-    <div v-for="res in data" :key="res.id"
+  <section class="w-full bg-zinc-950 px-2 py-2 lg:py-4" >
+    <div v-for="res in data" :key="res.id" 
       class="container max-w-8xl mb-2 lg:mb-4 mx-auto flex flex-col gap-2 md:gap-5 md:flex-row">
-      <div class="w-full lg:w-4/5 overflow-hidden aspect-video relative">
+      <div class="w-full lg:w-4/5 overflow-hidden aspect-video relative" >
         <NuxtImg :src="res.image" class="h-full w-full rounded-lg" style="object-fit: cover; object-position: center;"
           loading="lazy" format="webp"></NuxtImg>
         <div class="w-full h-full absolute top-0 bg-custom-feed-gradient-t z-10"></div>
       </div>
       <div class="text-left lg:text-right w-full container-text">
         <div>
-          <h2 class="h3 mb-1">{{ res.titleRU }}</h2>
+          <h2 class="h3 mb-1" >{{ res.titleRU }}</h2>
           <div class="flex lg:justify-end container-genres opacity-65 mt-1 mb-1 text-sm md:text-base md:mt-2 md:mb-2">
             <p class="" v-for="(genre, index) in res.genres" :key="index">{{ genre }}<span
                 v-if="index < res.genres.length - 1" class="mr-3 ml-3">•</span>
@@ -34,17 +34,28 @@
     </div>
   </section>
 </template>
+
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 import axios from 'axios';
+
+interface FeedItem {
+  id: number;
+  image: string;
+  titleRU: string;
+  genres: string[];
+  descriptionRU: string;
+}
+
 export default defineComponent({
-  name: "feedPanelComponent",
+  name: "FeedPanelComponent",
+
   setup() {
-    const data = ref(null);
+    const data = ref<FeedItem[]>([]);
 
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/feedPanel.json');
+        const response = await axios.get<FeedItem[]>('/api/feedPanel.json');
         data.value = response.data.sort(() => Math.random() - 0.5);
       } catch (error) {
         console.error(error);
@@ -72,5 +83,4 @@ export default defineComponent({
 .container:nth-child(2) .container-genres, .container:nth-child(4) .container-genres{
   @apply lg:justify-start
 }
-
 </style>
