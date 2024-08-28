@@ -2,13 +2,13 @@
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     ssr: true,
-    devtools: { enabled: true },
+    devtools: {enabled: true},
     target: 'static',
     override: true,
     app: {
-      // baseURL: '/Ota-ku-frontend/'
+        // baseURL: '/Ota-ku-frontend/'
     },
-  
+
     plugins: ['~/plugins/nprogress.ts', '~/plugins/statusBar.ts', '~/plugins/navigationBar.ts', '~/plugins/cursor.ts'],
     modules: ["nuxt-gtag", "@nuxtjs/ionic", '@nuxtjs/tailwindcss', '@nuxtjs/robots', '@nuxt/image', 'nuxt-swiper', 'nuxt-aos'],
 
@@ -17,21 +17,8 @@ export default defineNuxtConfig({
     },
 
     routeRules: {
-      '/': { prerender: true},
-      '/welcome': { prerender: true}, 
-    },
-
-    vuetify: {
-        moduleOptions: {
-        },
-        vuetifyOptions: {
-            theme: {
-                defaultTheme: 'dark',
-                themes: {
-
-                }
-            }
-        }
+        '/': {prerender: true},
+        '/welcome': {prerender: true},
     },
 
     css: [
@@ -47,10 +34,10 @@ export default defineNuxtConfig({
     },
 
     ionic: {
-      integrations: {
-        capacitor: true,
-      },
-      css: false
+        integrations: {
+            capacitor: true,
+        },
+        css: false
     },
-    
+
 })
