@@ -1,26 +1,29 @@
 <template>
 	<section class="flex flex-col justify-center h-dvh px-6 py-12 lg:px-8">
-		<back-button href="/auth/signIn"></back-button>
-		<auth-logo-and-title title="Ну что придумаем новый пароль Сэмпай?!"></auth-logo-and-title>
+		<back-button href="/welcome"></back-button>
+		<auth-logo-and-title title="Откройте для себя мир Отаку!"></auth-logo-and-title>
 
 		<div class="mt-7 sm:mx-auto sm:w-full sm:max-w-md flex flex-col">
 			<form class="space-y-5" @submit.prevent="submitForm">
 				<div>
-					<label for="password" class="block text-sm font-medium leading-5 text-white">Новый пароль</label>
+					<label for="email" class="block text-sm font-medium leading-5 text-white">Эл. почта</label>
 					<div class="mt-1">
-						<input id="password" v-model="password" @input="validateForm" type="password" placeholder="Введите пароль"
-						       autocomplete="current-password" required class="input input-primary"/>
-						<p v-if="errors.password" class="text-red-500 text-xs mt-1">{{ errors.password }}</p>
+						<input id="email" v-model="email" @input="validateForm" type="text" autocomplete="current-login" required
+						       placeholder="Введите эл. почту" class="input input-primary"/>
+						<p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
 					</div>
 				</div>
 				<div>
 					<div class="flex items-center justify-between">
-						<label for="password-repeat" class="block text-sm font-medium leading-5 text-white">Повторите пароль</label>
+						<label for="password" class="block text-sm font-medium leading-5 text-white">Пароль</label>
+						<div class="mt-1">
+							<NuxtLink class="text-sm text-blue-400" to="/auth/forgotPassword">Забыли Пароль?</NuxtLink>
+						</div>
 					</div>
 					<div class="mt-1">
-						<input id="password-repeat" v-model="repeatPassword" @input="validateForm" type="password"
-						       placeholder="Повторите пароль" autocomplete="current-password" required class="input input-primary"/>
-						<p v-if="errors.repeatPassword" class="text-red-500 text-xs mt-1">{{ errors.repeatPassword }}</p>
+						<input id="password" v-model="password" @input="validateForm" type="password"
+						       autocomplete="current-password" required placeholder="Введите пароль" class="input input-primary"/>
+						<p v-if="errors.password" class="text-red-500 text-xs mt-1">{{ errors.password }}</p>
 					</div>
 				</div>
 
@@ -30,15 +33,14 @@
 					</button>
 				</div>
 			</form>
-
 			<lazy-auth-footer></lazy-auth-footer>
 		</div>
 	</section>
 </template>
 
 <script lang="ts">
-import {defineComponent, onMounted} from 'vue';
-import {validatePassword, validateRepeatPassword} from '~/utils/validation';
+import {defineComponent} from 'vue';
+import {validateEmail, validatePassword} from '~/utils/validation';
 import {useNuxtApp} from '#app';
 import BackButton from "~/components/auth/backButton.vue";
 import AuthLogoAndTitle from "~/components/auth/authLogoAndTitle.vue";
@@ -60,8 +62,8 @@ export default defineComponent({
 
 	data() {
 		return {
+			email: '',
 			password: '',
-			repeatPassword: '',
 			errors: {},
 			isSubmitDisabled: true,
 		};
@@ -69,14 +71,13 @@ export default defineComponent({
 	methods: {
 		validateForm() {
 			const errors: ValidationErrors = {};
+			validateEmail(this.email, errors);
 			validatePassword(this.password, errors);
-			validateRepeatPassword(this.password, this.repeatPassword, errors);
 			this.errors = errors;
 			this.isSubmitDisabled = !!Object.keys(this.errors).length;
 		},
 		submitForm() {
-			console.log('Form submitted:', {password: this.password, repeatPassword: this.repeatPassword});
-			this.$router.push("/auth/signin")
+			console.log('Form submitted:', {emailLogin: this.email, password: this.password});
 		}
 	}
 });

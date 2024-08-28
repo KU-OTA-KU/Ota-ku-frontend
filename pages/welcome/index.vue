@@ -126,16 +126,16 @@
   </div>
   <div class="absolute bottom-0 w-full">
     <div class="w-full flex flex-col justify-center items-center">
-      <NuxtImg preload format="webp" src="/otaKu/logo.png" class="w-1/2 md:w-56 lg:w-60 xl:w-72 pointer-events-none select-none"
+      <NuxtImg preload format="webp" src="/ota-ku/Logo.webp" class="w-1/2 md:w-56 lg:w-60 xl:w-72 pointer-events-none select-none"
         alt="Ota-ku Смотреть аниме в нашем платформе" />
       <div class="mt-1 mb-4 text-center pointer-events-none select-none">
         <h1 class="text-4xl  md:text-5xl font-sans font-bold leading-none">Добро пожаловать</h1>
         <h2 class="text-xl lg:text-xl mt-2 leading-none">Здесь начинаются ваши<br> незабываемые приключения.</h2>
       </div>
       <div class="flex max-w-48 w-full flex-col gap-2 mt-3 mb-8">
-        <NuxtLink type="submit" class="button-primary button" to="/auth/signin">Войти</NuxtLink>
+        <NuxtLink type="submit" class="button-primary button" to="/auth/signIn">Войти</NuxtLink>
         <span class="text-center text-blue-400 font-semibold font-sans text-sm">или</span>
-        <NuxtLink class="link link-primary" to="/auth/signup">Создать акканут</NuxtLink>
+        <NuxtLink class="link link-primary" to="/auth/signUp">Создать акканут</NuxtLink>
       </div>
       <div class="pb-12 md:pb-2">
         <p class="text-sm text-center text-gray-300 pointer-events-none select-none">Весь материал на сайте представлен исключительно для домашнего
