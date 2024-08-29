@@ -1,11 +1,12 @@
 import { defineNuxtPlugin } from '#app';
-import Toast, {type PluginOptions, POSITION } from 'vue-toastification';
+import Toast, {type PluginOptions } from 'vue-toastification';
 // import 'vue-toastification/dist/index.css';
 import 'assets/css/toastification.css';
 
+const { POSITION } = Toast;
 const options: PluginOptions = {
-    position: POSITION.TOP_CENTER,
-    timeout: 2,
+    position: POSITION.TOP_RIGHT,
+    timeout: 4000,
     closeOnClick: false,
     draggablePercent: 1,
     closeButton: true,
