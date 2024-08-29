@@ -1,6 +1,6 @@
 <template>
 	<section class="flex flex-col justify-center h-dvh px-6 py-12 lg:px-8">
-		<back-button href="/welcome"></back-button>
+		<auth-back-button href="/welcome"></auth-back-button>
 		<auth-logo-and-title title="Еще не с нами? Сэмпай?! Присоединяйся"></auth-logo-and-title>
 
 		<div class="mt-7 sm:mx-auto sm:w-full sm:max-w-md flex flex-col">
@@ -55,6 +55,7 @@
 				</div>
 			</form>
 
+
 			<auth-footer></auth-footer>
 		</div>
 	</section>
@@ -62,18 +63,27 @@
 
 
 <script lang="ts">
-import {defineComponent, onMounted} from 'vue';
-import {validateEmail, validateLogin, validatePassword, validateRepeatPassword} from '~/utils/validation';
+import {defineComponent, onMounted, ref} from 'vue';
 import {useNuxtApp} from '#app';
-import BackButton from "~/components/auth/backButton.vue";
-import AuthLogoAndTitle from "~/components/auth/authLogoAndTitle.vue";
+import {AuthBackButton, AuthLogoAndTitle} from "#components";
+import authService from "~/services/api/authService";
+import {useToast} from "vue-toastification";
+import {validateEmail, validateLogin, validatePassword, validateRepeatPassword} from '~/utils/validation';
 
 export default defineComponent({
 	name: "signUpComponent",
-	components: {AuthLogoAndTitle, BackButton},
+	components: {AuthLogoAndTitle, AuthBackButton},
 
 	setup() {
+		const toast = useToast();
 		const {$statusBar, $navigationBar} = useNuxtApp();
+
+		const email = ref('');
+		const login = ref('');
+		const password = ref('');
+		const repeatPassword = ref('');
+		const errors = ref<Record<string, string>>({});
+		const isSubmitDisabled = ref(true);
 
 		onMounted(async () => {
 			$navigationBar.overlayShow();
@@ -81,37 +91,54 @@ export default defineComponent({
 			$navigationBar.setColor('#18181B');
 			$statusBar.setColor('#18181B');
 		});
-	},
 
-	data() {
+		const validateForm = () => {
+			const validationErrors: Record<string, string> = {};
+			validateEmail(email.value, validationErrors);
+			validateLogin(login.value, validationErrors);
+			validatePassword(password.value, validationErrors);
+			validateRepeatPassword(password.value, repeatPassword.value, validationErrors);
+			errors.value = validationErrors;
+			isSubmitDisabled.value = !!Object.keys(errors.value).length;
+		};
+
+		const submitForm = async () => {
+			try {
+				const response = await authService.register({
+					login: login.value,
+					email: email.value,
+					password: password.value,
+					password_confirmation: repeatPassword.value,
+				});
+
+				this.$router.push({name: 'auth/otp'});
+			} catch (error: any) {
+				if (error.response && error.response.data) {
+
+					if (error.response.data.errors) {
+						Object.keys(error.response.data.errors).forEach((field) => {
+							error.response.data.errors[field].forEach((message: string) => {
+								toast.error(`${message}`);
+							});
+						});
+					}
+				} else {
+					toast.error(error.message);
+				}
+			}
+		};
+
 		return {
-			email: '',
-			login: '',
-			password: '',
-			repeatPassword: '',
-			errors: {},
-			isSubmitDisabled: true,
+			email,
+			login,
+			password,
+			repeatPassword,
+			errors,
+			isSubmitDisabled,
+			validateForm,
+			submitForm,
 		};
 	},
-	methods: {
-		validateForm() {
-			const errors: ValidationErrors = {};
-			validateEmail(this.email, errors);
-			validateLogin(this.login, errors);
-			validatePassword(this.password, errors);
-			validateRepeatPassword(this.password, this.repeatPassword, errors);
-			this.errors = errors;
-			this.isSubmitDisabled = !!Object.keys(this.errors).length;
-		},
-		submitForm() {
-			console.log('Form submitted:', {
-				email: this.email,
-				login: this.login,
-				password: this.password,
-				repeatPassword: this.repeatPassword
-			});
-		}
-	}
 });
 </script>
 

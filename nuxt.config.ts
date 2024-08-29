@@ -9,7 +9,7 @@ export default defineNuxtConfig({
         // baseURL: '/Ota-ku-frontend/'
     },
 
-    plugins: ['~/plugins/nprogress.ts', '~/plugins/statusBar.ts', '~/plugins/navigationBar.ts', '~/plugins/cursor.ts'],
+    plugins: ['~/plugins/nprogress.ts', '~/plugins/statusBar.ts', '~/plugins/navigationBar.ts', '~/plugins/cursor.ts', '~/plugins/vueToastie.ts'],
     modules: ["nuxt-gtag", "@nuxtjs/ionic", '@nuxtjs/tailwindcss', '@nuxtjs/robots', '@nuxt/image', 'nuxt-swiper', 'nuxt-aos'],
 
     gtag: {

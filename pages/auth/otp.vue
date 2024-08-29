@@ -1,6 +1,6 @@
 <template>
 	<section class="flex flex-col justify-center h-dvh px-6 py-12 lg:px-8">
-		<back-button href="/auth/forgotPassword"></back-button>
+		<auth-back-button href="/auth/forgotPassword"></auth-back-button>
 		<auth-logo-and-title title="Лаг Сиинг уже в пути!"></auth-logo-and-title>
 
 		<div class="mt-7 sm:mx-auto sm:w-full sm:max-w-md flex flex-col">
@@ -37,12 +37,11 @@
 <script lang="ts">
 import {defineComponent, nextTick, onMounted} from 'vue';
 import {useNuxtApp} from '#app';
-import BackButton from "~/components/auth/backButton.vue";
-import AuthLogoAndTitle from "~/components/auth/authLogoAndTitle.vue";
+import {AuthBackButton, AuthLogoAndTitle} from "#components";
 
 export default defineComponent({
 	name: "otpComponent",
-	components: {AuthLogoAndTitle, BackButton},
+	components: {AuthLogoAndTitle, AuthBackButton},
 	data() {
 		return {
 			otp: ['', '', '', '', ''],

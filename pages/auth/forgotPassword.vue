@@ -1,6 +1,6 @@
 <template>
 	<section class="flex flex-col justify-center h-dvh px-6 py-12 lg:px-8">
-		<back-button href="/auth/signIn"></back-button>
+		<auth-back-button href="/auth/signIn"></auth-back-button>
 		<auth-logo-and-title title="Разве настоящие отаку забывают пароли?!"></auth-logo-and-title>
 
 		<div class="mt-7 sm:mx-auto sm:w-full sm:max-w-md flex flex-col">
@@ -29,12 +29,11 @@
 import {defineComponent, onMounted} from 'vue';
 import {validateEmail} from '~/utils/validation';
 import {useNuxtApp} from '#app';
-import BackButton from "~/components/auth/backButton.vue";
-import AuthLogoAndTitle from "~/components/auth/authLogoAndTitle.vue";
+import {AuthBackButton, AuthLogoAndTitle} from "#components";
 
 export default defineComponent({
 	name: "forgotPasswordComponent",
-	components: {AuthLogoAndTitle, BackButton},
+	components: {AuthLogoAndTitle, AuthBackButton},
 
 	setup() {
 		const {$statusBar, $navigationBar} = useNuxtApp();
