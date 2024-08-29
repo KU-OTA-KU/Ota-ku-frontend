@@ -3,9 +3,8 @@ import Toast, {type PluginOptions } from 'vue-toastification';
 // import 'vue-toastification/dist/index.css';
 import 'assets/css/toastification.css';
 
-const { POSITION } = Toast;
 const options: PluginOptions = {
-    position: POSITION.TOP_RIGHT,
+    position: 'top-right',
     timeout: 4000,
     closeOnClick: false,
     draggablePercent: 1,
