@@ -121,25 +121,24 @@
     </div>
   </div>
   <div class="absolute top-0 pt-12 md:pt-2 pl-2 pointer-events-none select-none">
-    <p class="text-sm text-gray-300">©2022 - 2024 OTA-KU Все права защищены.</p>
-    <p class="text-sm text-gray-200">для людей старше 16 лет</p>
+    <p class="text-sm text-gray-300">©2022 - 2024 {{ $t('all_rights_reserved')}}</p>
+    <p class="text-sm text-gray-200">{{ $t('age_restriction')}}</p>
   </div>
   <div class="absolute bottom-0 w-full">
     <div class="w-full flex flex-col justify-center items-center">
       <NuxtImg preload format="webp" src="/ota-ku/Logo.webp" class="w-1/2 md:w-56 lg:w-60 xl:w-72 pointer-events-none select-none"
         alt="Ota-ku Смотреть аниме в нашем платформе" />
       <div class="mt-1 mb-4 text-center pointer-events-none select-none">
-        <h1 class="text-4xl  md:text-5xl font-sans font-bold leading-none">Добро пожаловать</h1>
-        <h2 class="text-xl lg:text-xl mt-2 leading-none">Здесь начинаются ваши<br> незабываемые приключения.</h2>
+        <h1 class="text-4xl  md:text-5xl font-sans font-bold leading-none">{{ $t('welcome') }}</h1>
+        <h2 class="text-xl lg:text-xl mt-2 leading-none">{{ $t('journey_begins')}}<br> {{ $t('unforgettable_adventures')}}</h2>
       </div>
       <div class="flex max-w-48 w-full flex-col gap-2 mt-3 mb-8">
-        <NuxtLink type="submit" class="button-primary button" to="/auth/signIn">Войти</NuxtLink>
-        <span class="text-center text-blue-400 font-semibold font-sans text-sm">или</span>
-        <NuxtLink class="link link-primary" to="/auth/signUp">Создать акканут</NuxtLink>
+        <NuxtLink  type="submit" class="button-primary button" :to="$localeRoute('auth/signIn')">{{ $t('sign_in')}}</NuxtLink>
+        <span class="text-center text-blue-400 font-semibold font-sans text-sm">{{ $t('or')}}</span>
+        <NuxtLink class="link link-primary" to="/auth/signUp">{{ $t('create_account')}}</NuxtLink>
       </div>
       <div class="pb-12 md:pb-2">
-        <p class="text-sm text-center text-gray-300 pointer-events-none select-none">Весь материал на сайте представлен исключительно для домашнего
-          ознакомительного просмотра</p>
+        <p class="text-sm text-center text-gray-300 pointer-events-none select-none">{{ $t('disclaimer')}}</p>
       </div>
     </div>
   </div>

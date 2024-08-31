@@ -1,0 +1,12 @@
+{
+  "auth_title": "Discover the world of Ota-ku!",
+  "email_label": "Email",
+  "email_placeholder": "Enter your email",
+  "password_label": "Password",
+  "password_placeholder": "Enter your password",
+  "forgot_password": "Forgot Password?",
+  "sign_in": "Sign In",
+  "email_error": "Invalid email address",
+  "password_error": "Password is required",
+  "submit_button": "Sign In"
+}

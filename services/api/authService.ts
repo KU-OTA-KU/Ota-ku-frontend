@@ -10,9 +10,17 @@ class AuthService extends ApiService {
             throw error;
         }
     }
-    
+
     register(data: any) {
-        return this.request('post', '/register', data);
+        return this.request('post', '/auth/register', data);
+    }
+
+    generateOtp(data: any) {
+        return this.request('get', '/auth/otp/generate', data);
+    }
+
+    verifyOtp(data: any) {
+        return this.request('get', '/otp/verify ', data);
     }
 }
 

@@ -41,6 +41,7 @@
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@types/nprogress": "^0.2.3",
     "nuxt-aos": "^1.2.5",
+    "nuxt-i18n-micro": "^1.9.0",
     "sass": "^1.77.8"
   }
 }

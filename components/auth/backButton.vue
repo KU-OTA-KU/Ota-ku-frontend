@@ -13,10 +13,11 @@ export default defineComponent({
 </script>
 
 <template>
-	<div class="block lg:hidden pt-4 pr-5 pl-5 absolute top-0 left-0">
-		<NuxtLink :to="href" class="font-sans font-sm">
+	<div class="block pt-4 pr-5 pl-5 absolute top-0 left-0">
+		<NuxtLink :to="$localeRoute(href)" class="font-sans font-sm">
 			<svg
-					class="w-10 h-10 p-2  bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors" viewBox="0 0 512 512" version="1.1"
+					class="w-10 h-10 p-2  bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors" viewBox="0 0 512 512"
+					version="1.1"
 					xmlns="http://www.w3.org/2000/svg">
 				<title>cancel</title>
 				<g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

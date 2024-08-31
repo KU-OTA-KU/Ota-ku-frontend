@@ -35,8 +35,8 @@ export function validateOtpInput(otp: string, errors: Record<string, string>): v
 export function validatePassword(password: string, errors: Record<string, string>): void {
     if (!password) {
         errors.password = 'Это поле обязательно для заполнения';
-    } else if (password.length < 6) {
-        errors.password = 'Пароль должен содержать минимум 6 символов';
+    } else if (password.length < 8) {
+        errors.password = 'Пароль должен содержать минимум 8 символов';
     } else {
         delete errors.password;
     }

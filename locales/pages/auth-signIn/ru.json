@@ -1,0 +1,12 @@
+{
+  "auth_title": "Откройте для себя мир отаку!",
+  "email_label": "Эл. почта",
+  "email_placeholder": "Введите вашу эл. почту",
+  "password_label": "Пароль",
+  "password_placeholder": "Введите ваш пароль",
+  "forgot_password": "Забыли пароль?",
+  "sign_in": "Войти",
+  "email_error": "Неверный адрес электронной почты",
+  "password_error": "Пароль обязателен",
+  "submit_button": "Войти"
+}

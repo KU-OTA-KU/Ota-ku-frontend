@@ -1,0 +1,12 @@
+{
+  "auth_title": "Բացահայտեք Ota-ku-ների աշխարհը!",
+  "email_label": "Էլ. հասցե",
+  "email_placeholder": "Մուտքագրեք ձեր էլ. փոստը",
+  "password_label": "Գաղտնաբառ",
+  "password_placeholder": "Մուտքագրեք ձեր գաղտնաբառը",
+  "forgot_password": "Մոռացե՞լ եք գաղտնաբառը",
+  "sign_in": "Մուտք գործել",
+  "email_error": "Սխալ էլ. փոստի հասցե",
+  "password_error": "Գաղտնաբառը պարտադիր է",
+  "submit_button": "Մուտք գործել"
+}

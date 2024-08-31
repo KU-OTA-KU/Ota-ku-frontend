@@ -123,27 +123,27 @@
 }
 
 .Vue-Toastification__toast--info {
- background-color: rgba(64, 108, 204, 0.6);
+ background-color: rgba(64, 108, 204, 0.8);
  border-color: rgba(72, 108, 191, 0.6);
  color: #fff;
 }
 
 .Vue-Toastification__toast--success {
- background-color: rgba(64, 204, 76, 0.6);
+ background-color: rgba(64, 204, 76, 0.8);
  border-color: rgba(72, 204, 86, 0.6);
  background-color: #4caf50;
  color: #fff;
 }
 
 .Vue-Toastification__toast--error {
- background-color: rgba(202, 64, 64, 0.6);
- border-color: rgba(214, 64, 93, 0.4);
+ background-color: rgba(202, 64, 64, 0.8);
+ border-color: rgba(214, 64, 93, 0.6);
  color: #fff;
 }
 
 .Vue-Toastification__toast--warning {
- background-color: rgba(202, 154, 64, 0.6);
- border-color: rgba(214, 154, 93, 0.4);
+ background-color: rgba(202, 154, 64, 0.8);
+ border-color: rgba(214, 154, 93, 0.6);
  color: #fff;
 }
 

@@ -64,7 +64,7 @@
 
 <script lang="ts">
 import {defineComponent, onMounted, ref} from 'vue';
-import {useNuxtApp} from '#app';
+import {useNuxtApp, useRouter} from '#app';
 import {AuthBackButton, AuthLogoAndTitle} from "#components";
 import authService from "~/services/api/authService";
 import {useToast} from "vue-toastification";
@@ -76,6 +76,7 @@ export default defineComponent({
 
 	setup() {
 		const toast = useToast();
+		const router = useRouter();
 		const {$statusBar, $navigationBar} = useNuxtApp();
 
 		const email = ref('');
@@ -110,8 +111,11 @@ export default defineComponent({
 					password: password.value,
 					password_confirmation: repeatPassword.value,
 				});
-
-				this.$router.push({name: 'auth/otp'});
+				toast.success('Аккаунт создан успешно подвердите почту!');
+				await router.push({
+					path: '/auth/otp',
+					query: {goto: '/auth/signIn'},
+				});
 			} catch (error: any) {
 				if (error.response && error.response.data) {
 

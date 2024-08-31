@@ -10,7 +10,7 @@ export default defineNuxtConfig({
     },
 
     plugins: ['~/plugins/nprogress.ts', '~/plugins/statusBar.ts', '~/plugins/navigationBar.ts', '~/plugins/cursor.ts', '~/plugins/vueToastie.ts'],
-    modules: ["nuxt-gtag", "@nuxtjs/ionic", '@nuxtjs/tailwindcss', '@nuxtjs/robots', '@nuxt/image', 'nuxt-swiper', 'nuxt-aos'],
+    modules: ["nuxt-gtag", "@nuxtjs/ionic", '@nuxtjs/tailwindcss', '@nuxtjs/robots', '@nuxt/image', 'nuxt-swiper', 'nuxt-aos', 'nuxt-i18n-micro'],
 
     gtag: {
         id: 'G-XKSYJXXKPB'
@@ -21,9 +21,23 @@ export default defineNuxtConfig({
         '/welcome': {prerender: true},
     },
 
+    i18n: {
+        lazy: true,
+        translationDir: 'locales',
+        strategy: 'prefix',
+        autoDetectLanguage: true,
+        meta: true,
+        locales: [
+            {code: 'en', language: 'en-US', name: 'English'},
+            {code: 'ru', language: 'ru-RU', name: 'Русский'},
+            {code: 'hy', language: 'hy-AM', name: 'Հայերեն'},
+        ],
+        defaultLocale: 'en'
+    },
+
     css: [
         '~/assets/root.scss',
-        `~/assets/variables.css`,
+        `~/assets/css/variables.css`,
         '~/assets/nprogress.css',
         '~/assets/cursor.css',
     ],
