@@ -8,16 +8,15 @@ export default defineComponent({
 
 <template>
 	<div class="mt-5 text-center">
-		<p class="text-xs text-gray-400">Используя сайт / приложение, Вы соглашаетесь с условиями
+		<p class="text-xs text-gray-400">{{ $t('footer.agreement_message')}}
 			<NuxtLink
-					to="/doc/terms_ru" class="underline text-blue-500">Пользовательсово соглашения.
+					to="/doc/terms_ru" class="underline text-blue-500">{{ $t('footer.terms_link') }}
 			</NuxtLink>
-			и
+			{{ $t('and')}}
 			<NuxtLink
-					to="/doc/privacy_policy_ru" class="underline text-blue-500">Политика конфиденциальности.
+					to="/doc/privacy_policy_ru" class="underline text-blue-500">{{ $t('footer.privacy_link') }}
 			</NuxtLink>
-			Если Вы не согласны с условиями данного соглашения, не используйте сайт / приложение Ota-ku!<br>
-			а также подтверждаете, что вам больше 16 лет.
+			{{ $t('footer.agreement_message_2')}}
 		</p>
 	</div>
 </template>

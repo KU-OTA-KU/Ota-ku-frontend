@@ -1,25 +1,10 @@
 # START nuxt-robots (indexable)
 User-agent: *
 Allow: /catalog
-Allow: /en/catalog
-Allow: /ru/catalog
-Allow: /am/catalog
 Disallow: /animeView
-Disallow: /en/animeView
-Disallow: /ru/animeView
-Disallow: /am/animeView
 Disallow: /error
-Disallow: /en/error
-Disallow: /ru/error
-Disallow: /am/error
 Disallow: /404
-Disallow: /en/404
-Disallow: /ru/404
-Disallow: /am/404
 Disallow: /doc
-Disallow: /en/doc
-Disallow: /ru/doc
-Disallow: /am/doc
 
 Sitemap: https://ota-ku.ru/sitemap.xml
 Sitemap: https://ota-ku.ru/sitemap_anime.xml

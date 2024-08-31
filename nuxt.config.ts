@@ -2,23 +2,38 @@
 export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     ssr: true,
-    devtools: {enabled: true},
-    target: 'static',
-    override: true,
+    devtools: { enabled: true },
+
     app: {
-        // baseURL: '/Ota-ku-frontend/'
+        // baseURL: '/Ota-ku-frontend/' // Убедитесь, что это нужно, иначе раскомментируйте
     },
 
-    plugins: ['~/plugins/nprogress.ts', '~/plugins/statusBar.ts', '~/plugins/navigationBar.ts', '~/plugins/cursor.ts', '~/plugins/vueToastie.ts'],
-    modules: ["nuxt-gtag", "@nuxtjs/ionic", '@nuxtjs/tailwindcss', '@nuxtjs/robots', '@nuxt/image', 'nuxt-swiper', 'nuxt-aos', 'nuxt-i18n-micro'],
+    plugins: [
+        '~/plugins/nprogress.ts',
+        '~/plugins/statusBar.ts',
+        '~/plugins/navigationBar.ts',
+        '~/plugins/cursor.ts',
+        '~/plugins/vueToastie.ts'
+    ],
+
+    modules: [
+        'nuxt-gtag',
+        '@nuxtjs/ionic',
+        '@nuxtjs/tailwindcss',
+        '@nuxtjs/robots',
+        '@nuxt/image',
+        'nuxt-swiper',
+        'nuxt-aos',
+        'nuxt-i18n-micro'
+    ],
 
     gtag: {
         id: 'G-XKSYJXXKPB'
     },
 
     routeRules: {
-        '/': {prerender: true},
-        '/welcome': {prerender: true},
+        '/': { prerender: true },
+        '/welcome': { prerender: true }
     },
 
     i18n: {
@@ -28,18 +43,18 @@ export default defineNuxtConfig({
         autoDetectLanguage: true,
         meta: true,
         locales: [
-            {code: 'en', language: 'en-US', name: 'English'},
-            {code: 'ru', language: 'ru-RU', name: 'Русский'},
-            {code: 'hy', language: 'hy-AM', name: 'Հայերեն'},
+            { code: 'en', name: 'English', file: 'en.json' },
+            { code: 'ru', name: 'Русский', file: 'ru.json' },
+            { code: 'hy', name: 'Հայերեն', file: 'hy.json' }
         ],
         defaultLocale: 'en'
     },
 
     css: [
         '~/assets/root.scss',
-        `~/assets/css/variables.css`,
+        '~/assets/css/variables.css',
         '~/assets/nprogress.css',
-        '~/assets/cursor.css',
+        '~/assets/cursor.css'
     ],
 
     build: {
@@ -49,9 +64,8 @@ export default defineNuxtConfig({
 
     ionic: {
         integrations: {
-            capacitor: true,
+            capacitor: true
         },
         css: false
-    },
-
-})
+    }
+});

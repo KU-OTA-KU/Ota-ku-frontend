@@ -1,23 +1,23 @@
 <template>
 	<section class="flex flex-col justify-center h-dvh px-6 py-12 lg:px-8">
 		<auth-back-button href="/welcome"></auth-back-button>
-		<auth-logo-and-title title="Еще не с нами? Сэмпай?! Присоединяйся"></auth-logo-and-title>
+		<auth-logo-and-title :title="$t('auth_title')"></auth-logo-and-title>
 
 		<div class="mt-7 sm:mx-auto sm:w-full sm:max-w-md flex flex-col">
 			<form class="space-y-5" @submit.prevent="submitForm">
 				<div>
-					<label for="email" class="block text-sm font-medium leading-5 text-white">Эл. почта</label>
+					<label for="email" class="block text-sm font-medium leading-5 text-white">{{ $t('email_label') }}</label>
 					<div class="mt-1">
 						<input id="email" v-model="email" @input="validateForm" type="text" autocomplete="current-login"
-						       placeholder="Введите эл. почту" required class="input input-primary"/>
+						       :placeholder="$t('email_placeholder')" required class="input input-primary"/>
 						<p v-if="errors.email" class="text-red-500 text-xs mt-1">{{ errors.email }}</p>
 					</div>
 				</div>
 				<div>
-					<label for="login" class="block text-sm font-medium leading-5">Логин</label>
+					<label for="login" class="block text-sm font-medium leading-5">{{ $t('login_label') }}</label>
 					<div class="mt-1">
 						<input id="login" v-model="login" @input="validateForm" type="text" autocomplete="current-login"
-						       placeholder="Введите логин" required class="input input-primary"/>
+						       :placeholder="$t('login_placeholder')" required class="input input-primary"/>
 						<p v-if="errors.login" class="text-red-500 text-xs mt-1">{{ errors.login }}</p>
 					</div>
 				</div>
@@ -25,23 +25,25 @@
 					<div class="flex gap-3">
 						<div class="w-full">
 							<div class="flex items-center justify-between">
-								<label for="password" class="block text-sm font-medium leading-5">Пароль</label>
+								<label for="password" class="block text-sm font-medium leading-5">{{ $t('password_label') }}</label>
 							</div>
 							<div class="mt-1">
 								<input id="password" v-model="password" @input="validateForm" type="password"
 								       autocomplete="current-password" required class="input input-primary"
-								       placeholder="Введите пароль"/>
+								       :placeholder="$t('password_placeholder')"/>
 								<p v-if="errors.password" class="text-red-500 text-xs mt-1">{{ errors.password }}</p>
 							</div>
 						</div>
 						<div class="w-full">
 							<div class="flex items-center justify-between">
-								<label for="password-repeat" class="block text-sm font-medium leading-5">Повторите пароль</label>
+								<label for="password-repeat" class="block text-sm font-medium leading-5">{{
+										$t('repeat_password_label')
+									}}</label>
 							</div>
 							<div class="mt-1">
 								<input id="password-repeat" v-model="repeatPassword" @input="validateForm" type="password"
 								       autocomplete="current-password" required class="input input-primary"
-								       placeholder="Повторите пароль"/>
+								       :placeholder="$t('repeat_password_placeholder')"/>
 								<p v-if="errors.repeatPassword" class="text-red-500 text-xs mt-1">{{ errors.repeatPassword }}</p>
 							</div>
 						</div>
@@ -49,13 +51,12 @@
 				</div>
 
 				<div>
-					<button :disabled="isSubmitDisabled" type="submit" class="button button-primary"
-					        :class="{ 'button-disabled': isSubmitDisabled }">Создать акканут
+					<button :disabled="isSubmitDisabled" class="button button-primary"
+					        :class="{ 'button-disabled': isSubmitDisabled }">{{ $t('sign_Up') }}
 					</button>
 				</div>
 			</form>
-
-
+			
 			<auth-footer></auth-footer>
 		</div>
 	</section>
