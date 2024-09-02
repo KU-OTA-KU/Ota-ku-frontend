@@ -1,10 +1,11 @@
 import ApiService from './apiService';
 
 class AuthService extends ApiService {
+    private servicePrefix: string = 'auth';
 
     private async request(method: 'post' | 'get', url: string, data?: any) {
         try {
-            const response = await (this as any)[method](url, data);
+            const response = await (this as any)[method]('/' + this.servicePrefix + '/' +  url, data);
             return response.data;
         } catch (error) {
             throw error;
@@ -12,15 +13,15 @@ class AuthService extends ApiService {
     }
 
     register(data: any) {
-        return this.request('post', '/auth/register', data);
+        return this.request('post', 'register', data);
     }
 
     generateOtp(data: any) {
-        return this.request('get', '/auth/otp/generate', data);
+        return this.request('post', 'otp/generate', data);
     }
 
     verifyOtp(data: any) {
-        return this.request('get', '/otp/verify ', data);
+        return this.request('post', 'otp/verify', data);
     }
 }
 

@@ -9,9 +9,10 @@
   "repeat_password_label": "կրկնել գաղտնաբառը",
   "repeat_password_placeholder": "Կրկնեք ձեր գաղտնաբառը",
   "sign_Up": "Գրանցվել",
+  "toast_login_success": "Ձեր հաշիվը հաջողությամբ գրանցված է: Հաստատեք ձեր էլ փոստը:",
   "validation": {
     "email_required": "Այս դաշտը պարտադիր է լրացնել",
-    "email_invalid": "Մուտքագրեք ճիշտ էլ. հասցե",
+    "email_invalid": "Մուտքագրեք ճիշտ էլ. փոստի հասցե",
     "login_required": "Այս դաշտը պարտադիր է լրացնել",
     "otp_required": "Այս դաշտը պարտադիր է լրացնել",
     "password_required": "Այս դաշտը պարտադիր է լրացնել",

@@ -43,9 +43,9 @@ export default defineNuxtConfig({
         autoDetectLanguage: true,
         meta: true,
         locales: [
-            { code: 'en', name: 'English', file: 'en.json' },
-            { code: 'ru', name: 'Русский', file: 'ru.json' },
-            { code: 'hy', name: 'Հայերեն', file: 'hy.json' }
+            { code: 'en', name: 'English',},
+            { code: 'ru', name: 'Русский',},
+            { code: 'hy', name: 'Հայերեն',}
         ],
         defaultLocale: 'en'
     },

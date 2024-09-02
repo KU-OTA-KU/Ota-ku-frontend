@@ -11,7 +11,7 @@ interface ApiServiceInterface {
 class ApiService implements ApiServiceInterface {
     private readonly localStorageItemName: string = 'at';
     private readonly tokenPrefix: string = 'Bearer';
-    private readonly localeKey: string = 'i18n_locale';
+    private readonly localeKey: string = 'user-locale';
 
     private getApiPrefix(): string {
         return 'http://localhost:8000/api';
@@ -21,16 +21,19 @@ class ApiService implements ApiServiceInterface {
         return localStorage.getItem(this.localStorageItemName);
     }
 
-
     private getCurrentLocale(): string | null {
-        return useCookie('user-locale').value || null;
+        return useCookie(this.localeKey).value || null;
     }
 
     private getBaseHeaders(): Record<string, string> {
         const authToken = this.getAuthToken();
         const locale = this.getCurrentLocale();
 
-        const headers: Record<string, string> = authToken ? {Authorization: `${this.tokenPrefix} ${authToken}`} : {};
+        const headers: Record<string, string> = {};
+
+        if (authToken) {
+            headers['Authorization'] = `${this.tokenPrefix} ${authToken}`;
+        }
 
         if (locale) {
             headers['Accept-Language'] = locale;

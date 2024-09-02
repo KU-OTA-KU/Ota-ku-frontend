@@ -9,6 +9,7 @@
   "repeat_password_label": "Repeat password",
   "repeat_password_placeholder": "Repeat your password",
   "sign_Up": "Sign Up",
+  "toast_login_success": "Your account has been successfully registered. Please confirm your email.",
   "validation": {
     "email_required": "This field is required",
     "email_invalid": "Enter a valid email address",

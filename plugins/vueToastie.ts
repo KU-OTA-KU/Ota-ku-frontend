@@ -5,7 +5,7 @@ import 'assets/css/toastification.css';
 
 const options: PluginOptions = {
     position: 'top-right',
-    timeout: 2500,
+    timeout: 3000,
     pauseOnFocusLoss: false,
     pauseOnHover: false,
     showCloseButtonOnHover: true,

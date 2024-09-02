@@ -32,6 +32,7 @@
     "vee-validate": "^4.13.2",
     "vform": "^2.1.2",
     "vue": "latest",
+    "vue-i18n": "^9.14.0",
     "vue-toastification": "^2.0.0-rc.5",
     "yup": "^1.4.0"
   },

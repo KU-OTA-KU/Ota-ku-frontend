@@ -1,0 +1,24 @@
+{
+  "auth_title": "Lag Seeing is on the way!",
+  "submit_button": "Submit",
+  "otp_resend_in": "Resend in",
+  "otp_resend_button": "Resend OTP",
+  "otp_resent": "Verification code has been sent to your email",
+  "validation": {
+    "email_required": "This field is required",
+    "email_invalid": "Please enter a valid email address",
+    "login_required": "This field is required",
+    "otp_required": "This field is required",
+    "password_required": "This field is required",
+    "password_min_length": "Password must be at least 8 characters long",
+    "repeat_password_required": "This field is required",
+    "passwords_do_not_match": "Passwords do not match"
+  },
+  "footer": {
+    "terms_link": "Terms of Service",
+    "and": "and",
+    "privacy_link": "Privacy Policy",
+    "agreement_message": "By using this site/app, you agree to the terms",
+    "agreement_message_2": "If you do not agree with the terms of this agreement, do not use the Ota-ku site/app! You also confirm that you are over 16 years old."
+  }
+}

@@ -56,7 +56,7 @@
 					</button>
 				</div>
 			</form>
-			
+
 			<auth-footer></auth-footer>
 		</div>
 	</section>
@@ -66,19 +66,19 @@
 <script lang="ts">
 import {defineComponent, onMounted, ref} from 'vue';
 import {useNuxtApp, useRouter} from '#app';
-import {AuthBackButton, AuthLogoAndTitle} from "#components";
-import authService from "~/services/api/authService";
-import {useToast} from "vue-toastification";
+import {AuthBackButton, AuthLogoAndTitle} from '#components';
+import authService from '~/services/api/authService';
+import {useToast} from 'vue-toastification';
 import {validateEmail, validateLogin, validatePassword, validateRepeatPassword} from '~/utils/validation';
 
 export default defineComponent({
-	name: "signUpComponent",
+	name: 'signUpComponent',
 	components: {AuthLogoAndTitle, AuthBackButton},
 
 	setup() {
 		const toast = useToast();
 		const router = useRouter();
-		const {$statusBar, $navigationBar} = useNuxtApp();
+		const {$statusBar, $navigationBar, $getLocale, $t} = useNuxtApp();
 
 		const email = ref('');
 		const login = ref('');
@@ -112,18 +112,22 @@ export default defineComponent({
 					password: password.value,
 					password_confirmation: repeatPassword.value,
 				});
-				toast.success('Аккаунт создан успешно подвердите почту!');
-				await router.push({
-					path: '/auth/otp',
-					query: {goto: '/auth/signIn'},
-				});
+				toast.success(<any>$t('toast_login_success'));
+
+				const emailEncoded = btoa(email.value);
+				const successUrl = btoa('/auth/signIn');
+				const cancelUrl = btoa('/auth/signIn');
+				const getLocale = $getLocale();
+
+				const url = `${getLocale}/auth/otp-${emailEncoded}-${successUrl}-${cancelUrl}`;
+				await router.push('/' + url);
+
 			} catch (error: any) {
 				if (error.response && error.response.data) {
-
 					if (error.response.data.errors) {
 						Object.keys(error.response.data.errors).forEach((field) => {
 							error.response.data.errors[field].forEach((message: string) => {
-								toast.error(`${message}`);
+								toast.error(message);
 							});
 						});
 					}
