@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Ota-ku</string>
-    <string name="title_activity_main">Ota-ku</string>
-    <string name="package_name">com.otaku.app</string>
-    <string name="custom_url_scheme">com.otaku.app</string>
-</resources>

@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /catalog
-Disallow: /animeView
-Disallow: /error
-Disallow: /404
-Disallow: /doc
-
-Sitemap: https://ota-ku.ru/sitemap.xml
-Sitemap: https://ota-ku.ru/sitemap_anime.xml
