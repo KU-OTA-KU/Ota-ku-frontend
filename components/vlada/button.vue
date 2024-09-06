@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface Props {
-	type: 'primary' | 'secondary' | 'tertiary' | 'warning' | 'error';
+	type: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'error';
 	text?: string;
 	to: string;
 	icon?: string;
@@ -74,7 +74,22 @@ const props = defineProps<Props>();
 	}
 }
 
+/* quaternary */
+.button--quaternary {
+	@apply bg-vlada-color-quaternary p-2 rounded-lg text-white hover:bg-vlada-color-quinary;
 
+	p {
+		@apply text-lg;
+	}
+
+	.button__icon--quaternary {
+		@apply text-3xl;
+	}
+
+	.button--quaternary--active {
+		@apply text-vlada-color-quinary;
+	}
+}
 
 
 /* icons */

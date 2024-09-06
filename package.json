@@ -18,6 +18,7 @@
     "vue": "latest"
   },
   "devDependencies": {
-    "@iconify-json/bi": "^1.2.0"
+    "@iconify-json/bi": "^1.2.0",
+    "nuxt-swiper": "^1.2.2"
   }
 }
