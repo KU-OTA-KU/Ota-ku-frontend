@@ -3,7 +3,8 @@
 </script>
 
 <template>
-	<NuxtLayout/>
+	<common-header/>
+	<welcome-primary-header/>
 </template>
 
 <style scoped>

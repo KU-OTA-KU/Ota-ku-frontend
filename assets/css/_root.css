@@ -1,0 +1,11 @@
+body {
+ @apply bg-vlada-color-primary text-sm;
+}
+
+.vlada-container {
+ @apply xl:max-w-big lg:max-w-medium md:max-w-small mx-auto container px-3;
+}
+
+h1 {
+ @apply text-5xl font-bold font-manrope
+}
