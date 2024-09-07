@@ -5,7 +5,9 @@
 <template>
 	<welcome-header/>
 	<welcome-primary-header/>
-	<lazy-common-swiper-slider/>
+	<common-swiper-slider/>
+	<vlada-br height="20"/>
+	<welcome-streaming-features/>
 </template>
 
 <style scoped>

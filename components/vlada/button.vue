@@ -2,7 +2,7 @@
 interface Props {
 	type: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'error';
 	text?: string;
-	to: string;
+	to?: string;
 	icon?: string;
 	iconPosition?: 'left' | 'right';
 }
@@ -28,11 +28,23 @@ const props = defineProps<Props>();
 		<Icon v-if="props.icon && !props.iconPosition" :name="props.icon"
 		      :class="`button__icon button__icon--${props.type}`"/>
 	</NuxtLink>
+	<div v-else :class="['button', `button--${props.type}`]">
+		<Icon v-if="props.icon && props.iconPosition === 'left'" :name="props.icon"
+		      :class="`button__icon button__icon--${props.type}`"/>
+
+		<p v-if="props.text">{{ props.text }}</p>
+
+		<Icon v-if="props.icon && props.iconPosition === 'right'" :name="props.icon"
+		      :class="`button__icon button__icon--${props.type}`"/>
+
+		<Icon v-if="props.icon && !props.iconPosition" :name="props.icon"
+		      :class="`button__icon button__icon--${props.type}`"/>
+	</div>
 </template>
 
 <style scoped>
 .button {
-	@apply transition-colors font-manrope text-nowrap flex items-center justify-center gap-1;
+	@apply transition-colors font-manrope text-nowrap flex items-center justify-center gap-1 cursor-pointer;
 }
 
 .button__icon {
@@ -68,10 +80,10 @@ const props = defineProps<Props>();
 	.button__icon--tertiary {
 		@apply text-4xl;
 	}
+}
 
-	.button--tertiary--active {
-		@apply text-vlada-color-quinary;
-	}
+.button--tertiary--active {
+	@apply text-vlada-color-quinary;
 }
 
 /* quaternary */
@@ -85,12 +97,11 @@ const props = defineProps<Props>();
 	.button__icon--quaternary {
 		@apply text-3xl;
 	}
-
-	.button--quaternary--active {
-		@apply text-vlada-color-quinary;
-	}
 }
 
+.button--quaternary--active {
+	@apply text-vlada-color-quinary;
+}
 
 /* icons */
 .button__icon--secondary {

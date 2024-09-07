@@ -1,8 +1,28 @@
 <script setup lang="ts">
+import {ref, onMounted, onBeforeUnmount} from 'vue';
+
+const headerClass = ref('header-default');
+
+const handleScroll = () => {
+	if (window.scrollY > 30) {
+		headerClass.value = 'header-scrolled';
+	} else {
+		headerClass.value = 'header-default';
+	}
+};
+
+onMounted(() => {
+	window.addEventListener('scroll', handleScroll);
+	handleScroll();
+});
+
+onBeforeUnmount(() => {
+	window.removeEventListener('scroll', handleScroll);
+});
 </script>
 
 <template>
-	<header class="header">
+	<header :class="['header', headerClass]" id="header"> <!-- Используем динамическое связывание класса -->
 		<div class="vlada-container">
 			<div class="header__inner">
 				<div class="header__logo">
@@ -25,7 +45,17 @@
 
 <style scoped>
 .header {
-	@apply w-full mt-2 z-50 fixed top-0;
+	@apply w-full mt-2 z-50 fixed top-0 transition duration-300;
+	/* Добавляем плавный переход для смены класса */
+}
+
+.header-default {
+	@apply bg-transparent;
+}
+
+.header-scrolled {
+	@apply bg-white shadow-md;
+	/* Пример стилей при скролле */
 }
 
 .header__inner {

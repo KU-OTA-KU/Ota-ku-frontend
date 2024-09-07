@@ -10,7 +10,7 @@
 			anywhere. With<br> StreamVibe, you can enjoy a wide variety of content, including the latest blockbusters, classic
 			movies, popular TV shows, and more.<br> You can also create your own watchlist, so you can easily find the
 			content you want to watch.</p>
-		<vlada-button icon="bi:play-fill" text="Start Watching Now" type="tertiary" to="/"
+		<vlada-button icon="bi:play-fill" text="Start Watching Now" type="tertiary"
 		              icon-position="left"></vlada-button>
 	</section>
 </template>
