@@ -1,11 +1,35 @@
 <script setup lang="ts">
 const devices = [
-	{ icon: '📱', title: 'Smartphones', description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store' },
-	{ icon: '📲', title: 'Tablet', description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store' },
-	{ icon: '📺', title: 'Smart TV', description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store' },
-	{ icon: '💻', title: 'Laptops', description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store' },
-	{ icon: '🎮', title: 'Gaming Consoles', description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store' },
-	{ icon: '🥽', title: 'VR Headsets', description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store' }
+	{
+		icon: 'bi:phone-fill',
+		title: 'Smartphones',
+		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+	},
+	{
+		icon: 'bi:tablet-fill',
+		title: 'Tablet',
+		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+	},
+	{
+		icon: 'bi:tv-fill',
+		title: 'Smart TV',
+		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+	},
+	{
+		icon: 'bi:laptop-fill',
+		title: 'Laptops',
+		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+	},
+	{
+		icon: 'bi:joystick',
+		title: 'Gaming Consoles',
+		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+	},
+	{
+		icon: 'bi:headset-vr',
+		title: 'VR Headsets',
+		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+	}
 ]
 </script>
 
@@ -22,10 +46,15 @@ const devices = [
 				</div>
 			</div>
 			<div class="streaming__features-content">
-				<div v-for="(device, index) in devices" :key="index" class="streaming__features-card bg-dark rounded-lg p-6 shadow-lg text-white">
-					<div class="icon text-red-500 text-3xl mb-4">{{ device.icon }}</div>
-					<h4 class="text-xl font-semibold mb-2">{{ device.title }}</h4>
-					<p class="text-base">{{ device.description }}</p>
+				<div v-for="(device, index) in devices" :key="index" class="streaming__features-card">
+					<div class="streaming__features-card-gradient"></div>
+					<div class="streaming__features-card-icon-name">
+						<div class="streaming__features-card-icon">
+							<Icon :name="device.icon"/>
+						</div>
+						<h4 class="text-xl font-semibold mb-2">{{ device.title }}</h4>
+					</div>
+					<p class="streaming__features-card-description">{{ device.description }}</p>
 				</div>
 			</div>
 		</div>
@@ -35,7 +64,7 @@ const devices = [
 <style scoped>
 .streaming__features {
 	.streaming__features-top {
-		@apply flex justify-between items-center;
+		@apply flex justify-between items-center mb-5;
 
 		.streaming__features-top-title {
 			p {
@@ -45,11 +74,28 @@ const devices = [
 	}
 
 	.streaming__features-content {
-		@apply grid md:grid-cols-3 gap-6;
-	}
+		@apply grid md:grid-cols-3 gap-7;
 
-	.streaming__features-card {
-		@apply bg-gray-800 rounded-lg p-6 shadow-lg text-white;
+		.streaming__features-card {
+			@apply bg-vlada-color-secondary rounded-2xl p-8 relative overflow-hidden border-2 border-vlada-color-septenary;
+
+			.streaming__features-card-gradient {
+				@apply absolute top-0 left-0 w-full h-full;
+				background: radial-gradient(circle at top right, rgba(400, 0, 0, 0.2) 5%, rgba(31, 31, 31, 0) 35%);
+			}
+
+			.streaming__features-card-icon-name {
+				@apply flex items-center text-xs gap-2;
+
+				.streaming__features-card-icon {
+					@apply text-4xl mb-2 text-vlada-color-quinary bg-vlada-color-primary p-3 flex rounded-lg border-2 border-vlada-color-tertiary mr-3;
+				}
+			}
+
+			.streaming__features-card-description {
+				@apply my-2 text-vlada-color-senary font-light;
+			}
+		}
 	}
 }
 </style>

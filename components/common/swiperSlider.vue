@@ -61,12 +61,12 @@ const prev = () => {
 
 <style scoped>
 .carousel__slide {
-	padding: 0 10px
+	@apply px-3.5
 }
 
 .swiper__slider {
 	.swiper__slider-top {
-		@apply flex justify-between items-center;
+		@apply flex justify-between items-center mb-5;
 
 		.swiper__slider-top-title {
 			p {

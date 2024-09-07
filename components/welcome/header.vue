@@ -22,7 +22,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-	<header :class="['header', headerClass]" id="header"> <!-- Используем динамическое связывание класса -->
+	<header :class="['header', headerClass]" id="header">
 		<div class="vlada-container">
 			<div class="header__inner">
 				<div class="header__logo">
@@ -45,8 +45,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .header {
-	@apply w-full mt-2 z-50 fixed top-0 transition duration-300;
-	/* Добавляем плавный переход для смены класса */
+	@apply w-full z-50 fixed top-0 transition duration-300 py-2;
 }
 
 .header-default {
@@ -54,8 +53,7 @@ onBeforeUnmount(() => {
 }
 
 .header-scrolled {
-	@apply bg-white shadow-md;
-	/* Пример стилей при скролле */
+	@apply bg-vlada-color-tertiary shadow-md;
 }
 
 .header__inner {
