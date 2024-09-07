@@ -19,8 +19,7 @@
   },
   "devDependencies": {
     "@iconify-json/bi": "^1.2.0",
-    "nuxt-keen-slider": "^1.1.0",
-    "nuxt-swiper": "^1.2.2",
+    "nuxt-aos": "^1.2.5",
     "vue3-carousel-nuxt": "^1.1.2"
   }
 }

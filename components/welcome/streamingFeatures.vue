@@ -38,15 +38,15 @@ const devices = [
 		<div class="vlada-container">
 			<div class="streaming__features-top">
 				<div class="streaming__features-top-title">
-					<h3>We Provide you streaming experience across various devices.</h3>
-					<p>
+					<h3 data-aos="fade-left">We Provide you streaming experience across various devices.</h3>
+					<p data-aos="fade-up">
 						With StreamVibe, you can enjoy your favorite movies and TV shows anytime, anywhere. Our platform is designed
 						to be compatible with a wide range of<br> devices, ensuring that you never miss a moment of entertainment.
 					</p>
 				</div>
 			</div>
 			<div class="streaming__features-content">
-				<div v-for="(device, index) in devices" :key="index" class="streaming__features-card">
+				<div v-for="(device, index) in devices" :key="index" class="streaming__features-card" data-aos="fade-up" data-aos-duration="500">
 					<div class="streaming__features-card-gradient"></div>
 					<div class="streaming__features-card-icon-name">
 						<div class="streaming__features-card-icon">
@@ -67,6 +67,7 @@ const devices = [
 		@apply flex justify-between items-center mb-5;
 
 		.streaming__features-top-title {
+			@apply text-center w-full;
 			p {
 				@apply my-2 text-vlada-color-senary font-light;
 			}

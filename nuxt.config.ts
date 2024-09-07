@@ -8,7 +8,8 @@ export default defineNuxtConfig({
       '@nuxtjs/google-fonts',
       '@nuxt/icon',
       '@nuxt/image',
-      'vue3-carousel-nuxt'
+      'vue3-carousel-nuxt',
+      'nuxt-aos'
     ],
 
     css: ['~/assets/css/_root.css'],
