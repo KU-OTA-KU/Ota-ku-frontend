@@ -43,7 +43,7 @@ function getImagePath(imageName: string) {
 	<section class="header__scroller">
 		<div class="header__scroller-shadow"></div>
 		<div class="header__scroller-title">
-			<h1 class="header__scroller-title-text">The Best Streaming Experience</h1>
+			<h1 class="header__scroller-title-text" data-aos="fade-in">The Best Streaming Experience</h1>
 		</div>
 		<div v-for="(scroller, index) in data" :key="index"
 		     :class="['scroller', `scroller--${scroller.direction}`, 'scroller--slow', 'scroller--animated']">
