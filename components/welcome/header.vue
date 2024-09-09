@@ -1,15 +1,16 @@
 <script setup lang="ts">
-import {ref, onMounted, onBeforeUnmount} from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import throttle from 'lodash/throttle';
 
 const headerClass = ref('header-default');
 
-const handleScroll = () => {
+const handleScroll = throttle(() => {
 	if (window.scrollY > 30) {
 		headerClass.value = 'header-scrolled';
 	} else {
 		headerClass.value = 'header-default';
 	}
-};
+}, 200);
 
 onMounted(() => {
 	window.addEventListener('scroll', handleScroll);
@@ -26,17 +27,11 @@ onBeforeUnmount(() => {
 		<div class="vlada-container">
 			<div class="header__inner">
 				<div class="header__logo">
-					<NuxtImg src="/img/logo-red.svg"/>
+					<NuxtImg src="/img/logo-red.svg" />
 				</div>
-				<nav class="header__navigation">
-					<vlada-button type="primary" to="/welcome" text="Home"/>
-					<vlada-button type="primary" to="/" text="Movies & Shows"/>
-					<vlada-button type="primary" to="/" text="Support"/>
-					<vlada-button type="primary" to="/" text="Subscriptions"/>
-				</nav>
 				<div class="header__search-profile">
-					<vlada-button type="secondary" to="/" icon="bi:search"/>
-					<vlada-button type="secondary" to="/" icon="bi:bell"/>
+					<vlada-button type="secondary" to="/" icon="bi:search" />
+					<vlada-button type="secondary" to="/" icon="bi:bell" />
 				</div>
 			</div>
 		</div>
@@ -45,7 +40,23 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .header {
-	@apply w-full z-50 fixed top-0 transition duration-300 py-2;
+	@apply w-full z-50 fixed top-0 transition duration-300 py-4;
+
+	.header__inner {
+		@apply flex justify-between items-center;
+
+		.header__logo {
+			@apply block h-9 relative overflow-hidden;
+		}
+
+		.header__logo img {
+			@apply select-none pointer-events-none relative w-full h-full;
+		}
+
+		.header__search-profile {
+			@apply flex gap-2;
+		}
+	}
 }
 
 .header-default {
@@ -54,25 +65,5 @@ onBeforeUnmount(() => {
 
 .header-scrolled {
 	@apply bg-vlada-color-tertiary shadow-md;
-}
-
-.header__inner {
-	@apply flex justify-between items-center;
-}
-
-.header__logo {
-	@apply block h-9 relative overflow-hidden;
-}
-
-.header__logo img {
-	@apply select-none pointer-events-none relative w-full h-full;
-}
-
-.header__navigation {
-	@apply flex gap-3 bg-vlada-color-secondary p-2 border-2 rounded-xl border-vlada-color-tertiary;
-}
-
-.header__search-profile {
-	@apply flex gap-2;
 }
 </style>
