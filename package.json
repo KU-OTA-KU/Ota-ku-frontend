@@ -23,6 +23,7 @@
     "@nuxt/image": "^1.8.0",
     "@types/nprogress": "^0.2.3",
     "nuxt-aos": "^1.2.5",
+    "sass-embedded": "^1.78.0",
     "vue3-carousel-nuxt": "^1.1.2"
   }
 }
