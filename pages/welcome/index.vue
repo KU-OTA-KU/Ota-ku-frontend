@@ -8,9 +8,10 @@
 	<welcome-streaming-features/>
 	<vlada-br height="20"/>
 	<welcome-faq/>
-	<div style="height: 2000px;">
-
-	</div>
+	<vlada-br height="20"/>
+	<welcome-subscription/>
+	<vlada-br height="20"/>
+	<welcome-footer/>
 </template>
 
 <style scoped>

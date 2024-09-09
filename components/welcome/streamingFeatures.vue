@@ -46,7 +46,8 @@ const devices = [
 				</div>
 			</div>
 			<div class="streaming__features-content">
-				<div v-for="(device, index) in devices" :key="index" class="streaming__features-card" data-aos="fade-up" data-aos-duration="600">
+				<div v-for="(device, index) in devices" :key="index" class="streaming__features-card" data-aos="fade-up"
+				     data-aos-duration="600">
 					<div class="streaming__features-card-gradient"></div>
 					<div class="streaming__features-card-icon-name">
 						<div class="streaming__features-card-icon">
@@ -68,6 +69,7 @@ const devices = [
 
 		.streaming__features-top-title {
 			@apply text-center w-full;
+
 			p {
 				@apply my-2 text-vlada-color-senary font-light;
 			}

@@ -16,9 +16,9 @@ export default {
                 'vlada-color-quinary': '#E50000',
                 'vlada-color-senary': '#999999',
                 'vlada-color-septenary': '#262626',
-                'vlada-color-octonary': '#F76C6C',
-                'vlada-color-nonary': '#6A4C41',
-                'vlada-color-denary': '#D3A0A5',
+                'vlada-color-octonary': '#',
+                'vlada-color-nonary': '#',
+                'vlada-color-denary': '#',
             },
             fontFamily: {
                 'manrope': ['Manrope', 'sans-serif'],
