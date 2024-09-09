@@ -35,7 +35,7 @@ const data = ref([
 ]);
 
 function getImagePath(imageName: string) {
-	return `img/welcome-posters/${imageName}`;
+	return `/img/welcome-posters/${imageName}`;
 }
 </script>
 
