@@ -7,7 +7,7 @@
 		<div class="vlada-container">
 			<div class="footer__content-top">
 				<div class="footer__content-top-description">
-					<img src="~/public/img/logo-red.svg" alt="ota-ku-logo" loading="lazy">
+					<NuxtImg src="/img/logo-red.svg" alt="ota-ku-logo" />
 					<p>Trusted in more than 100 countries & 5 million customers. Have any query ?</p>
 				</div>
 				<!--End Col-->
