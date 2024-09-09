@@ -49,7 +49,7 @@ function getImagePath(imageName: string) {
 		     :class="['scroller', `scroller--${scroller.direction}`, 'scroller--slow', 'scroller--animated']">
 			<div class="scroller__inner">
 				<div class="scroller__container">
-					<img
+					<NuxtImg
 							v-for="(image, id) in scroller.images"
 							:key="id"
 							:src="getImagePath(image)"
