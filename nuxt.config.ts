@@ -3,6 +3,9 @@ export default defineNuxtConfig({
     compatibilityDate: '2024-04-03',
     ssr: true,
     devtools: {enabled: true},
+    app: {
+        baseURL: '/Ota-ku-frontend/'
+    },
     modules: [
       '@nuxtjs/tailwindcss',
       '@nuxtjs/google-fonts',
