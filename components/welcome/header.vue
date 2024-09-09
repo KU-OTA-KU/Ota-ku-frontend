@@ -26,7 +26,7 @@ onBeforeUnmount(() => {
 		<div class="vlada-container">
 			<div class="header__inner">
 				<div class="header__logo">
-					<img src="/img/logo-red.svg" alt="" loading="lazy">
+					<NuxtImg src="/img/logo-red.svg"/>
 				</div>
 				<nav class="header__navigation">
 					<vlada-button type="primary" to="/welcome" text="Home"/>
