@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     ssr: true,
     devtools: {enabled: true},
     app: {
-        baseURL: '/Ota-ku-frontend/'
+        // baseURL: '/Ota-ku-frontend/'
     },
     modules: [
       '@nuxtjs/tailwindcss',
