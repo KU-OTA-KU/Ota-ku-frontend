@@ -20,15 +20,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+
       - name: Install dependencies
-        run:
-          npm install
+        run: npm install
+
+      - name: Check if dist directory exists
+        id: check_dist
+        run: |
+          if [ -d "./dist" ]; then
+            echo "dist directory exists"
+            echo "dist_exists=true" >> $GITHUB_ENV
+          else
+            echo "dist directory does not exist"
+            echo "dist_exists=false" >> $GITHUB_ENV
+          fi
+
       - name: Generate Static Site
+        if: env.dist_exists == 'false'
         run: npm run generate
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
