@@ -30,8 +30,8 @@ onBeforeUnmount(() => {
 					<NuxtImg src="/img/logo-red.svg" />
 				</div>
 				<div class="header__search-profile">
-					<vlada-button type="secondary" to="/" icon="bi:search" />
-					<vlada-button type="secondary" to="/" icon="bi:bell" />
+					<vlada-button type="primary" size="md" rounded="md" placeholder="Sign In"/>
+					<vlada-button type="primary" size="cube" rounded="md" icon="bi:box-arrow-in-right"/>
 				</div>
 			</div>
 		</div>
@@ -42,15 +42,15 @@ onBeforeUnmount(() => {
 .header {
 	@apply w-full z-50 fixed top-0 transition duration-300 py-4;
 
-	.header__inner {
+	&__inner {
 		@apply flex justify-between items-center;
 
 		.header__logo {
 			@apply block h-9 relative overflow-hidden;
-		}
 
-		.header__logo img {
-			@apply select-none pointer-events-none relative w-full h-full;
+			img {
+				@apply select-none pointer-events-none relative w-full h-full;
+			}
 		}
 
 		.header__search-profile {
@@ -64,6 +64,6 @@ onBeforeUnmount(() => {
 }
 
 .header-scrolled {
-	@apply bg-vlada-color-tertiary shadow-md;
+	@apply bg-vlada-color-primary shadow-md;
 }
 </style>
