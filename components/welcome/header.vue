@@ -3,17 +3,17 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 import throttle from 'lodash/throttle';
 import { useI18n } from 'vue-i18n';
 
-const { locale, setLocale } = useI18n();
+const { locale, setLocale, t } = useI18n();
 
 const locales = [
-	{ value: 'en', label: 'English' },
-	{ value: 'es', label: 'Español' },
-	{ value: 'fr', label: 'Français' },
-	{ value: 'hy', label: 'Հայերեն' },
-	{ value: 'ja', label: '日本語' },
-	{ value: 'ru', label: 'Русский' },
-	{ value: 'uk', label: 'Українська' },
-	{ value: 'zh', label: '中文' }
+	{ value: 'en', label: t('languages.english'), labelCode: t('language-codes.english') },
+	{ value: 'es', label: t('languages.spanish'), labelCode: t('language-codes.spanish') },
+	{ value: 'fr', label: t('languages.french'), labelCode: t('language-codes.french') },
+	{ value: 'hy', label: t('languages.armenian'), labelCode: t('language-codes.armenian') },
+	{ value: 'ja', label: t('languages.japanese'), labelCode: t('language-codes.japanese') },
+	{ value: 'ru', label: t('languages.russian'), labelCode: t('language-codes.russian') },
+	{ value: 'uk', label: t('languages.ukrainian'), labelCode: t('language-codes.ukrainian') },
+	{ value: 'zh', label: t('languages.chinese'), labelCode: t('language-codes.chinese') },
 ];
 
 const headerClass = ref('header-default');

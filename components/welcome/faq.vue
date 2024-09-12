@@ -1,5 +1,21 @@
 <script setup lang="ts">
+import {ref} from 'vue';
+import faqService from "~/utils/api/faqService";
 
+const faqs = ref<any[]>([]);
+
+const fetchFaqs = async () => {
+	try {
+		faqs.value = await faqService.getAll({});
+		console.log(faqs.value);
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+onMounted(() => {
+	fetchFaqs();
+});
 </script>
 
 <template>
@@ -8,7 +24,7 @@
 			<div class="faq__features-top">
 				<div class="faq__features-top-title">
 					<h3 data-aos="fade-up">{{ $t('welcome.faq.title') }}</h3>
-					<p data-aos="fade-up" data-aos-duration="500">
+					<p data-aos="fade-up" data-aos-delay="100">
 						{{ $t('welcome.faq.description') }}
 					</p>
 				</div>
@@ -16,28 +32,16 @@
 					<vlada-button size="md" text="Ask a question" type="tertiary"/>
 				</div>
 			</div>
-			<div class="faq__features-content" data-aos="fade-up" data-aos-duration="600">
-				<vlada-collapse type="secondary" id="01" title="What is StreamVibe?"
-				                description="StreamVibe is a streaming service that allows you to watch movies and shows on demand."
-				                :is-open="true"/>
-				<vlada-collapse type="secondary" id="02" title="How much does StreamVibe cost?"
-				                description="StreamVibe is a streaming service that allows you to watch movies and shows on demand."
-				                :is-open="false"/>
-				<vlada-collapse type="secondary" id="03" title="What content is available on StreamVibe?"
-				                description="StreamVibe is a streaming service that allows you to watch movies and shows on demand."
-				                :is-open="false"/>
-				<vlada-collapse type="secondary" id="04" title="How can I watch StreamVibe?"
-				                description="StreamVibe is a streaming service that allows you to watch movies and shows on demand."
-				                :is-open="false"/>
-				<vlada-collapse type="secondary" id="05" title="How do I sign up for StreamVibe?"
-				                description="StreamVibe is a streaming service that allows you to watch movies and shows on demand."
-				                :is-open="false"/>
-				<vlada-collapse type="secondary" id="06" title="What is the StreamVibe free trial?"
-				                description="StreamVibe is a streaming service that allows you to watch movies and shows on demand."
-				                :is-open="false"/>
-				<vlada-collapse type="secondary" id="07" title="What are the StreamVibe payment methods?"
-				                description="StreamVibe is a streaming service that allows you to watch movies and shows on demand."
-				                :is-open="false"/>
+			<div class="faq__features-content" data-aos="fade-up" data-aos-delay="200">
+				<vlada-collapse
+						v-for="(faq, index) in faqs"
+						:key="index"
+						type="secondary"
+						:id="String(index + 1)"
+						:title="faq.title"
+						:description="faq.description"
+						:is-open="true"
+				/>
 			</div>
 		</div>
 	</section>

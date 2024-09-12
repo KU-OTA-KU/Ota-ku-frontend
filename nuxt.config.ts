@@ -35,6 +35,7 @@ export default defineNuxtConfig({
     i18n: {
         locales: [
             { code: 'en', iso: 'en-US', name: 'English' },
+            { code: 'es', iso: 'es-ES', name: 'Español' },
             { code: 'fr', iso: 'fr-FR', name: 'Français' },
             { code: 'hy', iso: 'hy-AM', name: 'Հայերեն' },
             { code: 'ja', iso: 'ja-JP', name: '日本語' },

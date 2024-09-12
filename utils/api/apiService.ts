@@ -9,7 +9,7 @@ interface ApiServiceInterface {
 class ApiService implements ApiServiceInterface {
     private readonly localStorageItemName: string = 'at';
     private readonly tokenPrefix: string = 'Bearer';
-    private readonly localeKey: string = 'user-locale';
+    private readonly localeKey: string = 'i18n_redirected';
 
     private getApiPrefix(): string {
         return 'http://localhost:8000/api';
@@ -20,7 +20,6 @@ class ApiService implements ApiServiceInterface {
     }
 
     private getCurrentLocale(): string | null {
-        // Ensure useCookie is properly imported or defined
         return useCookie(this.localeKey).value || null;
     }
 

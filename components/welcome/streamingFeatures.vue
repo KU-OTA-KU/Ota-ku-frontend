@@ -5,35 +5,60 @@ const { t } = useI18n();
 
 const devices = [
 	{
-		icon: 'bi:phone-fill',
+		icon: 'bi:speedometer2',
 		title: t('welcome.streaming-features.features.1.title'),
 		description: t('welcome.streaming-features.features.1.description')
 	},
 	{
-		icon: 'bi:tablet-fill',
+		icon: 'bi:tv-fill',
 		title: t('welcome.streaming-features.features.2.title'),
 		description: t('welcome.streaming-features.features.2.description')
 	},
 	{
-		icon: 'bi:tv-fill',
+		icon: 'bi:google-play',
 		title: t('welcome.streaming-features.features.3.title'),
 		description: t('welcome.streaming-features.features.3.description')
 	},
 	{
-		icon: 'bi:laptop-fill',
+		icon: 'bi:badge-4k',
 		title: t('welcome.streaming-features.features.4.title'),
 		description: t('welcome.streaming-features.features.4.description')
 	},
 	{
-		icon: 'bi:joystick',
+		icon: 'bi:people-fill',
 		title: t('welcome.streaming-features.features.5.title'),
 		description: t('welcome.streaming-features.features.5.description')
 	},
 	{
-		icon: 'bi:headset-vr',
+		icon: 'bi:arrow-down-up',
 		title: t('welcome.streaming-features.features.6.title'),
 		description: t('welcome.streaming-features.features.6.description')
-	}
+	},
+	{
+		icon: 'bi:droplet-fill',
+		title: t('welcome.streaming-features.features.7.title'),
+		description: t('welcome.streaming-features.features.7.description')
+	},
+	{
+		icon: 'bi:code-slash',
+		title: t('welcome.streaming-features.features.8.title'),
+		description: t('welcome.streaming-features.features.8.description')
+	},
+	{
+		icon: 'bi:database-down',
+		title: t('welcome.streaming-features.features.9.title'),
+		description: t('welcome.streaming-features.features.9.description')
+	},
+	{
+		icon: 'bi:fast-forward-btn-fill',
+		title: t('welcome.streaming-features.features.10.title'),
+		description: t('welcome.streaming-features.features.10.description')
+	},
+	{
+		icon: 'bi:terminal',
+		title: t('welcome.streaming-features.features.11.title'),
+		description: t('welcome.streaming-features.features.11.description')
+	},
 ]
 </script>
 

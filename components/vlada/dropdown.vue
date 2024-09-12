@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import {defineProps, defineEmits} from 'vue';
-
 interface DropdownItem {
 	value: string;
 	label: string;
@@ -27,7 +25,7 @@ const handleItemClick = (item: { value: string, label: string }) => {
 		<div v-if="showDropdown" class="dropdown__menu">
 			<ul>
 				<li v-for="item in items" :key="item.value" @click="handleItemClick(item)">
-					{{ item.label }}
+					{{ item.label }} <p class="dropdown__menu-code" v-if="item.labelCode">/ {{ item.labelCode }}</p>
 				</li>
 			</ul>
 		</div>
@@ -41,12 +39,16 @@ const handleItemClick = (item: { value: string, label: string }) => {
 	&__menu {
 		@apply absolute top-0 right-0 mt-1 text-white border border-vlada-color-septenary rounded-xl shadow-lg p-2 w-52 z-50 bg-vlada-color-primary;
 
+		&-code {
+			@apply text-xs text-white text-vlada-color-senary;
+		}
+
 		ul {
 			@apply list-none m-0 p-0;
 		}
 
 		li {
-			@apply p-2 cursor-pointer hover:bg-vlada-color-tertiary;
+			@apply p-2 cursor-pointer hover:bg-vlada-color-tertiary flex items-end gap-1;
 		}
 
 	}
