@@ -40,7 +40,9 @@ const toggleAccordion = () => {
 
 <style scoped>
 .accordion {
-	.accordion__button:hover {
+	.accordion__button {
+		@apply flex items-center justify-between cursor-pointer;
+
 		&:hover {
 			.accordion__button--id {
 				@apply border-vlada-color-quinary;
@@ -55,17 +57,7 @@ const toggleAccordion = () => {
 					@apply text-vlada-color-quinary;
 				}
 			}
-
-			.accordion__content {
-				p {
-					@apply text-white;
-				}
-			}
 		}
-	}
-
-	.accordion__button {
-		@apply flex items-center justify-between cursor-pointer;
 
 		.accordion__button--id {
 			@apply text-white bg-vlada-color-tertiary px-8 py-8 rounded-xl flex items-center justify-center text-xl font-bold border-2 border-vlada-color-septenary mr-5 relative transition-colors;

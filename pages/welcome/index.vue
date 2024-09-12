@@ -5,7 +5,7 @@
 <template>
 	<welcome-header/>
 	<welcome-primary-header/>
-	<welcome-streaming-features/>
+	<welcome-advantages/>
 	<vlada-br height="20"/>
 	<welcome-faq/>
 	<vlada-br height="20"/>

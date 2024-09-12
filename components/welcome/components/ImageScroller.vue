@@ -28,7 +28,7 @@ const imagePaths = computed(() =>
 	<section class="header__scroller">
 		<div class="header__scroller-shadow"></div>
 		<div class="header__scroller-title">
-			<h1>{{ $t('welcome.title') }}</h1>
+			<h1 data-aos="fade-in">{{ $t('welcome.title') }}</h1>
 		</div>
 		<div v-for="(scroller, index) in imagePaths" :key="index"
 		     :class="['scroller', `scroller--${scroller.direction}`, 'scroller--slow', 'scroller--animated']">

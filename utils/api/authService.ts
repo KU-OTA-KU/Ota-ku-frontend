@@ -5,7 +5,7 @@ class AuthService extends ApiService {
 
     private async request(method: 'post' | 'get', url: string, data?: any) {
         try {
-            const response = await (this as any)[method]('/' + this.servicePrefix + '/' +  url, data);
+            const response = await (this as any)[method]('/' + this.servicePrefix + '/' + url, data);
             return response.data;
         } catch (error) {
             throw error;

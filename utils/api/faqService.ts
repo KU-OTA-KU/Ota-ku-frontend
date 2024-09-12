@@ -1,6 +1,6 @@
 import ApiService from './apiService';
 
-class AuthService extends ApiService {
+class FaqService extends ApiService {
     private servicePrefix: string = 'faq';
 
     private async request(method: 'post' | 'get', url: string, data?: any) {
@@ -17,4 +17,4 @@ class AuthService extends ApiService {
     }
 }
 
-export default new AuthService();
+export default new FaqService();
