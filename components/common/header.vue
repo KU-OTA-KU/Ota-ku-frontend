@@ -9,14 +9,14 @@
 					<NuxtImg src="/img/logo-red.svg"/>
 				</div>
 				<nav class="header__navigation">
-					<vlada-button type="primary" to="/welcome" text="Home"/>
-					<vlada-button type="primary" to="/" text="Movies & Shows"/>
-					<vlada-button type="primary" to="/" text="Support"/>
-					<vlada-button type="primary" to="/" text="Subscriptions"/>
+					<vlada-button size="md" type="primary" to="/welcome" text="Home"/>
+					<vlada-button size="md" type="primary" to="/" text="Movies & Shows"/>
+					<vlada-button size="md" type="primary" to="/" text="Support"/>
+					<vlada-button size="md" type="primary" to="/" text="Subscriptions"/>
 				</nav>
 				<div class="header__search-profile">
-					<vlada-button type="secondary" to="/" icon="bi:search"/>
-					<vlada-button type="secondary" to="/" icon="bi:bell"/>
+					<vlada-button size="md" type="secondary" to="/" icon="bi:search"/>
+					<vlada-button size="md" type="secondary" to="/" icon="bi:bell"/>
 				</div>
 			</div>
 		</div>

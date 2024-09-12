@@ -1,34 +1,38 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 const devices = [
 	{
 		icon: 'bi:phone-fill',
-		title: 'Smartphones',
-		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+		title: t('welcome.streaming-features.features.1.title'),
+		description: t('welcome.streaming-features.features.1.description')
 	},
 	{
 		icon: 'bi:tablet-fill',
-		title: 'Tablet',
-		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+		title: t('welcome.streaming-features.features.2.title'),
+		description: t('welcome.streaming-features.features.2.description')
 	},
 	{
 		icon: 'bi:tv-fill',
-		title: 'Smart TV',
-		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+		title: t('welcome.streaming-features.features.3.title'),
+		description: t('welcome.streaming-features.features.3.description')
 	},
 	{
 		icon: 'bi:laptop-fill',
-		title: 'Laptops',
-		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+		title: t('welcome.streaming-features.features.4.title'),
+		description: t('welcome.streaming-features.features.4.description')
 	},
 	{
 		icon: 'bi:joystick',
-		title: 'Gaming Consoles',
-		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+		title: t('welcome.streaming-features.features.5.title'),
+		description: t('welcome.streaming-features.features.5.description')
 	},
 	{
 		icon: 'bi:headset-vr',
-		title: 'VR Headsets',
-		description: 'StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store'
+		title: t('welcome.streaming-features.features.6.title'),
+		description: t('welcome.streaming-features.features.6.description')
 	}
 ]
 </script>
@@ -38,10 +42,9 @@ const devices = [
 		<div class="vlada-container">
 			<div class="streaming__features-top">
 				<div class="streaming__features-top-title">
-					<h3 data-aos="fade-up">We Provide you streaming experience across various devices.</h3>
+					<h3 data-aos="fade-up">{{ t('welcome.streaming-features.title') }}</h3>
 					<p data-aos="fade-up" data-aos-duration="500">
-						With StreamVibe, you can enjoy your favorite movies and TV shows anytime, anywhere. Our platform is designed
-						to be compatible with a wide range of<br> devices, ensuring that you never miss a moment of entertainment.
+						{{ t('welcome.streaming-features.description') }}
 					</p>
 				</div>
 			</div>

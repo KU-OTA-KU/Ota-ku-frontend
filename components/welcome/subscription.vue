@@ -39,7 +39,7 @@ const subscriptions = [
 						<p>${{ device.price }}</p><span> / year</span>
 					</div>
 					<div class="subscription__card-buttons">
-						<vlada-button text="Start Free Trial" type="tertiary"/>
+						<vlada-button  type="primary" size="md" rounded="md" placeholder="Sign Up"/>
 					</div>
 				</div>
 			</div>

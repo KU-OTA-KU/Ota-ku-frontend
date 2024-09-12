@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+				цвцв
 </template>
 
 <style scoped>

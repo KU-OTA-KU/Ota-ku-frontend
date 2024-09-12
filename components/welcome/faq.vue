@@ -7,14 +7,13 @@
 		<div class="vlada-container">
 			<div class="faq__features-top">
 				<div class="faq__features-top-title">
-					<h3 data-aos="fade-up">We Provide you streaming experience across various devices.</h3>
+					<h3 data-aos="fade-up">{{ $t('welcome.faq.title') }}</h3>
 					<p data-aos="fade-up" data-aos-duration="500">
-						With StreamVibe, you can enjoy your favorite movies and TV shows anytime, anywhere. Our platform is designed
-						to be compatible with a wide range of<br> devices, ensuring that you never miss a moment of entertainment.
+						{{ $t('welcome.faq.description') }}
 					</p>
 				</div>
 				<div data-aos="fade-left">
-					<vlada-button text="Ask a question" type="tertiary"/>
+					<vlada-button size="md" text="Ask a question" type="tertiary"/>
 				</div>
 			</div>
 			<div class="faq__features-content" data-aos="fade-up" data-aos-duration="600">

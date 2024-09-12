@@ -21,6 +21,7 @@
   "devDependencies": {
     "@iconify-json/bi": "^1.2.0",
     "@nuxt/image": "^1.8.0",
+    "@nuxtjs/i18n": "^8.5.3",
     "@types/nprogress": "^0.2.3",
     "nuxt-aos": "^1.2.5",
     "sass-embedded": "^1.78.0",

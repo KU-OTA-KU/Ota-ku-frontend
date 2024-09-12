@@ -38,13 +38,13 @@ const prev = () => {
 				</div>
 				<div class="swiper__slider-top-swiper-buttons">
 					<div @click="prev">
-						<vlada-button icon="bi:arrow-left-short" type="quaternary"/>
+						<vlada-button  size="md" icon="bi:arrow-left-short" type="quaternary"/>
 					</div>
 					<div class="swiper__slider-top-swiper-sections">
 						1 / 10
 					</div>
 					<div @click="next">
-						<vlada-button icon="bi:arrow-right-short" type="quaternary"/>
+						<vlada-button  size="md" icon="bi:arrow-right-short" type="quaternary"/>
 					</div>
 				</div>
 			</div>

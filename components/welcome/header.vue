@@ -1,8 +1,23 @@
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import throttle from 'lodash/throttle';
+import { useI18n } from 'vue-i18n';
+
+const { locale, setLocale } = useI18n();
+
+const locales = [
+	{ value: 'en', label: 'English' },
+	{ value: 'es', label: 'Español' },
+	{ value: 'fr', label: 'Français' },
+	{ value: 'hy', label: 'Հայերեն' },
+	{ value: 'ja', label: '日本語' },
+	{ value: 'ru', label: 'Русский' },
+	{ value: 'uk', label: 'Українська' },
+	{ value: 'zh', label: '中文' }
+];
 
 const headerClass = ref('header-default');
+const showLocales = ref(false);
 
 const handleScroll = throttle(() => {
 	if (window.scrollY > 30) {
@@ -20,6 +35,15 @@ onMounted(() => {
 onBeforeUnmount(() => {
 	window.removeEventListener('scroll', handleScroll);
 });
+
+const toggleLocales = () => {
+	showLocales.value = !showLocales.value;
+};
+
+const handleLocaleSelect = (item: { value: string, label: string }) => {
+	setLocale(item.value);
+	showLocales.value = false;
+};
 </script>
 
 <template>
@@ -30,11 +54,20 @@ onBeforeUnmount(() => {
 					<NuxtImg src="/img/logo-red.svg" />
 				</div>
 				<div class="header__search-profile">
-					<vlada-button type="primary" size="md" rounded="md" placeholder="Sign In"/>
-					<vlada-button type="primary" size="cube" rounded="md" icon="bi:box-arrow-in-right"/>
+					<vlada-button type="primary" size="md" rounded="md" :placeholder="$t('sign-up')" />
+					<div class="header__translate-button">
+						<vlada-button type="primary" size="cube" rounded="md" icon="bi:translate" @click="toggleLocales" />
+						<vlada-dropdown
+								:items="locales"
+								:showDropdown="showLocales"
+								animation="fade-in"
+								@item-select="handleLocaleSelect"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</header>
 </template>
 
