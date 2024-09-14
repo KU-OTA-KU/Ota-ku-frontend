@@ -4,16 +4,10 @@
 <template>
 	<welcome-components-image-scroller/>
 	<section class="header__scroller-description">
-		<p class="header__scroller-description-paragraph">StreamVibe is the best streaming experience for
-			watching your
-			favorite movies and shows on demand,
-			anytime,
-			anywhere. With<br> StreamVibe, you can enjoy a wide variety of content, including the latest blockbusters, classic
-			movies, popular TV shows, and more.<br> You can also create your own watchlist, so you can easily find the
-			content you want to watch.</p>
-		<vlada-button icon="bi:play-fill" text="Start Watching Now"
-		              type="tertiary"
-		              icon-position="left"></vlada-button>
+		<p class="header__scroller-description-paragraph" data-aos="fade-in" data-aos-duration="100">{{ $t('welcome.description')}}</p>
+		<div data-aos="fade-in" data-aos-duration="200">
+			<vlada-button type="primary" size="md" icon="bi:play-fill" icon-position="left" rounded="md" :placeholder="$t('welcome.start-watching-now')"/>
+		</div>
 	</section>
 </template>
 
@@ -22,7 +16,7 @@
 	@apply flex flex-col items-center mb-20;
 
 	.header__scroller-description-paragraph {
-		@apply font-manrope text-center my-4 text-vlada-color-senary font-light;
+		@apply font-manrope text-center my-4 max-w-4xl text-vlada-color-senary font-light;
 	}
 }
 </style>

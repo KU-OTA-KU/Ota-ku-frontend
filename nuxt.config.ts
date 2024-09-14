@@ -12,7 +12,8 @@ export default defineNuxtConfig({
       '@nuxt/icon',
       'vue3-carousel-nuxt',
       'nuxt-aos',
-      '@nuxt/image'
+      '@nuxt/image',
+      '@nuxtjs/i18n'
     ],
 
     css: ['~/assets/css/_root.css'],
@@ -30,5 +31,20 @@ export default defineNuxtConfig({
         families: {
             Manrope: true
         }
+    },
+    i18n: {
+        locales: [
+            { code: 'en', iso: 'en-US', name: 'English' },
+            { code: 'es', iso: 'es-ES', name: 'Español' },
+            { code: 'fr', iso: 'fr-FR', name: 'Français' },
+            { code: 'hy', iso: 'hy-AM', name: 'Հայերեն' },
+            { code: 'ja', iso: 'ja-JP', name: '日本語' },
+            { code: 'ru', iso: 'ru-RU', name: 'Русский' },
+            { code: 'uk', iso: 'uk-UA', name: 'Українська' },
+            { code: 'zh', iso: 'zh-CN', name: '中文' }
+        ],
+        defaultLocale: 'en',
+        strategy: 'prefix_and_default',
+        vueI18n: './i18n.config.ts'
     }
 })

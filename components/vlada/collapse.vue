@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import {ref} from 'vue';
 
 interface Props {
 	id: string;
@@ -22,12 +22,12 @@ const toggleAccordion = () => {
 	<div class="accordion">
 		<div class="accordion__button" @click="toggleAccordion">
 			<div class="accordion__button--id">
-				{{ props.id }}
+				<p>{{ props.id }}</p>
 			</div>
 			<div class="accordion__button--title">
 				<h3>{{ props.title }}</h3>
-				<Icon class="accordion__button-icon" name="bi:chevron-up" v-show="isOpen" />
-				<Icon class="accordion__button-icon" name="bi:chevron-down" v-show="!isOpen" />
+				<Icon class="accordion__button-icon" name="bi:chevron-up" v-show="isOpen"/>
+				<Icon class="accordion__button-icon" name="bi:chevron-down" v-show="!isOpen"/>
 			</div>
 		</div>
 		<transition name="accordion" mode="out-in">
@@ -41,17 +41,37 @@ const toggleAccordion = () => {
 <style scoped>
 .accordion {
 	.accordion__button {
-		@apply flex items-center justify-between;
+		@apply flex items-center justify-between cursor-pointer;
+
+		&:hover {
+			.accordion__button--id {
+				@apply border-vlada-color-quinary;
+
+				p {
+					@apply text-vlada-color-quinary;
+				}
+			}
+
+			.accordion__button--title {
+				h3 {
+					@apply text-vlada-color-quinary;
+				}
+			}
+		}
 
 		.accordion__button--id {
-			@apply text-white bg-vlada-color-tertiary px-6 py-5 rounded-xl text-xl font-bold border-2 border-vlada-color-septenary mr-5;
+			@apply text-white bg-vlada-color-tertiary px-8 py-8 rounded-xl flex items-center justify-center text-xl font-bold border-2 border-vlada-color-septenary mr-5 relative transition-colors;
+
+			p {
+				@apply absolute;
+			}
 		}
 
 		.accordion__button--title {
-			@apply text-white w-full cursor-pointer flex justify-between items-center;
+			@apply text-white w-full cursor-pointer flex justify-between items-center transition-colors;
 
 			h3 {
-				@apply text-xl;
+				@apply text-xl transition-colors;
 			}
 
 			.accordion__button-icon {

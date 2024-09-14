@@ -1,0 +1,62 @@
+{
+  "sign-up": "Sign Up",
+  "languages": {
+    "english": "English",
+    "spanish": "Español",
+    "french": "Français",
+    "armenian": "Հայերեն",
+    "japanese": "日本語",
+    "russian": "Русский",
+    "ukrainian": "Українська",
+    "chinese": "中文"
+  },
+  "language-codes": {
+    "english": "English",
+    "spanish": "Spanish",
+    "french": "French",
+    "armenian": "Armenian",
+    "japanese": "Japanese",
+    "russian": "Russian",
+    "ukrainian": "Ukrainian",
+    "chinese": "Chinese"
+  },
+  "welcome": {
+    "title": "The Ultimate Anime Experience",
+    "description": "Ota-Ku provides the ultimate anime experience for watching your favorite anime series and movies on demand, anytime, anywhere. With Ota-Ku, you can explore a vast library of anime content, including the latest releases, classic favorites, and hidden gems. Create your own personalized watchlist to easily access the anime you love and stay up-to-date with your favorite series.",
+    "start-watching-now": "Start Watching Now",
+    "streaming-features": {
+      "title": "We Provide you streaming experience across various devices.",
+      "description": "With StreamVibe, you can enjoy your favorite movies and TV shows anytime, anywhere. Our platform is designed to be compatible with a wide range of devices, ensuring that you never miss a moment of entertainment.",
+      "features": {
+        "1": {
+          "title": "Smartphones",
+          "description": "StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store"
+        },
+        "2": {
+          "title": "Tablet",
+          "description": "StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store"
+        },
+        "3": {
+          "title": "Smart TV",
+          "description": "StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store"
+        },
+        "4": {
+          "title": "Laptops",
+          "description": "StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store"
+        },
+        "5": {
+          "title": "Gaming Consoles",
+          "description": "StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store"
+        },
+        "6": {
+          "title": "VR Headsets",
+          "description": "StreamVibe is optimized for both Android and iOS smartphones. Download our app from the Google Play Store or the Apple App Store"
+        }
+      }
+    },
+    "faq": {
+      "title": "We Provide you streaming experience across various devices.",
+      "description": "With StreamVibe, you can enjoy your favorite movies and TV shows anytime, anywhere. Our platform is designed to be compatible with a wide range of\ndevices, ensuring that you never miss a moment of entertainment."
+    }
+  }
+}

@@ -17,8 +17,8 @@ export default {
                 'vlada-color-quinary': '#E50000',
                 'vlada-color-senary': '#999999',
                 'vlada-color-septenary': '#262626',
-                'vlada-color-octonary': '#',
-                'vlada-color-nonary': '#',
+                'vlada-color-octonary': '#950606',
+                'vlada-color-nonary': '#c81b1b',
                 'vlada-color-denary': '#',
             },
             fontFamily: {
