@@ -23,23 +23,21 @@ const subscriptions = [
 		<div class="vlada-container">
 			<div class="subscription__top">
 				<div class="subscription__top-title">
-					<h3 data-aos="fade-up">Explore our wide variety of categories</h3>
-					<p data-aos="fade-up" data-aos-duration="500">
-						Whether you're looking for a comedy to make you laugh, a drama to make you think, or a documentary to learn
-						something new
+					<h3 data-aos="fade-up">{{ $t('welcome.subscription.title') }}</h3>
+					<p data-aos="fade-up" data-aos-delay="100">
+						{{ $t('welcome.subscription.description') }}
 					</p>
 				</div>
 			</div>
-			<div class="subscription__content">
-				<div v-for="(device, index) in subscriptions" :key="index" class="subscription__card" data-aos="fade-up"
-				     data-aos-duration="600">
+			<div class="subscription__content" data-aos="fade-up" data-aos-delay="200">
+				<div v-for="(device, index) in subscriptions" :key="index" class="subscription__card">
 					<h4>{{ device.title }}</h4>
 					<p class="subscription__card--description">{{ device.description }}</p>
 					<div class="subscription__card-price">
 						<p>${{ device.price }}</p><span> / year</span>
 					</div>
 					<div class="subscription__card-buttons">
-						<vlada-button  type="primary" size="md" rounded="md" placeholder="Sign Up"/>
+						<vlada-button type="primary" size="md" rounded="md" placeholder="Sign Up"/>
 					</div>
 				</div>
 			</div>
@@ -63,7 +61,16 @@ const subscriptions = [
 		@apply grid md:grid-cols-3 gap-7;
 
 		.subscription__card {
-			@apply bg-vlada-color-quaternary p-8 rounded-2xl border-2 border-vlada-color-septenary;
+			@apply bg-vlada-color-quaternary p-8 rounded-2xl border-2 border-vlada-color-septenary transition-colors;
+
+			&:hover {
+				@apply border-vlada-color-quinary;
+
+				h4 {
+					@apply text-vlada-color-quinary;
+				}
+			}
+
 
 			.subscription__card--description {
 				@apply mt-5 text-vlada-color-senary font-light;
