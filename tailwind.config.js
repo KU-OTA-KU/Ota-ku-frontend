@@ -20,6 +20,7 @@ export default {
                 'vlada-color-octonary': '#950606',
                 'vlada-color-nonary': '#c81b1b',
                 'vlada-color-denary': '#',
+                'vlada-color-primary-light': 'rgba(0,0,0,0.05)',
             },
             fontFamily: {
                 'manrope': ['Manrope', 'sans-serif'],

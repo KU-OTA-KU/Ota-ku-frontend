@@ -1,0 +1,4 @@
+const faq_vue_vue_type_style_index_0_scoped_392b16f4_lang = ".faq__features .faq__features-top[data-v-392b16f4]{align-items:center;display:flex;justify-content:space-between;margin-bottom:1.25rem}.faq__features .faq__features-top .faq__features-top-title[data-v-392b16f4]{width:100%}.faq__features .faq__features-top .faq__features-top-title p[data-v-392b16f4]{font-weight:300;margin-bottom:.5rem;margin-top:.5rem;--tw-text-opacity:1;color:rgb(153 153 153/var(--tw-text-opacity))}.faq__features .faq__features-content[data-v-392b16f4]{-moz-column-gap:5rem;column-gap:5rem;display:grid;row-gap:1.25rem;width:100%}@media (min-width:768px){.faq__features .faq__features-content[data-v-392b16f4]{grid-template-columns:repeat(2,minmax(0,1fr))}}";
+
+export { faq_vue_vue_type_style_index_0_scoped_392b16f4_lang as f };
+//# sourceMappingURL=faq-styles-1.mjs-Bkodu1f6.mjs.map

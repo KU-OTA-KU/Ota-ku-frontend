@@ -2,21 +2,38 @@
 </script>
 
 <template>
-	<welcome-components-image-scroller/>
-	<section class="header__scroller-description">
-		<p class="header__scroller-description-paragraph" data-aos="fade-in" data-aos-duration="100">{{ $t('welcome.description')}}</p>
-		<div data-aos="fade-in" data-aos-duration="200">
-			<vlada-button type="primary" size="md" icon="bi:play-fill" icon-position="left" rounded="md" :placeholder="$t('welcome.start-watching-now')"/>
-		</div>
-	</section>
+    <welcome-components-image-scroller/>
+    <section class="header__scroller-description">
+        <p class="header__scroller-description-paragraph">{{ $t('welcome.description') }}</p>
+        <div class="header__scroller-button">
+            <vlada-button type="primary" size="md" icon="bi:play-fill" icon-position="left" rounded="md"
+                          :placeholder="$t('welcome.start-watching-now')"/>
+        </div>
+    </section>
 </template>
 
 <style scoped>
-.header__scroller-description {
-	@apply flex flex-col items-center mb-20;
+.dark-mode .header__scroller-description {
+    @apply flex flex-col items-center bg-vlada-color-primary transition-colors;
 
-	.header__scroller-description-paragraph {
-		@apply font-manrope text-center my-4 max-w-4xl text-vlada-color-senary font-light;
-	}
+    .header__scroller-description-paragraph {
+        @apply hidden md:block font-manrope text-center my-4 max-w-4xl text-white opacity-70 font-light transition-colors;
+    }
+
+    .header__scroller-button {
+        @apply mt-3 
+    }
+}
+
+.light-mode .header__scroller-description {
+    @apply flex flex-col items-center bg-vlada-color-primary-light transition-colors;
+
+    .header__scroller-description-paragraph {
+        @apply hidden md:block font-manrope text-center my-4 max-w-4xl text-black font-light transition-colors;
+    }
+
+    .header__scroller-button {
+        @apply mt-3
+    }
 }
 </style>

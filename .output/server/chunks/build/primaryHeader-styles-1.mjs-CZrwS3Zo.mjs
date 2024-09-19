@@ -1,0 +1,4 @@
+const primaryHeader_vue_vue_type_style_index_0_scoped_b35b3292_lang = ".header__scroller-description[data-v-b35b3292]{align-items:center;display:flex;flex-direction:column;margin-bottom:5rem}.header__scroller-description .header__scroller-description-paragraph[data-v-b35b3292]{display:none;font-family:Manrope,sans-serif;font-weight:300;margin-bottom:1rem;margin-top:1rem;max-width:56rem;text-align:center;--tw-text-opacity:1;color:rgb(153 153 153/var(--tw-text-opacity))}@media (min-width:768px){.header__scroller-description .header__scroller-description-paragraph[data-v-b35b3292]{display:block}}.header__scroller-description .header__scroller-button[data-v-b35b3292]{margin-top:.75rem}";
+
+export { primaryHeader_vue_vue_type_style_index_0_scoped_b35b3292_lang as p };
+//# sourceMappingURL=primaryHeader-styles-1.mjs-CZrwS3Zo.mjs.map

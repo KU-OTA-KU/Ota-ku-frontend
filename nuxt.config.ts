@@ -13,7 +13,8 @@ export default defineNuxtConfig({
       'vue3-carousel-nuxt',
       'nuxt-aos',
       '@nuxt/image',
-      '@nuxtjs/i18n'
+      '@nuxtjs/i18n',
+      '@nuxtjs/color-mode'
     ],
 
     css: ['~/assets/css/_root.css'],
@@ -31,6 +32,16 @@ export default defineNuxtConfig({
         families: {
             Manrope: true
         }
+    },
+    colorMode: {
+        preference: 'system',
+        fallback: 'dark',
+        hid: 'nuxt-color-mode-script',
+        globalName: '__NUXT_COLOR_MODE__',
+        componentName: 'ColorScheme',
+        classSuffix: '-mode',
+        storage: 'localStorage',
+        storageKey: 'nuxt-color-mode'
     },
     i18n: {
         locales: [

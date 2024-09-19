@@ -1,7 +1,7 @@
 import ApiService from './apiService';
 
 class FaqService extends ApiService {
-    private servicePrefix: string = 'faq';
+    private servicePrefix: string = 'content/api/faq';
 
     private async request(method: 'post' | 'get', url: string, data?: any) {
         try {
