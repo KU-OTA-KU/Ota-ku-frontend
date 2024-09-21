@@ -9,7 +9,7 @@
 					<NuxtImg src="/img/logo-red.svg"/>
 				</div>
 				<nav class="header__navigation">
-					<vlada-button size="md" type="primary" to="/welcome" text="Home"/>
+					<vlada-button size="md" type="primary" to="/welcome" plac="Home"/>
 					<vlada-button size="md" type="primary" to="/" text="Movies & Shows"/>
 					<vlada-button size="md" type="primary" to="/" text="Support"/>
 					<vlada-button size="md" type="primary" to="/" text="Subscriptions"/>

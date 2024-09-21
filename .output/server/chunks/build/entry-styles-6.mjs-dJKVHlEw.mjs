@@ -1,4 +1,0 @@
-const nprogress = "#nprogress{pointer-events:none}#nprogress .bar{background:#e50000;height:2px;left:0;position:fixed;top:0;width:100%;z-index:1031}#nprogress .peg{box-shadow:0 0 10px #e50000,0 0 5px #e50000;display:block;height:100%;opacity:1;position:absolute;right:0;transform:rotate(3deg) translateY(-4px);width:100px}#nprogress .spinner{display:block;position:fixed;right:15px;top:15px;z-index:1031}#nprogress .spinner-icon{animation:nprogress-spinner .4s linear infinite;border-color:#e50000 transparent transparent #e50000;border-radius:50%;border-style:solid;border-width:2px;box-sizing:border-box;height:18px;width:18px}.nprogress-custom-parent{overflow:hidden;position:relative}.nprogress-custom-parent #nprogress .bar,.nprogress-custom-parent #nprogress .spinner{position:absolute}@keyframes nprogress-spinner{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}";
-
-export { nprogress as n };
-//# sourceMappingURL=entry-styles-6.mjs-dJKVHlEw.mjs.map

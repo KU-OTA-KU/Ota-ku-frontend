@@ -66,7 +66,7 @@ const imagePaths = computed(() =>
 
     &-shadow {
         @apply w-full h-full z-10 absolute;
-        background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 4%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.05) 96%);
+        background: linear-gradient(180deg, rgba(242, 242, 242, 1) 4%, rgba(0, 0, 0, 0) 50%, rgba(242, 242, 242, 1) 96%);
     }
 
     &-title {

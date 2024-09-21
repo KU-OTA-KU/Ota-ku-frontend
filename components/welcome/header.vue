@@ -61,12 +61,14 @@ const handleLocaleSelect = (item: { value: string, label: string }) => {
                     <NuxtImg src="/img/logo-red-dark.svg"/>
                 </div>
                 <div class="header__search-profile">
-                    <vlada-button type="primary" />
-                    <select v-model="$colorMode.preference">
-                        <option value="system">System</option>
-                        <option value="light">Light</option>
-                        <option value="dark">Dark</option>
-                    </select>
+                    <div>
+                        <vlada-button v-if="$colorMode.preference === 'system'" type="primary" size="cube" rounded="md" icon="bi:laptop-fill"
+                                      @click="$colorMode.preference = 'light'"/>
+                        <vlada-button v-else-if="$colorMode.preference === 'light'" type="primary" size="cube" rounded="md" icon="bi:sun-fill"
+                                      @click="$colorMode.preference = 'dark'"/>
+                        <vlada-button v-else type="primary" size="cube" rounded="md" icon="bi:moon-fill"
+                                      @click="$colorMode.preference = 'system'"/>
+                    </div>
                     <div class="header__translate-button">
                         <vlada-button type="primary" size="cube" rounded="md" icon="bi:translate"
                                       @click="toggleLocales"/>

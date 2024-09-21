@@ -1,1 +1,0 @@
-{"version":3,"file":"default-CRyz2rrX.mjs","sources":["../../../../node_modules/nuxt/dist/app/components/route-provider.js","../../../../node_modules/nuxt/dist/pages/runtime/page.js"],"sourcesContent":null,"names":["generateRouteKey","defaultPageTransition","defaultKeepaliveConfig"],"mappings":"","x_google_ignoreList":[0,1]}

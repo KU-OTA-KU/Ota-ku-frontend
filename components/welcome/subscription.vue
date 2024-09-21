@@ -108,7 +108,7 @@ onMounted(() => {
         @apply grid md:grid-cols-3 gap-7;
 
         .subscription__card {
-            @apply bg-vlada-color-quaternary p-8 rounded-2xl border-2 border-vlada-color-septenary transition-colors flex flex-col justify-between;
+            @apply bg-vlada-color-secondary p-8 rounded-2xl border-2 border-vlada-color-septenary transition-colors flex flex-col justify-between;
 
             &:hover {
                 @apply border-vlada-color-quinary;
