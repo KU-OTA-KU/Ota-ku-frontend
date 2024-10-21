@@ -12,7 +12,11 @@ const props = defineProps<Props>();
 </template>
 
 <style scoped>
-  .vlada-br-20 {
-	  @apply mb-20;
+  .dark-mode .vlada-br-20 {
+	  @apply h-20 bg-vlada-color-primary transition-colors;
+  }
+
+  .light-mode .vlada-br-20 {
+      @apply h-20 bg-vlada-color-primary-light transition-colors;
   }
 </style>

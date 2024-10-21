@@ -12,7 +12,7 @@ class ApiService implements ApiServiceInterface {
     private readonly localeKey: string = 'i18n_redirected';
 
     private getApiPrefix(): string {
-        return 'http://localhost:8000/api';
+        return 'http://localhost:8000';
     }
 
     private getAuthToken(): string | null {

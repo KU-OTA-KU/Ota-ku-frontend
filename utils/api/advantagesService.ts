@@ -1,7 +1,7 @@
 import ApiService from './apiService';
 
 class AdvantagesService extends ApiService {
-    private servicePrefix: string = 'advantages';
+    private servicePrefix: string = 'content/api/advantages';
 
     private async request(method: 'post' | 'get', url: string, data?: any) {
         try {

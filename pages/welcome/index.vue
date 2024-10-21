@@ -5,11 +5,12 @@
 <template>
 	<welcome-header/>
 	<welcome-primary-header/>
-	<welcome-advantages/>
+    <vlada-br height="20"/>
+	<lazy-welcome-advantages/>
 	<vlada-br height="20"/>
-	<welcome-faq/>
+	<lazy-welcome-faq/>
 	<vlada-br height="20"/>
-	<welcome-subscription/>
+	<lazy-welcome-subscription/>
 	<vlada-br height="20"/>
 	<welcome-footer/>
 </template>
