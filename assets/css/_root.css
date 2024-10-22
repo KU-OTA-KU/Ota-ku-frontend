@@ -1,4 +1,19 @@
-.body {
+
+
+
+.dark-mode {
+    body {
+        @apply bg-vlada-color-primary;    
+    }
+}
+
+.light-mode {
+    body {
+      
+    }
+}
+
+body {
     @apply text-sm;
 }
 

@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import {ref} from 'vue';
-import subscriptionsService from "~/utils/api/subscriptionsService";
-
-const subscriptions = ref<any[]>([]);
-
-const fetchSubscriptions = async () => {
-    try {
-        const response = await subscriptionsService.getAll({});
-
-        subscriptions.value = response.map((subscription: any) => {
-            if (typeof subscription.benefits === 'string') {
-                subscription.benefits = JSON.parse(subscription.benefits);
-            }
-            return subscription;
-        });
-        console.log(subscriptions.value);
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-onMounted(() => {
-    fetchSubscriptions();
-});
+// import {ref} from 'vue';
+// import subscriptionsService from "~/utils/api/subscriptionsService";
+//
+// const subscriptions = ref<any[]>([]);
+//
+// const fetchSubscriptions = async () => {
+//     try {
+//         const response = await subscriptionsService.getAll({});
+//
+//         subscriptions.value = response.map((subscription: any) => {
+//             if (typeof subscription.benefits === 'string') {
+//                 subscription.benefits = JSON.parse(subscription.benefits);
+//             }
+//             return subscription;
+//         });
+//         console.log(subscriptions.value);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
+//
+// onMounted(() => {
+//     fetchSubscriptions();
+// });
 </script>
 
 <template>
