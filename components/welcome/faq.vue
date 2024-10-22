@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import {ref} from 'vue';
-import faqService from "~/utils/api/faqService";
-
-const faqs = ref<any[]>([]);
-
-const fetchFaqs = async () => {
-    try {
-        faqs.value = await faqService.getAll({});
-        console.log(faqs.value);
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-onMounted(() => {
-    fetchFaqs();
-});
+// import {ref} from 'vue';
+// import faqService from "~/utils/api/faqService";
+//
+// const faqs = ref<any[]>([]);
+//
+// const fetchFaqs = async () => {
+//     try {
+//         faqs.value = await faqService.getAll({});
+//         console.log(faqs.value);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
+//
+// onMounted(() => {
+//     fetchFaqs();
+// });
 </script>
 
 <template>
@@ -37,15 +37,15 @@ onMounted(() => {
                 </div>
             </div>
             <div class="faq__features-content" data-aos="fade-up" data-aos-delay="200">
-                <vlada-collapse
-                    v-for="(faq, index) in faqs"
-                    :key="index"
-                    type="secondary"
-                    :id="String(index + 1)"
-                    :title="faq.title"
-                    :description="faq.description"
-                    :is-open="true"
-                />
+<!--                <vlada-collapse-->
+<!--                    v-for="(faq, index) in faqs"-->
+<!--                    :key="index"-->
+<!--                    type="secondary"-->
+<!--                    :id="String(index + 1)"-->
+<!--                    :title="faq.title"-->
+<!--                    :description="faq.description"-->
+<!--                    :is-open="true"-->
+<!--                />-->
             </div>
         </div>
     </section>

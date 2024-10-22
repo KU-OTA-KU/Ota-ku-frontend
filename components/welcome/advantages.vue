@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import {ref} from 'vue';
-import advantagesService from "~/utils/api/advantagesService";
-
-const advantages = ref<any[]>([]);
-
-const fetchAdvantages = async () => {
-    try {
-        advantages.value = await advantagesService.getAll({});
-        console.log(advantages.value);
-    } catch (error) {
-        console.error(error);
-    }
-};
-
-onMounted(() => {
-    fetchAdvantages();
-});
+// import {ref} from 'vue';
+// import advantagesService from "~/utils/rest/services/advantagesService";
+//
+// const advantages = ref<any[]>([]);
+//
+// const fetchAdvantages = async () => {
+//     try {
+//         advantages.value = await advantagesService.index({});
+//         console.log(advantages.value);
+//     } catch (error) {
+//         console.error(error);
+//     }
+// };
+//
+// onMounted(() => {
+//     fetchAdvantages();
+// });
 </script>
 
 <template>
@@ -34,20 +34,20 @@ onMounted(() => {
                 </div>
             </div>
             <div class="streaming__features-content">
-                <div v-for="(device, index) in advantages" :key="index" class="streaming__features-card"
-                     data-aos="fade-up"
-                     data-aos-delay="200">
-                    <div class="streaming__features-card-inner">
-                        <div class="streaming__features-card-gradient"></div>
-                        <div class="streaming__features-card-icon-name">
-                            <div class="streaming__features-card-icon">
-                                <Icon :name="device.icon"/>
-                            </div>
-                            <h4>{{ device.title }}</h4>
-                        </div>
-                        <p class="streaming__features-card-description">{{ device.description }}</p>
-                    </div>
-                </div>
+<!--                <div v-for="(device, index) in advantages" :key="index" class="streaming__features-card"-->
+<!--                     data-aos="fade-up"-->
+<!--                     data-aos-delay="200">-->
+<!--                    <div class="streaming__features-card-inner">-->
+<!--                        <div class="streaming__features-card-gradient"></div>-->
+<!--                        <div class="streaming__features-card-icon-name">-->
+<!--                            <div class="streaming__features-card-icon">-->
+<!--                                <Icon :name="device.icon"/>-->
+<!--                            </div>-->
+<!--                            <h4>{{ device.title }}</h4>-->
+<!--                        </div>-->
+<!--                        <p class="streaming__features-card-description">{{ device.description }}</p>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
     </section>
