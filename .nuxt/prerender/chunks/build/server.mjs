@@ -1,4 +1,4 @@
-import { version as version$1, unref, inject as inject$1, h, defineComponent as defineComponent$1, ref, provide, createElementBlock, watch, onScopeDispose, reactive, computed, watchEffect, toRefs, isVNode, Comment, Fragment, shallowRef, warn, getCurrentInstance as getCurrentInstance$1, capitalize, camelize, toRaw, createVNode, mergeProps, readonly, nextTick, Suspense, Transition, isRef, toRef, Text, resolveDynamicComponent, withDirectives, resolveDirective, hasInjectionContext, effectScope, useSSRContext, TransitionGroup, vShow, createApp, shallowReactive, getCurrentScope, onErrorCaptured, onServerPrefetch, isReadonly, withCtx, createTextVNode, isShallow, isReactive } from 'file://Z:/Ota-ku-nuxt/node_modules/vue/index.mjs';
+import { version as version$1, unref, inject as inject$1, h, watch, onScopeDispose, reactive, computed, watchEffect, toRefs, isVNode, Comment, Fragment, shallowRef, warn, getCurrentInstance as getCurrentInstance$1, ref, provide, defineComponent as defineComponent$1, capitalize, camelize, toRaw, createVNode, mergeProps, readonly, defineAsyncComponent, Suspense, nextTick, Transition, isRef, toRef, Text, resolveDynamicComponent, withDirectives, resolveDirective, hasInjectionContext, effectScope, useSSRContext, TransitionGroup, vShow, createApp, shallowReactive, getCurrentScope, onErrorCaptured, onServerPrefetch, isReadonly, withCtx, createTextVNode, isShallow, isReactive } from 'file://Z:/Ota-ku-nuxt/node_modules/vue/index.mjs';
 import { $fetch } from 'file://Z:/Ota-ku-nuxt/node_modules/ofetch/dist/node.mjs';
 import { b as baseURL, p as publicAssetsURL } from '../_/renderer.mjs';
 import { createHooks } from 'file://Z:/Ota-ku-nuxt/node_modules/hookable/dist/index.mjs';
@@ -10,24 +10,23 @@ import { useRoute as useRoute$2, createMemoryHistory, createRouter, START_LOCATI
 import { toRouteMatcher, createRouter as createRouter$1 } from 'file://Z:/Ota-ku-nuxt/node_modules/radix3/dist/index.mjs';
 import { defu } from 'file://Z:/Ota-ku-nuxt/node_modules/defu/dist/defu.mjs';
 import { joinURL, hasProtocol, isScriptProtocol, withQuery } from 'file://Z:/Ota-ku-nuxt/node_modules/ufo/dist/index.mjs';
-import NProgress from 'file://Z:/Ota-ku-nuxt/node_modules/nprogress/nprogress.js';
 import { ssrRenderSuspense, ssrRenderComponent, ssrRenderVNode } from 'file://Z:/Ota-ku-nuxt/node_modules/vue/server-renderer/index.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/devalue/index.js';
 import 'file://Z:/Ota-ku-nuxt/node_modules/@unhead/ssr/dist/index.mjs';
-import '../runtime.mjs';
+import '../_/nitro.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/destr/dist/index.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/unenv/runtime/fetch/index.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/klona/dist/index.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/scule/dist/index.mjs';
+import 'node:fs';
+import 'node:url';
+import 'file://Z:/Ota-ku-nuxt/node_modules/pathe/dist/index.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/ohash/dist/index.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/unstorage/dist/index.mjs';
 import 'file://Z:/Ota-ku-nuxt/node_modules/unstorage/drivers/fs.mjs';
 import 'file:///Z:/Ota-ku-nuxt/node_modules/nuxt/dist/core/runtime/nitro/cache-driver.js';
 import 'file://Z:/Ota-ku-nuxt/node_modules/unstorage/drivers/fs-lite.mjs';
-import 'node:fs';
-import 'node:url';
-import 'file://Z:/Ota-ku-nuxt/node_modules/pathe/dist/index.mjs';
 
 if (!globalThis.$fetch) {
   globalThis.$fetch = $fetch.create({
@@ -38,28 +37,30 @@ const appLayoutTransition = false;
 const appPageTransition = false;
 const appKeepalive = false;
 const appId = "nuxt-app";
-function getNuxtAppCtx(appName = appId) {
-  return getContext(appName, {
+function getNuxtAppCtx(id = appId) {
+  return getContext(id, {
     asyncContext: false
   });
 }
 const NuxtPluginIndicator = "__nuxt_plugin";
 function createNuxtApp(options) {
+  var _a;
   let hydratingCount = 0;
   const nuxtApp = {
-    _name: appId,
+    _id: options.id || appId || "nuxt-app",
     _scope: effectScope(),
     provide: void 0,
     globalName: "nuxt",
     versions: {
       get nuxt() {
-        return "3.12.3";
+        return "3.15.0";
       },
       get vue() {
         return nuxtApp.vueApp.version;
       }
     },
     payload: shallowReactive({
+      ...((_a = options.ssrContext) == null ? void 0 : _a.payload) || {},
       data: shallowReactive({}),
       state: reactive({}),
       once: /* @__PURE__ */ new Set(),
@@ -102,6 +103,15 @@ function createNuxtApp(options) {
   {
     nuxtApp.payload.serverRendered = true;
   }
+  if (nuxtApp.ssrContext) {
+    nuxtApp.payload.path = nuxtApp.ssrContext.url;
+    nuxtApp.ssrContext.nuxt = nuxtApp;
+    nuxtApp.ssrContext.payload = nuxtApp.payload;
+    nuxtApp.ssrContext.config = {
+      public: nuxtApp.ssrContext.runtimeConfig.public,
+      app: nuxtApp.ssrContext.runtimeConfig.app
+    };
+  }
   nuxtApp.hooks = createHooks();
   nuxtApp.hook = nuxtApp.hooks.hook;
   {
@@ -120,22 +130,6 @@ function createNuxtApp(options) {
   };
   defineGetter(nuxtApp.vueApp, "$nuxt", nuxtApp);
   defineGetter(nuxtApp.vueApp.config.globalProperties, "$nuxt", nuxtApp);
-  {
-    if (nuxtApp.ssrContext) {
-      nuxtApp.ssrContext.nuxt = nuxtApp;
-      nuxtApp.ssrContext._payloadReducers = {};
-      nuxtApp.payload.path = nuxtApp.ssrContext.url;
-    }
-    nuxtApp.ssrContext = nuxtApp.ssrContext || {};
-    if (nuxtApp.ssrContext.payload) {
-      Object.assign(nuxtApp.payload, nuxtApp.ssrContext.payload);
-    }
-    nuxtApp.ssrContext.payload = nuxtApp.payload;
-    nuxtApp.ssrContext.config = {
-      public: options.ssrContext.runtimeConfig.public,
-      app: options.ssrContext.runtimeConfig.app
-    };
-  }
   const runtimeConfig = options.ssrContext.runtimeConfig;
   nuxtApp.provide("config", runtimeConfig);
   return nuxtApp;
@@ -223,22 +217,22 @@ function defineNuxtPlugin(plugin2) {
 }
 function callWithNuxt(nuxt, setup, args) {
   const fn = () => setup();
-  const nuxtAppCtx = getNuxtAppCtx(nuxt._name);
+  const nuxtAppCtx = getNuxtAppCtx(nuxt._id);
   {
     return nuxt.vueApp.runWithContext(() => nuxtAppCtx.callAsync(nuxt, fn));
   }
 }
-function tryUseNuxtApp(appName) {
+function tryUseNuxtApp(id) {
   var _a;
   let nuxtAppInstance;
   if (hasInjectionContext()) {
     nuxtAppInstance = (_a = getCurrentInstance$1()) == null ? void 0 : _a.appContext.app.$nuxt;
   }
-  nuxtAppInstance = nuxtAppInstance || getNuxtAppCtx(appName).tryUse();
+  nuxtAppInstance = nuxtAppInstance || getNuxtAppCtx(id).tryUse();
   return nuxtAppInstance || null;
 }
-function useNuxtApp(appName) {
-  const nuxtAppInstance = tryUseNuxtApp(appName);
+function useNuxtApp(id) {
+  const nuxtAppInstance = tryUseNuxtApp(id);
   if (!nuxtAppInstance) {
     {
       throw new Error("[nuxt] instance unavailable");
@@ -279,6 +273,7 @@ const isProcessingMiddleware = () => {
   }
   return false;
 };
+const URL_QUOTE_RE = /"/g;
 const navigateTo = (to, options) => {
   if (!to) {
     to = "/";
@@ -304,7 +299,7 @@ const navigateTo = (to, options) => {
       const location2 = isExternal ? toPath : joinURL((/* @__PURE__ */ useRuntimeConfig()).app.baseURL, fullPath);
       const redirect = async function(response) {
         await nuxtApp.callHook("app:redirected");
-        const encodedLoc = location2.replace(/"/g, "%22");
+        const encodedLoc = location2.replace(URL_QUOTE_RE, "%22");
         const encodedHeader = encodeURL(location2, isExternalHost);
         nuxtApp.ssrContext._renderResponse = {
           statusCode: sanitizeStatusCode((options == null ? void 0 : options.redirectCode) || 302, 302),
@@ -378,32 +373,37 @@ const createError = (error) => {
   });
   return nuxtError;
 };
-version$1.startsWith("3");
+version$1[0] === "3";
 function resolveUnref(r) {
   return typeof r === "function" ? r() : unref(r);
 }
-function resolveUnrefHeadInput(ref2, lastKey = "") {
-  if (ref2 instanceof Promise)
+function resolveUnrefHeadInput(ref2) {
+  if (ref2 instanceof Promise || ref2 instanceof Date || ref2 instanceof RegExp)
     return ref2;
   const root = resolveUnref(ref2);
   if (!ref2 || !root)
     return root;
   if (Array.isArray(root))
-    return root.map((r) => resolveUnrefHeadInput(r, lastKey));
+    return root.map((r) => resolveUnrefHeadInput(r));
   if (typeof root === "object") {
-    return Object.fromEntries(
-      Object.entries(root).map(([k, v]) => {
-        if (k === "titleTemplate" || k.startsWith("on"))
-          return [k, unref(v)];
-        return [k, resolveUnrefHeadInput(v, k)];
-      })
-    );
+    const resolved = {};
+    for (const k in root) {
+      if (!Object.prototype.hasOwnProperty.call(root, k)) {
+        continue;
+      }
+      if (k === "titleTemplate" || k[0] === "o" && k[1] === "n") {
+        resolved[k] = unref(root[k]);
+        continue;
+      }
+      resolved[k] = resolveUnrefHeadInput(root[k]);
+    }
+    return resolved;
   }
   return root;
 }
 defineHeadPlugin({
   hooks: {
-    "entries:resolve": function(ctx) {
+    "entries:resolve": (ctx) => {
       for (const entry2 of ctx.entries)
         entry2.resolvedInput = resolveUnrefHeadInput(entry2.input);
     }
@@ -455,7 +455,7 @@ function createContext(opts = {}) {
     }
   }
   const _getCurrentInstance = () => {
-    if (als && currentInstance === void 0) {
+    if (als) {
       const instance = als.getStore();
       if (instance !== void 0) {
         return instance;
@@ -522,7 +522,6 @@ function createNamespace(defaultOpts = {}) {
       if (!contexts[key]) {
         contexts[key] = createContext({ ...defaultOpts, ...opts });
       }
-      contexts[key];
       return contexts[key];
     }
   };
@@ -554,8 +553,11 @@ function executeAsync(function_) {
   }
   return [awaitable, restore];
 }
+const ROUTE_KEY_PARENTHESES_RE$1 = /(:\w+)\([^)]+\)/g;
+const ROUTE_KEY_SYMBOLS_RE$1 = /(:\w+)[?+*]/g;
+const ROUTE_KEY_NORMAL_RE$1 = /:\w+/g;
 const interpolatePath = (route, match) => {
-  return match.path.replace(/(:\w+)\([^)]+\)/g, "$1").replace(/(:\w+)[?+*]/g, "$1").replace(/:\w+/g, (r) => {
+  return match.path.replace(ROUTE_KEY_PARENTHESES_RE$1, "$1").replace(ROUTE_KEY_SYMBOLS_RE$1, "$1").replace(ROUTE_KEY_NORMAL_RE$1, (r) => {
     var _a;
     return ((_a = route.params[r.slice(1)]) == null ? void 0 : _a.toString()) || "";
   });
@@ -574,54 +576,56 @@ const wrapInKeepAlive = (props, children) => {
 function toArray$1(value) {
   return Array.isArray(value) ? value : [value];
 }
-async function getRouteRules(url) {
+async function getRouteRules(arg) {
+  const path = typeof arg === "string" ? arg : arg.path;
   {
-    const _routeRulesMatcher = toRouteMatcher(
+    useNuxtApp().ssrContext._preloadManifest = true;
+    const _routeRulesMatcher2 = toRouteMatcher(
       createRouter$1({ routes: (/* @__PURE__ */ useRuntimeConfig()).nitro.routeRules })
     );
-    return defu({}, ..._routeRulesMatcher.matchAll(url).reverse());
+    return defu({}, ..._routeRulesMatcher2.matchAll(path).reverse());
   }
 }
 const _routes = [
   {
     name: "catalog",
     path: "/catalog",
-    component: () => import('./catalog-Di9v5evF.mjs').then((m) => m.default || m)
+    component: () => import('./catalog-BLZYZWTO.mjs')
   },
   {
     name: "doc-authors_ru",
     path: "/doc/authors_ru",
-    component: () => import('./authors_ru-CAsVCjA5.mjs').then((m) => m.default || m)
+    component: () => import('./authors_ru-DjC5e7FH.mjs')
   },
   {
     name: "doc-privacy_policy_ru",
     path: "/doc/privacy_policy_ru",
-    component: () => import('./privacy_policy_ru-Cg8Onpvf.mjs').then((m) => m.default || m)
+    component: () => import('./privacy_policy_ru-mwUW8kV3.mjs')
   },
   {
     name: "doc-terms_ru",
     path: "/doc/terms_ru",
-    component: () => import('./terms_ru-iFzXzBtS.mjs').then((m) => m.default || m)
+    component: () => import('./terms_ru-A5dMVuwC.mjs')
   },
   {
     name: "index",
     path: "/",
-    component: () => import('./index-yHzvb4EK.mjs').then((m) => m.default || m)
+    component: () => import('./index-D-M-Sw9d.mjs')
   },
   {
     name: "OpenAnimeView",
     path: "/OpenAnimeView",
-    component: () => import('./OpenAnimeView-BLSyQ2YN.mjs').then((m) => m.default || m)
+    component: () => import('./OpenAnimeView-C7ENDwJh.mjs')
   },
   {
     name: "releases",
     path: "/releases",
-    component: () => import('./releases-Hy04EEsB.mjs').then((m) => m.default || m)
+    component: () => import('./releases-DXZWBRo7.mjs')
   },
   {
     name: "schedule",
     path: "/schedule",
-    component: () => import('./schedule-DJLfwyPq.mjs').then((m) => m.default || m)
+    component: () => import('./schedule-CvGqEA40.mjs')
   }
 ];
 const _wrapIf = (component, props, slots) => {
@@ -631,8 +635,11 @@ const _wrapIf = (component, props, slots) => {
     return props ? h(component, props, slots) : (_a = slots.default) == null ? void 0 : _a.call(slots);
   } };
 };
+const ROUTE_KEY_PARENTHESES_RE = /(:\w+)\([^)]+\)/g;
+const ROUTE_KEY_SYMBOLS_RE = /(:\w+)[?+*]/g;
+const ROUTE_KEY_NORMAL_RE = /:\w+/g;
 function generateRouteKey(route) {
-  const source = (route == null ? void 0 : route.meta.key) ?? route.path.replace(/(:\w+)\([^)]+\)/g, "$1").replace(/(:\w+)[?+*]/g, "$1").replace(/:\w+/g, (r) => {
+  const source = (route == null ? void 0 : route.meta.key) ?? route.path.replace(ROUTE_KEY_PARENTHESES_RE, "$1").replace(ROUTE_KEY_SYMBOLS_RE, "$1").replace(ROUTE_KEY_NORMAL_RE, (r) => {
     var _a;
     return ((_a = route.params[r.slice(1)]) == null ? void 0 : _a.toString()) || "";
   });
@@ -692,7 +699,7 @@ function _getHashElementScrollMarginTop(selector) {
   try {
     const elem = (void 0).querySelector(selector);
     if (elem) {
-      return Number.parseFloat(getComputedStyle(elem).scrollMarginTop);
+      return (Number.parseFloat(getComputedStyle(elem).scrollMarginTop) || 0) + (Number.parseFloat(getComputedStyle((void 0).documentElement).scrollPaddingTop) || 0);
     }
   } catch {
   }
@@ -712,15 +719,29 @@ const validate = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
   if (!((_a = to.meta) == null ? void 0 : _a.validate)) {
     return;
   }
-  useNuxtApp();
-  useRouter$1();
+  const nuxtApp = useNuxtApp();
+  const router = useRouter$1();
   const result = ([__temp, __restore] = executeAsync(() => Promise.resolve(to.meta.validate(to))), __temp = await __temp, __restore(), __temp);
   if (result === true) {
     return;
   }
-  {
-    return result;
-  }
+  const error = createError({
+    statusCode: result && result.statusCode || 404,
+    statusMessage: result && result.statusMessage || `Page Not Found: ${to.fullPath}`,
+    data: {
+      path: to.fullPath
+    }
+  });
+  const unsub = router.beforeResolve((final) => {
+    unsub();
+    if (final === to) {
+      const unsub2 = router.afterEach(async () => {
+        unsub2();
+        await nuxtApp.runWithContext(() => showError(error));
+      });
+      return false;
+    }
+  });
 });
 const manifest_45route_45rule = /* @__PURE__ */ defineNuxtRouteMiddleware(async (to) => {
   {
@@ -736,14 +757,11 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:router",
   enforce: "pre",
   async setup(nuxtApp) {
-    var _a, _b, _c, _d;
+    var _a, _b, _c;
     let __temp, __restore;
     let routerBase = (/* @__PURE__ */ useRuntimeConfig()).app.baseURL;
-    if (routerOptions.hashMode && !routerBase.includes("#")) {
-      routerBase += "#";
-    }
     const history = ((_a = routerOptions.history) == null ? void 0 : _a.call(routerOptions, routerBase)) ?? createMemoryHistory(routerBase);
-    const routes2 = ((_b = routerOptions.routes) == null ? void 0 : _b.call(routerOptions, _routes)) ?? _routes;
+    const routes2 = routerOptions.routes ? ([__temp, __restore] = executeAsync(() => routerOptions.routes(_routes)), __temp = await __temp, __restore(), __temp) ?? _routes : _routes;
     let startPosition;
     const router = createRouter({
       ...routerOptions,
@@ -781,15 +799,16 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     };
     nuxtApp.hook("page:finish", syncCurrentRoute);
     router.afterEach((to, from) => {
-      var _a2, _b2, _c2, _d2;
-      if (((_b2 = (_a2 = to.matched[0]) == null ? void 0 : _a2.components) == null ? void 0 : _b2.default) === ((_d2 = (_c2 = from.matched[0]) == null ? void 0 : _c2.components) == null ? void 0 : _d2.default)) {
+      var _a2, _b2, _c2, _d;
+      if (((_b2 = (_a2 = to.matched[0]) == null ? void 0 : _a2.components) == null ? void 0 : _b2.default) === ((_d = (_c2 = from.matched[0]) == null ? void 0 : _c2.components) == null ? void 0 : _d.default)) {
         syncCurrentRoute();
       }
     });
     const route = {};
     for (const key in _route.value) {
       Object.defineProperty(route, key, {
-        get: () => _route.value[key]
+        get: () => _route.value[key],
+        enumerable: true
       });
     }
     nuxtApp._route = shallowReactive(route);
@@ -798,7 +817,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
       named: {}
     };
     useError();
-    if (!((_c = nuxtApp.ssrContext) == null ? void 0 : _c.islandContext)) {
+    if (!((_b = nuxtApp.ssrContext) == null ? void 0 : _b.islandContext)) {
       router.afterEach(async (to, _from, failure) => {
         delete nuxtApp._processingMiddleware;
         if (failure) {
@@ -807,16 +826,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
         if ((failure == null ? void 0 : failure.type) === 4) {
           return;
         }
-        if (to.matched.length === 0) {
-          await nuxtApp.runWithContext(() => showError(createError$1({
-            statusCode: 404,
-            fatal: false,
-            statusMessage: `Page not found: ${to.fullPath}`,
-            data: {
-              path: to.fullPath
-            }
-          })));
-        } else if (to.redirectedFrom && to.fullPath !== initialURL) {
+        if (to.redirectedFrom && to.fullPath !== initialURL) {
           await nuxtApp.runWithContext(() => navigateTo(to.fullPath || "/"));
         }
       });
@@ -835,7 +845,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     }
     const resolvedInitialRoute = router.currentRoute.value;
     syncCurrentRoute();
-    if ((_d = nuxtApp.ssrContext) == null ? void 0 : _d.islandContext) {
+    if ((_c = nuxtApp.ssrContext) == null ? void 0 : _c.islandContext) {
       return { provide: { router } };
     }
     const initialLayout = nuxtApp.payload.state._layout;
@@ -859,7 +869,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
           }
         }
         {
-          const routeRules = await nuxtApp.runWithContext(() => getRouteRules(to.path));
+          const routeRules = await nuxtApp.runWithContext(() => getRouteRules({ path: to.path }));
           if (routeRules.appMiddleware) {
             for (const key in routeRules.appMiddleware) {
               if (routeRules.appMiddleware[key]) {
@@ -899,6 +909,18 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
       delete nuxtApp._processingMiddleware;
       await nuxtApp.callHook("page:loading:end");
     });
+    router.afterEach(async (to, _from) => {
+      if (to.matched.length === 0) {
+        await nuxtApp.runWithContext(() => showError(createError$1({
+          statusCode: 404,
+          fatal: false,
+          statusMessage: `Page not found: ${to.fullPath}`,
+          data: {
+            path: to.fullPath
+          }
+        })));
+      }
+    });
     nuxtApp.hooks.hookOnce("app:created", async () => {
       try {
         if ("name" in resolvedInitialRoute) {
@@ -921,70 +943,25 @@ function definePayloadReducer(name, reduce) {
     useNuxtApp().ssrContext._payloadReducers[name] = reduce;
   }
 }
-const reducers = {
-  NuxtError: (data) => isNuxtError(data) && data.toJSON(),
-  EmptyShallowRef: (data) => isRef(data) && isShallow(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_"),
-  EmptyRef: (data) => isRef(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_"),
-  ShallowRef: (data) => isRef(data) && isShallow(data) && data.value,
-  ShallowReactive: (data) => isReactive(data) && isShallow(data) && toRaw(data),
-  Ref: (data) => isRef(data) && data.value,
-  Reactive: (data) => isReactive(data) && toRaw(data)
-};
+const reducers = [
+  ["NuxtError", (data) => isNuxtError(data) && data.toJSON()],
+  ["EmptyShallowRef", (data) => isRef(data) && isShallow(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_")],
+  ["EmptyRef", (data) => isRef(data) && !data.value && (typeof data.value === "bigint" ? "0n" : JSON.stringify(data.value) || "_")],
+  ["ShallowRef", (data) => isRef(data) && isShallow(data) && data.value],
+  ["ShallowReactive", (data) => isReactive(data) && isShallow(data) && toRaw(data)],
+  ["Ref", (data) => isRef(data) && data.value],
+  ["Reactive", (data) => isReactive(data) && toRaw(data)]
+];
 const revive_payload_server_eJ33V7gbc6 = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:revive-payload:server",
   setup() {
-    for (const reducer in reducers) {
-      definePayloadReducer(reducer, reducers[reducer]);
+    for (const [reducer, fn] of reducers) {
+      definePayloadReducer(reducer, fn);
     }
   }
 });
 const components_plugin_KR1HBZs4kY = /* @__PURE__ */ defineNuxtPlugin({
   name: "nuxt:global-components"
-});
-function toArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-function useRequestEvent(nuxtApp = useNuxtApp()) {
-  var _a;
-  return (_a = nuxtApp.ssrContext) == null ? void 0 : _a.event;
-}
-function prerenderRoutes(path) {
-  const paths = toArray(path);
-  appendHeader(useRequestEvent(), "x-nitro-prerender", paths.map((p) => encodeURIComponent(p)).join(", "));
-}
-const clientOnlySymbol = Symbol.for("nuxt:client-only");
-defineComponent$1({
-  name: "ClientOnly",
-  inheritAttrs: false,
-  props: ["fallback", "placeholder", "placeholderTag", "fallbackTag"],
-  setup(_, { slots, attrs }) {
-    const mounted2 = ref(false);
-    provide(clientOnlySymbol, true);
-    return (props) => {
-      var _a;
-      if (mounted2.value) {
-        return (_a = slots.default) == null ? void 0 : _a.call(slots);
-      }
-      const slot = slots.fallback || slots.placeholder;
-      if (slot) {
-        return slot();
-      }
-      const fallbackStr = props.fallback || props.placeholder || "";
-      const fallbackTag = props.fallbackTag || props.placeholderTag || "span";
-      return createElementBlock(fallbackTag, attrs, fallbackStr);
-    };
-  }
-});
-NProgress.configure({ showSpinner: true });
-const nprogress_OPYCKjD1DE = /* @__PURE__ */ defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.hook("page:start", () => {
-    NProgress.start();
-  });
-  nuxtApp.hook("page:finish", () => {
-    NProgress.done();
-  });
-});
-const themeLogo_OOqHECXy10 = /* @__PURE__ */ defineNuxtPlugin(() => {
 });
 function useToggleScope(source, fn) {
   let scope;
@@ -1078,6 +1055,10 @@ function convertToUnit(str) {
 }
 function isObject(obj) {
   return obj !== null && typeof obj === "object" && !Array.isArray(obj);
+}
+function isPlainObject(obj) {
+  let proto;
+  return obj !== null && typeof obj === "object" && ((proto = Object.getPrototypeOf(obj)) === Object.prototype || proto === null);
 }
 function refElement(obj) {
   if (obj && "$el" in obj) {
@@ -1211,11 +1192,11 @@ function mergeDeep() {
   for (const key in target) {
     const sourceProperty = source[key];
     const targetProperty = target[key];
-    if (isObject(sourceProperty) && isObject(targetProperty)) {
+    if (isPlainObject(sourceProperty) && isPlainObject(targetProperty)) {
       out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn);
       continue;
     }
-    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+    if (arrayFn && Array.isArray(sourceProperty) && Array.isArray(targetProperty)) {
       out[key] = arrayFn(sourceProperty, targetProperty);
       continue;
     }
@@ -1271,9 +1252,6 @@ function destructComputed(getter) {
 }
 function includes(arr, val) {
   return arr.includes(val);
-}
-function eventName(propName) {
-  return propName[2].toLowerCase() + propName.slice(3);
 }
 const EventProp = () => [Function, Array];
 function hasEvent(props, name) {
@@ -1343,16 +1321,6 @@ function defer(timeout, cb) {
     };
   }
 }
-function eagerComputed(fn, options) {
-  const result = shallowRef();
-  watchEffect(() => {
-    result.value = fn();
-  }, {
-    flush: "sync",
-    ...options
-  });
-  return readonly(result);
-}
 function isClickInsideElement(event, targetDiv) {
   const mouseX = event.clientX;
   const mouseY = event.clientY;
@@ -1378,6 +1346,11 @@ function templateRef() {
     get: () => refElement(el.value)
   });
   return fn;
+}
+function checkPrintable(e) {
+  const isPrintableChar = e.key.length === 1;
+  const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey;
+  return isPrintableChar && noModifier;
 }
 const block = ["top", "bottom"];
 const inline = ["start", "end", "left", "right"];
@@ -2048,6 +2021,11 @@ const en = {
     counter: "{0} files",
     counterSize: "{0} files ({1} in total)"
   },
+  fileUpload: {
+    title: "Drag and drop files here",
+    divider: "or",
+    browse: "Browse Files"
+  },
   timePicker: {
     am: "AM",
     pm: "PM",
@@ -2402,13 +2380,14 @@ const firstDay = {
   ZA: 0,
   ZW: 0
 };
-function getWeekArray(date2, locale) {
+function getWeekArray(date2, locale, firstDayOfWeek) {
   const weeks = [];
   let currentWeek = [];
   const firstDayOfMonth = startOfMonth(date2);
   const lastDayOfMonth = endOfMonth(date2);
-  const firstDayWeekIndex = (firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7;
-  const lastDayWeekIndex = (lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()] + 7) % 7;
+  const first = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0;
+  const firstDayWeekIndex = (firstDayOfMonth.getDay() - first + 7) % 7;
+  const lastDayWeekIndex = (lastDayOfMonth.getDay() - first + 7) % 7;
   for (let i = 0; i < firstDayWeekIndex; i++) {
     const adjacentDay = new Date(firstDayOfMonth);
     adjacentDay.setDate(adjacentDay.getDate() - (firstDayWeekIndex - i));
@@ -2432,9 +2411,10 @@ function getWeekArray(date2, locale) {
   }
   return weeks;
 }
-function startOfWeek(date2, locale) {
+function startOfWeek(date2, locale, firstDayOfWeek) {
+  const day = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0;
   const d = new Date(date2);
-  while (d.getDay() !== (firstDay[locale.slice(-2).toUpperCase()] ?? 0)) {
+  while (d.getDay() !== day) {
     d.setDate(d.getDate() - 1);
   }
   return d;
@@ -2473,8 +2453,8 @@ function date(value) {
   return null;
 }
 const sundayJanuarySecond2000 = new Date(2e3, 0, 2);
-function getWeekdays(locale) {
-  const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()];
+function getWeekdays(locale, firstDayOfWeek) {
+  const daysFromSunday = firstDayOfWeek ?? firstDay[locale.slice(-2).toUpperCase()] ?? 0;
   return createRange(7).map((i) => {
     const weekday = new Date(sundayJanuarySecond2000);
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i);
@@ -2871,11 +2851,11 @@ class VuetifyDateAdapter {
   addMonths(date2, amount) {
     return addMonths(date2, amount);
   }
-  getWeekArray(date2) {
-    return getWeekArray(date2, this.locale);
+  getWeekArray(date2, firstDayOfWeek) {
+    return getWeekArray(date2, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : void 0);
   }
-  startOfWeek(date2) {
-    return startOfWeek(date2, this.locale);
+  startOfWeek(date2, firstDayOfWeek) {
+    return startOfWeek(date2, this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : void 0);
   }
   endOfWeek(date2) {
     return endOfWeek(date2, this.locale);
@@ -2934,8 +2914,8 @@ class VuetifyDateAdapter {
   getDiff(date2, comparing, unit) {
     return getDiff(date2, comparing, unit);
   }
-  getWeekdays() {
-    return getWeekdays(this.locale);
+  getWeekdays(firstDayOfWeek) {
+    return getWeekdays(this.locale, firstDayOfWeek ? Number(firstDayOfWeek) : void 0);
   }
   getYear(date2) {
     return getYear(date2);
@@ -3343,7 +3323,8 @@ const aliases = {
   calendar: "mdi-calendar",
   treeviewCollapse: "mdi-menu-down",
   treeviewExpand: "mdi-menu-right",
-  eyeDropper: "mdi-eyedropper"
+  eyeDropper: "mdi-eyedropper",
+  upload: "mdi-cloud-upload"
 };
 const mdi = {
   // Not using mergeProps here, functional components merge props by default (?)
@@ -3787,9 +3768,7 @@ const makeLayoutItemProps = propsFactory({
 function useLayout() {
   const layout = inject$1(VuetifyLayoutKey);
   if (!layout) throw new Error("[Vuetify] Could not find injected layout");
-  const layoutIsReady = nextTick();
   return {
-    layoutIsReady,
     getLayoutItem: layout.getLayoutItem,
     mainRect: layout.mainRect,
     mainStyles: layout.mainStyles
@@ -3804,7 +3783,6 @@ function useLayoutItem(options) {
     id
   });
   const isKeptAlive = shallowRef(false);
-  const layoutIsReady = nextTick();
   const {
     layoutItemStyles,
     layoutItemScrimStyles
@@ -3816,8 +3794,7 @@ function useLayoutItem(options) {
   return {
     layoutItemStyles,
     layoutRect: layout.layoutRect,
-    layoutItemScrimStyles,
-    layoutIsReady
+    layoutItemScrimStyles
   };
 }
 const generateLayers = (layout, positions, layoutSizes, activeItems) => {
@@ -3863,7 +3840,29 @@ function createLayout(props) {
     resizeRef,
     contentRect: layoutRect
   } = useResizeObserver();
-  const layers = eagerComputed(() => {
+  const computedOverlaps = computed(() => {
+    const map = /* @__PURE__ */ new Map();
+    const overlaps = props.overlaps ?? [];
+    for (const overlap of overlaps.filter((item) => item.includes(":"))) {
+      const [top, bottom] = overlap.split(":");
+      if (!registered.value.includes(top) || !registered.value.includes(bottom)) continue;
+      const topPosition = positions.get(top);
+      const bottomPosition = positions.get(bottom);
+      const topAmount = layoutSizes.get(top);
+      const bottomAmount = layoutSizes.get(bottom);
+      if (!topPosition || !bottomPosition || !topAmount || !bottomAmount) continue;
+      map.set(bottom, {
+        position: topPosition.value,
+        amount: parseInt(topAmount.value, 10)
+      });
+      map.set(top, {
+        position: bottomPosition.value,
+        amount: -parseInt(bottomAmount.value, 10)
+      });
+    }
+    return map;
+  });
+  const layers = computed(() => {
     const uniquePriorities = [...new Set([...priorities.values()].map((p) => p.value))].sort((a, b) => a - b);
     const layout = [];
     for (const p of uniquePriorities) {
@@ -3892,7 +3891,7 @@ function createLayout(props) {
       }
     };
   });
-  const items = eagerComputed(() => {
+  const items = computed(() => {
     return layers.value.slice(1).map((_ref, index) => {
       let {
         id
@@ -3914,7 +3913,7 @@ function createLayout(props) {
     return items.value.find((item) => item.id === id);
   };
   const rootVm = getCurrentInstance("createLayout");
-  const layoutIsReady = nextTick();
+  const isMounted = shallowRef(false);
   provide(VuetifyLayoutKey, {
     register: (vm, _ref2) => {
       let {
@@ -3953,9 +3952,13 @@ function createLayout(props) {
             transition: "none"
           }
         };
-        if (index.value < 0) throw new Error(`Layout item "${id}" is missing`);
+        if (!isMounted.value) return styles;
         const item = items.value[index.value];
         if (!item) throw new Error(`[Vuetify] Could not find layout item "${id}"`);
+        const overlap = computedOverlaps.value.get(id);
+        if (overlap) {
+          item[overlap.position] += overlap.amount;
+        }
         return {
           ...styles,
           height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : elementSize.value ? `${elementSize.value}px` : void 0,
@@ -3988,8 +3991,7 @@ function createLayout(props) {
     getLayoutItem,
     items,
     layoutRect,
-    rootZIndex,
-    layoutIsReady
+    rootZIndex
   });
   const layoutClasses = computed(() => ["v-layout", {
     "v-layout--full-height": props.fullHeight
@@ -4005,7 +4007,6 @@ function createLayout(props) {
     getLayoutItem,
     items,
     layoutRect,
-    layoutIsReady,
     layoutRef: resizeRef
   };
 }
@@ -4080,7 +4081,7 @@ function createVuetify() {
     goTo
   };
 }
-const version = "3.6.11";
+const version = "3.7.6";
 createVuetify.version = version;
 function inject(key) {
   var _a, _b;
@@ -4099,15 +4100,25 @@ const vuetify_7h9QAQEssH = /* @__PURE__ */ defineNuxtPlugin((app) => {
   });
   app.vueApp.use(vuetify);
 });
+function toArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+function useRequestEvent(nuxtApp = useNuxtApp()) {
+  var _a;
+  return (_a = nuxtApp.ssrContext) == null ? void 0 : _a.event;
+}
+function prerenderRoutes(path) {
+  const paths = toArray(path);
+  appendHeader(useRequestEvent(), "x-nitro-prerender", paths.map((p) => encodeURIComponent(p)).join(", "));
+}
 let routes;
+let _routeRulesMatcher = void 0;
 const prerender_server_LXx1wM9sKF = /* @__PURE__ */ defineNuxtPlugin(async () => {
   let __temp, __restore;
-  if (routerOptions.hashMode) {
-    return;
-  }
   if (routes && !routes.length) {
     return;
   }
+  (/* @__PURE__ */ useRuntimeConfig()).nitro.routeRules;
   routes || (routes = Array.from(processRoutes(([__temp, __restore] = executeAsync(() => {
     var _a;
     return (_a = routerOptions.routes) == null ? void 0 : _a.call(routerOptions, _routes);
@@ -4116,17 +4127,22 @@ const prerender_server_LXx1wM9sKF = /* @__PURE__ */ defineNuxtPlugin(async () =>
   prerenderRoutes(batch);
 });
 const OPTIONAL_PARAM_RE = /^\/?:.*(?:\?|\(\.\*\)\*)$/;
+function shouldPrerender(path) {
+  return !_routeRulesMatcher;
+}
 function processRoutes(routes2, currentPath = "/", routesToPrerender = /* @__PURE__ */ new Set()) {
   var _a;
   for (const route of routes2) {
-    if (OPTIONAL_PARAM_RE.test(route.path) && !((_a = route.children) == null ? void 0 : _a.length)) {
+    if (OPTIONAL_PARAM_RE.test(route.path) && !((_a = route.children) == null ? void 0 : _a.length) && shouldPrerender()) {
       routesToPrerender.add(currentPath);
     }
     if (route.path.includes(":")) {
       continue;
     }
     const fullPath = joinURL(currentPath, route.path);
-    routesToPrerender.add(fullPath);
+    {
+      routesToPrerender.add(fullPath);
+    }
     if (route.children) {
       processRoutes(route.children, fullPath, routesToPrerender);
     }
@@ -4138,13 +4154,130 @@ const plugins = [
   plugin,
   revive_payload_server_eJ33V7gbc6,
   components_plugin_KR1HBZs4kY,
-  nprogress_OPYCKjD1DE,
-  themeLogo_OOqHECXy10,
   vuetify_7h9QAQEssH,
   prerender_server_LXx1wM9sKF
 ];
+function defaultEstimatedProgress(duration, elapsed) {
+  const completionPercentage = elapsed / duration * 100;
+  return 2 / Math.PI * 100 * Math.atan(completionPercentage / 50);
+}
+function createLoadingIndicator(opts = {}) {
+  opts.estimatedProgress || defaultEstimatedProgress;
+  const nuxtApp = useNuxtApp();
+  const progress = ref(0);
+  const isLoading = ref(false);
+  const error = ref(false);
+  const start = () => {
+    error.value = false;
+    set(0);
+  };
+  function set(at = 0) {
+    if (nuxtApp.isHydrating) {
+      return;
+    }
+    if (at >= 100) {
+      return finish();
+    }
+    progress.value = at < 0 ? 0 : at;
+    {
+      isLoading.value = true;
+    }
+  }
+  function finish(opts2 = {}) {
+    progress.value = 100;
+    if (opts2.error) {
+      error.value = true;
+    }
+    if (opts2.force) {
+      progress.value = 0;
+      isLoading.value = false;
+    }
+  }
+  function clear() {
+  }
+  let _cleanup = () => {
+  };
+  return {
+    _cleanup,
+    progress: computed(() => progress.value),
+    isLoading: computed(() => isLoading.value),
+    error: computed(() => error.value),
+    start,
+    set,
+    finish,
+    clear
+  };
+}
+function useLoadingIndicator(opts = {}) {
+  const nuxtApp = useNuxtApp();
+  const indicator = nuxtApp._loadingIndicator = nuxtApp._loadingIndicator || createLoadingIndicator(opts);
+  return indicator;
+}
+const __nuxt_component_0 = defineComponent$1({
+  name: "NuxtLoadingIndicator",
+  props: {
+    throttle: {
+      type: Number,
+      default: 200
+    },
+    duration: {
+      type: Number,
+      default: 2e3
+    },
+    height: {
+      type: Number,
+      default: 3
+    },
+    color: {
+      type: [String, Boolean],
+      default: "repeating-linear-gradient(to right,#00dc82 0%,#34cdfe 50%,#0047e1 100%)"
+    },
+    errorColor: {
+      type: String,
+      default: "repeating-linear-gradient(to right,#f87171 0%,#ef4444 100%)"
+    },
+    estimatedProgress: {
+      type: Function,
+      required: false
+    }
+  },
+  setup(props, { slots, expose }) {
+    const { progress, isLoading, error, start, finish, clear } = useLoadingIndicator({
+      duration: props.duration,
+      throttle: props.throttle,
+      estimatedProgress: props.estimatedProgress
+    });
+    expose({
+      progress,
+      isLoading,
+      error,
+      start,
+      finish,
+      clear
+    });
+    return () => h("div", {
+      class: "nuxt-loading-indicator",
+      style: {
+        position: "fixed",
+        top: 0,
+        right: 0,
+        left: 0,
+        pointerEvents: "none",
+        width: "auto",
+        height: `${props.height}px`,
+        opacity: isLoading.value ? 1 : 0,
+        background: error.value ? props.errorColor : props.color || void 0,
+        backgroundSize: `${100 / progress.value * 100}% auto`,
+        transform: `scaleX(${progress.value}%)`,
+        transformOrigin: "left",
+        transition: "transform 0.1s, height 0.4s, opacity 0.4s",
+        zIndex: 999999
+      }
+    }, slots);
+  }
+});
 const layouts = {
-  default: () => import('./default-B9KtabJL.mjs').then((m) => m.default || m)
+  default: defineAsyncComponent(() => import('./default-Bah_Gd2O.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent$1({
   name: "LayoutLoader",
@@ -4153,12 +4286,11 @@ const LayoutLoader = defineComponent$1({
     name: String,
     layoutProps: Object
   },
-  async setup(props, context) {
-    const LayoutComponent = await layouts[props.name]().then((r) => r.default || r);
-    return () => h(LayoutComponent, props.layoutProps, context.slots);
+  setup(props, context) {
+    return () => h(layouts[props.name], props.layoutProps, context.slots);
   }
 });
-const __nuxt_component_0 = defineComponent$1({
+const __nuxt_component_1 = defineComponent$1({
   name: "NuxtLayout",
   inheritAttrs: false,
   props: {
@@ -4256,8 +4388,12 @@ const _export_sfc = (sfc, props) => {
 };
 const _sfc_main$2 = {};
 function _sfc_ssrRender$1(_ctx, _push, _parent, _attrs) {
-  const _component_NuxtLayout = __nuxt_component_0;
-  _push(ssrRenderComponent(_component_NuxtLayout, _attrs, null, _parent));
+  const _component_NuxtLoadingIndicator = __nuxt_component_0;
+  const _component_NuxtLayout = __nuxt_component_1;
+  _push(`<!--[-->`);
+  _push(ssrRenderComponent(_component_NuxtLoadingIndicator, null, null, _parent));
+  _push(ssrRenderComponent(_component_NuxtLayout, null, null, _parent));
+  _push(`<!--]-->`);
 }
 const _sfc_setup$2 = _sfc_main$2.setup;
 _sfc_main$2.setup = (props, ctx) => {
@@ -5328,10 +5464,14 @@ function useLink(props, attrs) {
     return (isLink == null ? void 0 : isLink.value) || hasEvent(attrs, "click") || hasEvent(props, "click");
   });
   if (typeof RouterLink === "string" || !("useLink" in RouterLink)) {
+    const href2 = toRef(props, "href");
     return {
       isLink,
       isClickable,
-      href: toRef(props, "href")
+      href: href2,
+      linkProps: reactive({
+        href: href2
+      })
     };
   }
   const linkProps = computed(() => ({
@@ -5341,21 +5481,27 @@ function useLink(props, attrs) {
   const routerLink = RouterLink.useLink(linkProps.value);
   const link = computed(() => props.to ? routerLink : void 0);
   const route = useRoute();
+  const isActive = computed(() => {
+    var _a2, _b2, _c;
+    if (!link.value) return false;
+    if (!props.exact) return ((_a2 = link.value.isActive) == null ? void 0 : _a2.value) ?? false;
+    if (!route.value) return ((_b2 = link.value.isExactActive) == null ? void 0 : _b2.value) ?? false;
+    return ((_c = link.value.isExactActive) == null ? void 0 : _c.value) && deepEqual(link.value.route.value.query, route.value.query);
+  });
+  const href = computed(() => {
+    var _a2;
+    return props.to ? (_a2 = link.value) == null ? void 0 : _a2.route.value.href : props.href;
+  });
   return {
     isLink,
     isClickable,
+    isActive,
     route: (_a = link.value) == null ? void 0 : _a.route,
     navigate: (_b = link.value) == null ? void 0 : _b.navigate,
-    isActive: computed(() => {
-      var _a2, _b2, _c;
-      if (!link.value) return false;
-      if (!props.exact) return ((_a2 = link.value.isActive) == null ? void 0 : _a2.value) ?? false;
-      if (!route.value) return ((_b2 = link.value.isExactActive) == null ? void 0 : _b2.value) ?? false;
-      return ((_c = link.value.isExactActive) == null ? void 0 : _c.value) && deepEqual(link.value.route.value.query, route.value.query);
-    }),
-    href: computed(() => {
-      var _a2;
-      return props.to ? (_a2 = link.value) == null ? void 0 : _a2.route.value.href : props.href;
+    href,
+    linkProps: reactive({
+      href,
+      "aria-current": computed(() => isActive.value ? "page" : void 0)
     })
   };
 }
@@ -5657,6 +5803,7 @@ const makeVBtnProps = propsFactory({
     type: Boolean,
     default: void 0
   },
+  activeColor: String,
   baseColor: String,
   symbol: {
     type: null,
@@ -5749,11 +5896,12 @@ const VBtn = genericComponent()({
       }
       return group == null ? void 0 : group.isSelected.value;
     });
+    const color = computed(() => isActive.value ? props.activeColor ?? props.color : props.color);
     const variantProps = computed(() => {
       var _a, _b;
       const showColor = (group == null ? void 0 : group.isSelected.value) && (!link.isLink.value || ((_a = link.isActive) == null ? void 0 : _a.value)) || !group || ((_b = link.isActive) == null ? void 0 : _b.value);
       return {
-        color: showColor ? props.color ?? props.baseColor : props.baseColor,
+        color: showColor ? color.value ?? props.baseColor : props.baseColor,
         variant: props.variant
       };
     });
@@ -5782,7 +5930,7 @@ const VBtn = genericComponent()({
       const hasPrepend = !!(props.prependIcon || slots.prepend);
       const hasAppend = !!(props.appendIcon || slots.append);
       const hasIcon = !!(props.icon && props.icon !== true);
-      return withDirectives(createVNode(Tag, {
+      return withDirectives(createVNode(Tag, mergeProps({
         "type": Tag === "a" ? void 0 : "button",
         "class": ["v-btn", group == null ? void 0 : group.selectedClass.value, {
           "v-btn--active": isActive.value,
@@ -5799,11 +5947,10 @@ const VBtn = genericComponent()({
         "style": [colorStyles.value, dimensionStyles.value, locationStyles.value, sizeStyles.value, props.style],
         "aria-busy": props.loading ? true : void 0,
         "disabled": isDisabled.value || void 0,
-        "href": link.href.value,
         "tabindex": props.loading || props.readonly ? -1 : void 0,
         "onClick": onClick,
         "value": valueAttr.value
-      }, {
+      }, link.linkProps), {
         default: () => {
           var _a;
           return [genOverlays(true, "v-btn"), !props.icon && hasPrepend && createVNode("span", {
@@ -5862,7 +6009,7 @@ const VBtn = genericComponent()({
             "width": "2"
           }, null)])];
         }
-      }), [[Ripple, !isDisabled.value && !!props.ripple, "", {
+      }), [[Ripple, !isDisabled.value && props.ripple, "", {
         center: !!props.icon
       }]]);
     });
@@ -6009,6 +6156,7 @@ const Intersect = {
   unmounted
 };
 const makeVImgProps = propsFactory({
+  absolute: Boolean,
   alt: String,
   cover: Boolean,
   color: String,
@@ -6261,6 +6409,7 @@ const VImg = genericComponent()({
       const responsiveProps = VResponsive.filterProps(props);
       return withDirectives(createVNode(VResponsive, mergeProps({
         "class": ["v-img", {
+          "v-img--absolute": props.absolute,
           "v-img--booting": !isBooted.value
         }, backgroundColorClasses.value, roundedClasses.value, props.class],
         "style": [{
@@ -6295,6 +6444,7 @@ const makeVAvatarProps = propsFactory({
   icon: IconValue,
   image: String,
   text: String,
+  ...makeBorderProps(),
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeRoundedProps(),
@@ -6316,6 +6466,9 @@ const VAvatar = genericComponent()({
       themeClasses
     } = provideTheme(props);
     const {
+      borderClasses
+    } = useBorder(props);
+    const {
       colorClasses,
       colorStyles,
       variantClasses
@@ -6334,7 +6487,7 @@ const VAvatar = genericComponent()({
       "class": ["v-avatar", {
         "v-avatar--start": props.start,
         "v-avatar--end": props.end
-      }, themeClasses.value, colorClasses.value, densityClasses.value, roundedClasses.value, sizeClasses.value, variantClasses.value, props.class],
+      }, themeClasses.value, borderClasses.value, colorClasses.value, densityClasses.value, roundedClasses.value, sizeClasses.value, variantClasses.value, props.class],
       "style": [colorStyles.value, sizeStyles.value, props.style]
     }, {
       default: () => [!slots.default ? props.image ? createVNode(VImg, {
@@ -6350,7 +6503,7 @@ const VAvatar = genericComponent()({
         "defaults": {
           VImg: {
             cover: true,
-            image: props.image
+            src: props.image
           },
           VIcon: {
             icon: props.icon
@@ -6573,7 +6726,7 @@ const VCard = genericComponent()({
       const hasImage = !!(slots.image || props.image);
       const hasCardItem = hasHeader || hasPrepend || hasAppend;
       const hasText = !!(slots.text || props.text != null);
-      return withDirectives(createVNode(Tag, {
+      return withDirectives(createVNode(Tag, mergeProps({
         "class": ["v-card", {
           "v-card--disabled": props.disabled,
           "v-card--flat": props.flat,
@@ -6581,10 +6734,9 @@ const VCard = genericComponent()({
           "v-card--link": isClickable.value
         }, themeClasses.value, borderClasses.value, colorClasses.value, densityClasses.value, elevationClasses.value, loaderClasses.value, positionClasses.value, roundedClasses.value, variantClasses.value, props.class],
         "style": [colorStyles.value, dimensionStyles.value, locationStyles.value, props.style],
-        "href": link.href.value,
         "onClick": isClickable.value && link.navigate,
         "tabindex": props.disabled ? -1 : void 0
-      }, {
+      }, link.linkProps), {
         default: () => {
           var _a;
           return [hasImage && createVNode("div", {
@@ -6645,6 +6797,7 @@ const makeVContainerProps = propsFactory({
     default: false
   },
   ...makeComponentProps(),
+  ...makeDimensionProps(),
   ...makeTagProps()
 }, "VContainer");
 const VContainer = genericComponent()({
@@ -6657,11 +6810,14 @@ const VContainer = genericComponent()({
     const {
       rtlClasses
     } = useRtl();
+    const {
+      dimensionStyles
+    } = useDimension(props);
     useRender(() => createVNode(props.tag, {
       "class": ["v-container", {
         "v-container--fluid": props.fluid
       }, rtlClasses.value, props.class],
-      "style": props.style
+      "style": [dimensionStyles.value, props.style]
     }, slots));
     return {};
   }
@@ -6688,16 +6844,14 @@ const VLayout = genericComponent()({
     const {
       dimensionStyles
     } = useDimension(props);
-    useRender(() => createVNode("div", {
-      "ref": layoutRef,
-      "class": [layoutClasses.value, props.class],
-      "style": [dimensionStyles.value, layoutStyles.value, props.style]
-    }, [createVNode(Suspense, null, {
-      default: () => {
-        var _a;
-        return [createVNode(Fragment, null, [(_a = slots.default) == null ? void 0 : _a.call(slots)])];
-      }
-    })]));
+    useRender(() => {
+      var _a;
+      return createVNode("div", {
+        "ref": layoutRef,
+        "class": [layoutClasses.value, props.class],
+        "style": [dimensionStyles.value, layoutStyles.value, props.style]
+      }, [(_a = slots.default) == null ? void 0 : _a.call(slots)]);
+    });
     return {
       getLayoutItem,
       items
@@ -7052,5 +7206,5 @@ let entry;
 }
 const entry$1 = (ssrContext) => entry(ssrContext);
 
-export { makeGroupProps as $, useElevation as A, useRounded as B, deprecate as C, genOverlays as D, EventProp as E, VAvatar as F, VIcon as G, useTextColor as H, IconValue as I, convertToUnit as J, deepEqual as K, getPropertyFromItem as L, MaybeTransition as M, omit as N, useBackgroundColor as O, provideDefaults as P, focusChild as Q, Ripple as R, filterInputAttrs as S, matchesSelector as T, useLocale as U, VDefaultsProvider as V, makeTransitionProps as W, getCurrentInstanceName as X, useToggleScope as Y, only as Z, useRtl as _, useRender as a, wrapInKeepAlive as a$, useGroup as a0, makeGroupItemProps as a1, makeSizeProps as a2, useSize as a3, useGroupItem as a4, isClickInsideElement as a5, focusableChildren as a6, getNextElement as a7, makeLoaderProps as a8, useLoader as a9, flipSide as aA, flipAlign as aB, flipCorner as aC, consoleError as aD, getAxis as aE, defer as aF, templateRef as aG, IN_BROWSER as aH, useRouter as aI, breakpoints as aJ, useLayout as aK, injectHead as aL, resolveUnrefHeadInput as aM, makeDisplayProps as aN, useGoTo as aO, keys as aP, VProgressLinear as aQ, makeVImgProps as aR, VCardActions as aS, useIntersectionObserver as aT, PageRouteSymbol as aU, useNuxtApp as aV, LayoutMetaSymbol as aW, generateRouteKey$1 as aX, appPageTransition as aY, appKeepalive as aZ, _wrapIf as a_, LoaderSlot as aa, isOn as ab, pick as ac, Intersect as ad, callEvent as ae, useResizeObserver as af, useDisplay as ag, clamp as ah, debounce as ai, ensureValidVNode as aj, _export_sfc as ak, VCard as al, VCardTitle as am, VCardSubtitle as an, VBtn as ao, VImg as ap, VCardText as aq, VLayout as ar, VContainer as as, eventName as at, useTheme as au, makeLayoutItemProps as av, useLayoutItem as aw, VBtnToggleSymbol as ax, destructComputed as ay, parseAnchor as az, getCurrentInstance as b, toArray$1 as b0, consoleWarn as c, getUid as d, entry$1 as default, defineComponent as e, makeTagProps as f, genericComponent as g, createSimpleFunctional as h, makeBorderProps as i, makeDensityProps as j, makeDimensionProps as k, makeElevationProps as l, makeComponentProps as m, makeRoundedProps as n, makeRouterProps as o, propsFactory as p, makeThemeProps as q, makeVariantProps as r, useLink as s, provideTheme as t, useProxiedModel as u, useBorder as v, wrapInArray as w, useVariant as x, useDensity as y, useDimension as z };
+export { useRtl as $, useDimension as A, useElevation as B, useRounded as C, deprecate as D, EventProp as E, genOverlays as F, VAvatar as G, VIcon as H, IconValue as I, useTextColor as J, convertToUnit as K, deepEqual as L, MaybeTransition as M, getPropertyFromItem as N, omit as O, useBackgroundColor as P, provideDefaults as Q, Ripple as R, focusChild as S, filterInputAttrs as T, matchesSelector as U, VDefaultsProvider as V, useLocale as W, makeTransitionProps as X, getCurrentInstanceName as Y, useToggleScope as Z, only as _, useRender as a, wrapInKeepAlive as a$, makeGroupProps as a0, useGroup as a1, makeGroupItemProps as a2, makeSizeProps as a3, useSize as a4, useGroupItem as a5, isClickInsideElement as a6, getNextElement as a7, focusableChildren as a8, makeLoaderProps as a9, destructComputed as aA, parseAnchor as aB, flipSide as aC, flipAlign as aD, flipCorner as aE, getAxis as aF, defer as aG, templateRef as aH, useRouter as aI, makeDisplayProps as aJ, useGoTo as aK, keys as aL, VProgressLinear as aM, makeVImgProps as aN, VCardActions as aO, useIntersectionObserver as aP, makeLayoutItemProps as aQ, useLayoutItem as aR, useTheme as aS, VBtnToggleSymbol as aT, PageRouteSymbol as aU, useNuxtApp as aV, LayoutMetaSymbol as aW, generateRouteKey$1 as aX, appPageTransition as aY, appKeepalive as aZ, _wrapIf as a_, useLoader as aa, LoaderSlot as ab, isOn as ac, pick as ad, Intersect as ae, callEvent as af, useResizeObserver as ag, useDisplay as ah, clamp as ai, isObject as aj, debounce as ak, ensureValidVNode as al, checkPrintable as am, _export_sfc as an, VCard as ao, VCardTitle as ap, VCardSubtitle as aq, VBtn as ar, VImg as as, VCardText as at, VLayout as au, VContainer as av, breakpoints as aw, useLayout as ax, injectHead as ay, resolveUnrefHeadInput as az, getCurrentInstance as b, toArray$1 as b0, consoleWarn as c, consoleError as d, entry$1 as default, getUid as e, defineComponent as f, genericComponent as g, makeTagProps as h, createSimpleFunctional as i, makeBorderProps as j, makeDensityProps as k, makeDimensionProps as l, makeComponentProps as m, makeElevationProps as n, makeRoundedProps as o, propsFactory as p, makeRouterProps as q, makeThemeProps as r, makeVariantProps as s, useLink as t, useProxiedModel as u, provideTheme as v, wrapInArray as w, useBorder as x, useVariant as y, useDensity as z };
 //# sourceMappingURL=server.mjs.map

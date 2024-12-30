@@ -1,14 +1,16 @@
 # Nuxt dev/build outputs
-.output
 .data
+.nuxt
+.output
+dist
 
 .nitro
 .cache
 
-
 # Node dependencies
 node_modules
-
+android
+ios
 # Logs
 logs
 *.log

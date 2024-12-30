@@ -6,7 +6,7 @@
           <v-toolbar-title style="max-width: 120px; min-width: 120px; margin-right: 20px" @click="navigateToHome"
                            class="cursor-pointer">
             <v-img class="ota-ku-ru-icon user-select-none"
-                   src="/ota-kashima/ota-ku-kashima.png"
+                   src="/logo.png"
                    width="100%"
                    alt="ota-ku watch anime in good quality"
             ></v-img>

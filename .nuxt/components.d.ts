@@ -3,15 +3,15 @@ import type { DefineComponent, SlotsType } from 'vue'
 type IslandComponent<T extends DefineComponent> = T & DefineComponent<{}, {refresh: () => Promise<void>}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, SlotsType<{ fallback: { error: unknown } }>>
 interface _GlobalComponents {
       'AnimeCatalog': typeof import("../components/AnimeCatalog.vue")['default']
-    'FooterComponent': typeof import("../components/FooterComponent.vue")['default']
     'MostAnimeList': typeof import("../components/MostAnimeList.vue")['default']
     'OpenAnimeGallery': typeof import("../components/OpenAnimeGallery.vue")['default']
     'OpenAnimePlayer': typeof import("../components/OpenAnimePlayer.vue")['default']
-    'PrimaryHeader': typeof import("../components/PrimaryHeader.vue")['default']
     'TopSlider': typeof import("../components/TopSlider.vue")['default']
+    'CommonFooter': typeof import("../components/common/footer.vue")['default']
+    'CommonHeader': typeof import("../components/common/header.vue")['default']
     'OthersAnimeDialog': typeof import("../components/others/AnimeDialog.vue")['default']
     'OthersBanner': typeof import("../components/others/Banner.vue")['default']
-    'NuxtWelcome': typeof import("../node_modules/nuxt/dist/app/components/welcome")['default']
+    'NuxtWelcome': typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
     'NuxtLayout': typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
     'NuxtErrorBoundary': typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary")['default']
     'ClientOnly': typeof import("../node_modules/nuxt/dist/app/components/client-only")['default']
@@ -35,15 +35,15 @@ interface _GlobalComponents {
     'NuxtIsland': typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
     'NuxtRouteAnnouncer': IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
       'LazyAnimeCatalog': typeof import("../components/AnimeCatalog.vue")['default']
-    'LazyFooterComponent': typeof import("../components/FooterComponent.vue")['default']
     'LazyMostAnimeList': typeof import("../components/MostAnimeList.vue")['default']
     'LazyOpenAnimeGallery': typeof import("../components/OpenAnimeGallery.vue")['default']
     'LazyOpenAnimePlayer': typeof import("../components/OpenAnimePlayer.vue")['default']
-    'LazyPrimaryHeader': typeof import("../components/PrimaryHeader.vue")['default']
     'LazyTopSlider': typeof import("../components/TopSlider.vue")['default']
+    'LazyCommonFooter': typeof import("../components/common/footer.vue")['default']
+    'LazyCommonHeader': typeof import("../components/common/header.vue")['default']
     'LazyOthersAnimeDialog': typeof import("../components/others/AnimeDialog.vue")['default']
     'LazyOthersBanner': typeof import("../components/others/Banner.vue")['default']
-    'LazyNuxtWelcome': typeof import("../node_modules/nuxt/dist/app/components/welcome")['default']
+    'LazyNuxtWelcome': typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
     'LazyNuxtLayout': typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
     'LazyNuxtErrorBoundary': typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary")['default']
     'LazyClientOnly': typeof import("../node_modules/nuxt/dist/app/components/client-only")['default']
@@ -68,28 +68,20 @@ interface _GlobalComponents {
     'LazyNuxtRouteAnnouncer': IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
 }
 
-declare module '@vue/runtime-core' {
-  export interface GlobalComponents extends _GlobalComponents { }
-}
-
-declare module '@vue/runtime-dom' {
-  export interface GlobalComponents extends _GlobalComponents { }
-}
-
 declare module 'vue' {
   export interface GlobalComponents extends _GlobalComponents { }
 }
 
 export const AnimeCatalog: typeof import("../components/AnimeCatalog.vue")['default']
-export const FooterComponent: typeof import("../components/FooterComponent.vue")['default']
 export const MostAnimeList: typeof import("../components/MostAnimeList.vue")['default']
 export const OpenAnimeGallery: typeof import("../components/OpenAnimeGallery.vue")['default']
 export const OpenAnimePlayer: typeof import("../components/OpenAnimePlayer.vue")['default']
-export const PrimaryHeader: typeof import("../components/PrimaryHeader.vue")['default']
 export const TopSlider: typeof import("../components/TopSlider.vue")['default']
+export const CommonFooter: typeof import("../components/common/footer.vue")['default']
+export const CommonHeader: typeof import("../components/common/header.vue")['default']
 export const OthersAnimeDialog: typeof import("../components/others/AnimeDialog.vue")['default']
 export const OthersBanner: typeof import("../components/others/Banner.vue")['default']
-export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome")['default']
+export const NuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const NuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
 export const NuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary")['default']
 export const ClientOnly: typeof import("../node_modules/nuxt/dist/app/components/client-only")['default']
@@ -113,15 +105,15 @@ export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const NuxtRouteAnnouncer: IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
 export const LazyAnimeCatalog: typeof import("../components/AnimeCatalog.vue")['default']
-export const LazyFooterComponent: typeof import("../components/FooterComponent.vue")['default']
 export const LazyMostAnimeList: typeof import("../components/MostAnimeList.vue")['default']
 export const LazyOpenAnimeGallery: typeof import("../components/OpenAnimeGallery.vue")['default']
 export const LazyOpenAnimePlayer: typeof import("../components/OpenAnimePlayer.vue")['default']
-export const LazyPrimaryHeader: typeof import("../components/PrimaryHeader.vue")['default']
 export const LazyTopSlider: typeof import("../components/TopSlider.vue")['default']
+export const LazyCommonFooter: typeof import("../components/common/footer.vue")['default']
+export const LazyCommonHeader: typeof import("../components/common/header.vue")['default']
 export const LazyOthersAnimeDialog: typeof import("../components/others/AnimeDialog.vue")['default']
 export const LazyOthersBanner: typeof import("../components/others/Banner.vue")['default']
-export const LazyNuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome")['default']
+export const LazyNuxtWelcome: typeof import("../node_modules/nuxt/dist/app/components/welcome.vue")['default']
 export const LazyNuxtLayout: typeof import("../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
 export const LazyNuxtErrorBoundary: typeof import("../node_modules/nuxt/dist/app/components/nuxt-error-boundary")['default']
 export const LazyClientOnly: typeof import("../node_modules/nuxt/dist/app/components/client-only")['default']

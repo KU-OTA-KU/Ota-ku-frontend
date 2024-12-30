@@ -1,5 +1,5 @@
 {
-  "name": "Ota-ku",
+  "name": "ota-ku",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,12 +15,10 @@
     "@capacitor/cli": "^6.1.0",
     "@capacitor/core": "^6.1.0",
     "@capacitor/ios": "^6.1.0",
-    "@capacitor/storage": "^1.2.5",
     "@mdi/font": "^7.4.47",
     "axios": "^1.7.2",
     "moment": "^2.30.1",
     "moment-timezone": "^0.5.45",
-    "nprogress": "^0.2.0",
     "nuxt": "^3.12.3",
     "vue": "latest",
     "vuex": "^4.1.0"

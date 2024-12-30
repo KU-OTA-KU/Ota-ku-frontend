@@ -1,73 +1,47 @@
 import process from 'node:process';globalThis._importMeta_=globalThis._importMeta_||{url:"file:///_entry.js",env:process.env};import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://Z:/Ota-ku-nuxt/node_modules/vue-bundle-renderer/dist/runtime.mjs';
-import { eventHandler, setResponseHeader, send, getResponseStatus, setResponseStatus, setResponseHeaders, getQuery, createError, appendResponseHeader, getResponseStatusText } from 'file://Z:/Ota-ku-nuxt/node_modules/h3/dist/index.mjs';
+import { getQuery, createError, appendResponseHeader, getResponseStatus, getResponseStatusText } from 'file://Z:/Ota-ku-nuxt/node_modules/h3/dist/index.mjs';
 import { stringify, uneval } from 'file://Z:/Ota-ku-nuxt/node_modules/devalue/index.js';
 import { joinRelativeURL, joinURL, withoutTrailingSlash } from 'file://Z:/Ota-ku-nuxt/node_modules/ufo/dist/index.mjs';
 import { renderToString } from 'file://Z:/Ota-ku-nuxt/node_modules/vue/server-renderer/index.mjs';
 import { propsToString, renderSSRHead } from 'file://Z:/Ota-ku-nuxt/node_modules/@unhead/ssr/dist/index.mjs';
-import { u as useRuntimeConfig, a as useNitroApp, b as useStorage, g as getRouteRules } from '../runtime.mjs';
 import { createServerHead as createServerHead$1, CapoPlugin } from 'file://Z:/Ota-ku-nuxt/node_modules/unhead/dist/index.mjs';
+import { a as useRuntimeConfig, d as defineRenderHandler, b as useStorage, g as getRouteRules, u as useNitroApp } from './nitro.mjs';
 import { version, unref } from 'file://Z:/Ota-ku-nuxt/node_modules/vue/index.mjs';
 import { defineHeadPlugin } from 'file://Z:/Ota-ku-nuxt/node_modules/@unhead/shared/dist/index.mjs';
 
-function defineRenderHandler(handler) {
-  const runtimeConfig = useRuntimeConfig();
-  return eventHandler(async (event) => {
-    if (event.path === `${runtimeConfig.app.baseURL}favicon.ico`) {
-      setResponseHeader(event, "Content-Type", "image/x-icon");
-      return send(
-        event,
-        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
-      );
-    }
-    const response = await handler(event);
-    if (!response) {
-      const _currentStatus = getResponseStatus(event);
-      setResponseStatus(event, _currentStatus === 200 ? 500 : _currentStatus);
-      return send(
-        event,
-        "No response returned from render handler: " + event.path
-      );
-    }
-    const nitroApp = useNitroApp();
-    await nitroApp.hooks.callHook("render:response", response, { event });
-    if (response.headers) {
-      setResponseHeaders(event, response.headers);
-    }
-    if (response.statusCode || response.statusMessage) {
-      setResponseStatus(event, response.statusCode, response.statusMessage);
-    }
-    return response.body;
-  });
-}
-
-const Vue3 = version.startsWith("3");
+const Vue3 = version[0] === "3";
 
 function resolveUnref(r) {
   return typeof r === "function" ? r() : unref(r);
 }
-function resolveUnrefHeadInput(ref, lastKey = "") {
-  if (ref instanceof Promise)
+function resolveUnrefHeadInput(ref) {
+  if (ref instanceof Promise || ref instanceof Date || ref instanceof RegExp)
     return ref;
   const root = resolveUnref(ref);
   if (!ref || !root)
     return root;
   if (Array.isArray(root))
-    return root.map((r) => resolveUnrefHeadInput(r, lastKey));
+    return root.map((r) => resolveUnrefHeadInput(r));
   if (typeof root === "object") {
-    return Object.fromEntries(
-      Object.entries(root).map(([k, v]) => {
-        if (k === "titleTemplate" || k.startsWith("on"))
-          return [k, unref(v)];
-        return [k, resolveUnrefHeadInput(v, k)];
-      })
-    );
+    const resolved = {};
+    for (const k in root) {
+      if (!Object.prototype.hasOwnProperty.call(root, k)) {
+        continue;
+      }
+      if (k === "titleTemplate" || k[0] === "o" && k[1] === "n") {
+        resolved[k] = unref(root[k]);
+        continue;
+      }
+      resolved[k] = resolveUnrefHeadInput(root[k]);
+    }
+    return resolved;
   }
   return root;
 }
 
 const VueReactivityPlugin = defineHeadPlugin({
   hooks: {
-    "entries:resolve": function(ctx) {
+    "entries:resolve": (ctx) => {
       for (const entry of ctx.entries)
         entry.resolvedInput = resolveUnrefHeadInput(entry.input);
     }
@@ -96,7 +70,7 @@ function createServerHead(options = {}) {
 
 const unheadPlugins = true ? [CapoPlugin({ track: true })] : [];
 
-const renderSSRHeadOptions = {};
+const renderSSRHeadOptions = {"omitLineBreaks":false};
 
 const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
 
@@ -109,6 +83,8 @@ const appTeleportTag = "div";
 const appTeleportAttrs = {"id":"teleports"};
 
 const componentIslands = false;
+
+const appId = "nuxt-app";
 
 function baseURL() {
   return useRuntimeConfig().app.baseURL;
@@ -159,7 +135,11 @@ const getSSRRenderer = lazyCachedFunction(async () => {
 });
 const getSPARenderer = lazyCachedFunction(async () => {
   const manifest = await getClientManifest();
-  const spaTemplate = await import('../virtual/_virtual_spa-template.mjs').then((r) => r.template).catch(() => "").then((r) => APP_ROOT_OPEN_TAG + r + APP_ROOT_CLOSE_TAG);
+  const spaTemplate = await import('../virtual/_virtual_spa-template.mjs').then((r) => r.template).catch(() => "").then((r) => {
+    {
+      return APP_ROOT_OPEN_TAG + r + APP_ROOT_CLOSE_TAG;
+    }
+  });
   const options = {
     manifest,
     renderToString: () => spaTemplate,
@@ -171,9 +151,7 @@ const getSPARenderer = lazyCachedFunction(async () => {
   const renderToString = (ssrContext) => {
     const config = useRuntimeConfig(ssrContext.event);
     ssrContext.modules = ssrContext.modules || /* @__PURE__ */ new Set();
-    ssrContext.payload = {
-      serverRendered: false
-    };
+    ssrContext.payload.serverRendered = false;
     ssrContext.config = {
       public: config.public,
       app: config.app
@@ -207,7 +185,7 @@ const renderer = defineRenderHandler(async (event) => {
       statusMessage: "Page Not Found: /__nuxt_error"
     });
   }
-  const isRenderingIsland = componentIslands ;
+  const isRenderingIsland = componentIslands;
   const islandContext = void 0;
   let url = ssrError?.url || islandContext?.url || event.path;
   const isRenderingPayload = PAYLOAD_URL_RE.test(url) && !isRenderingIsland;
@@ -237,14 +215,8 @@ const renderer = defineRenderHandler(async (event) => {
     nuxt: void 0,
     /* NuxtApp */
     payload: ssrError ? { error: ssrError } : {},
-    _payloadReducers: {},
+    _payloadReducers: /* @__PURE__ */ Object.create(null),
     modules: /* @__PURE__ */ new Set(),
-    set _registeredComponents(value) {
-      this.modules = value;
-    },
-    get _registeredComponents() {
-      return this.modules;
-    },
     islandContext
   };
   const _PAYLOAD_EXTRACTION = !ssrContext.noSSR && !isRenderingIsland;
@@ -287,23 +259,33 @@ const renderer = defineRenderHandler(async (event) => {
   const inlinedStyles = await renderInlineStyles(ssrContext.modules ?? []) ;
   const NO_SCRIPTS = routeOptions.experimentalNoScripts;
   const { styles, scripts } = getRequestDependencies(ssrContext, renderer.rendererContext);
-  if (_PAYLOAD_EXTRACTION && !isRenderingIsland) {
+  if (_PAYLOAD_EXTRACTION && !NO_SCRIPTS && !isRenderingIsland) {
     head.push({
       link: [
         { rel: "preload", as: "fetch", crossorigin: "anonymous", href: payloadURL } 
       ]
     }, headEntryOptions);
   }
-  head.push({ style: inlinedStyles });
+  if (ssrContext._preloadManifest) {
+    head.push({
+      link: [
+        { rel: "preload", as: "fetch", fetchpriority: "low", crossorigin: "anonymous", href: buildAssetsURL(`builds/meta/${ssrContext.runtimeConfig.app.buildId}.json`) }
+      ]
+    }, { ...headEntryOptions, tagPriority: "low" });
+  }
+  if (inlinedStyles.length) {
+    head.push({ style: inlinedStyles });
+  }
   {
     const link = [];
-    for (const style in styles) {
-      const resource = styles[style];
+    for (const resource of Object.values(styles)) {
       {
-        link.push({ rel: "stylesheet", href: renderer.rendererContext.buildAssetsURL(resource.file) });
+        link.push({ rel: "stylesheet", href: renderer.rendererContext.buildAssetsURL(resource.file), crossorigin: "" });
       }
     }
-    head.push({ link }, headEntryOptions);
+    if (link.length) {
+      head.push({ link }, headEntryOptions);
+    }
   }
   if (!NO_SCRIPTS && !isRenderingIsland) {
     head.push({
@@ -313,7 +295,7 @@ const renderer = defineRenderHandler(async (event) => {
       link: getPrefetchLinks(ssrContext, renderer.rendererContext)
     }, headEntryOptions);
     head.push({
-      script: _PAYLOAD_EXTRACTION ? renderPayloadJsonScript({ id: "__NUXT_DATA__", ssrContext, data: splitPayload(ssrContext).initial, src: payloadURL })  : renderPayloadJsonScript({ id: "__NUXT_DATA__", ssrContext, data: ssrContext.payload }) 
+      script: _PAYLOAD_EXTRACTION ? renderPayloadJsonScript({ ssrContext, data: splitPayload(ssrContext).initial, src: payloadURL })  : renderPayloadJsonScript({ ssrContext, data: ssrContext.payload }) 
     }, {
       ...headEntryOptions,
       // this should come before another end of body scripts
@@ -329,7 +311,7 @@ const renderer = defineRenderHandler(async (event) => {
         defer: resource.module ? null : true,
         // if we are rendering script tag payloads that import an async payload
         // we need to ensure this resolves before executing the Nuxt entry
-        tagPosition: _PAYLOAD_EXTRACTION && !true ? "bodyClose" : "head",
+        tagPosition: "head",
         crossorigin: ""
       }))
     }, headEntryOptions);
@@ -390,7 +372,7 @@ async function renderInlineStyles(usedModules) {
   const styleMap = await getSSRStyles();
   const inlinedStyles = /* @__PURE__ */ new Set();
   for (const mod of usedModules) {
-    if (mod in styleMap) {
+    if (mod in styleMap && styleMap[mod]) {
       for (const style of await styleMap[mod]()) {
         inlinedStyles.add(style);
       }
@@ -413,17 +395,21 @@ function renderPayloadJsonScript(opts) {
   const contents = opts.data ? stringify(opts.data, opts.ssrContext._payloadReducers) : "";
   const payload = {
     "type": "application/json",
-    "id": opts.id,
     "innerHTML": contents,
+    "data-nuxt-data": appId,
     "data-ssr": !(opts.ssrContext.noSSR)
   };
+  {
+    payload.id = "__NUXT_DATA__";
+  }
   if (opts.src) {
     payload["data-src"] = opts.src;
   }
+  const config = uneval(opts.ssrContext.config);
   return [
     payload,
     {
-      innerHTML: `window.__NUXT__={};window.__NUXT__.config=${uneval(opts.ssrContext.config)}`
+      innerHTML: `window.__NUXT__={};window.__NUXT__.config=${config}`
     }
   ];
 }

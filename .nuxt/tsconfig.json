@@ -2,8 +2,14 @@
 {
   "compilerOptions": {
     "paths": {
+      "nitropack/types": [
+        "../node_modules/nuxt/node_modules/nitropack/types"
+      ],
+      "nitropack/runtime": [
+        "../node_modules/nuxt/node_modules/nitropack/runtime"
+      ],
       "nitropack": [
-        "../node_modules/nitropack"
+        "../node_modules/nuxt/node_modules/nitropack"
       ],
       "defu": [
         "../node_modules/defu"
@@ -29,9 +35,6 @@
       "@vue/compiler-sfc": [
         "../node_modules/@vue/compiler-sfc"
       ],
-      "@vue/runtime-dom": [
-        "../node_modules/@vue/runtime-dom"
-      ],
       "vue-router": [
         "../node_modules/vue-router"
       ],
@@ -46,6 +49,9 @@
       ],
       "nuxt": [
         "../node_modules/nuxt"
+      ],
+      "vite/client": [
+        "../node_modules/vite/client"
       ],
       "~": [
         ".."
@@ -71,6 +77,9 @@
       "@@/*": [
         "../*"
       ],
+      "#shared": [
+        "../shared"
+      ],
       "assets": [
         "../assets"
       ],
@@ -82,6 +91,12 @@
       ],
       "public/*": [
         "../public/*"
+      ],
+      "#build": [
+        "."
+      ],
+      "#build/*": [
+        "./*"
       ],
       "#app": [
         "../node_modules/nuxt/dist/app"
@@ -99,13 +114,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/dev"
-      ],
-      "#build": [
-        "."
-      ],
-      "#build/*": [
-        "./*"
+        "./manifest/meta/dfc4e955-3750-4fae-9c62-be9ac5c79a2a.json"
       ],
       "#components": [
         "./components"
@@ -144,15 +153,21 @@
     "../.config/nuxt.*",
     "../**/*",
     "../node_modules/@nuxt/devtools/runtime",
+    "../node_modules/@nuxt/devtools/dist/runtime",
     "../node_modules/@nuxt/telemetry/runtime",
+    "../node_modules/@nuxt/telemetry/dist/runtime",
     ".."
   ],
   "exclude": [
     "../dist",
     "../node_modules",
     "../node_modules/nuxt/node_modules",
+    "../node_modules/@nuxt/devtools/node_modules",
+    "../node_modules/@nuxt/telemetry/node_modules",
     "../node_modules/@nuxt/devtools/runtime/server",
+    "../node_modules/@nuxt/devtools/dist/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",
+    "../node_modules/@nuxt/telemetry/dist/runtime/server",
     "../.output"
   ]
 }

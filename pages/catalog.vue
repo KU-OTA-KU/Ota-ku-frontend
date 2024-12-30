@@ -1,5 +1,4 @@
 <template>
-  <primary-header/>
   <v-layout>
     <v-main tag="main">
       <v-container style="max-width: var(--ota-ku-max-width); padding: 20px 10px 0 10px; align-items: center;">

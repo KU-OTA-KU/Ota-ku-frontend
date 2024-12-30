@@ -1,10 +1,8 @@
 <template>
-  <PrimaryHeader/>
   <v-layout>
     <v-main tag="main">
       <TopSlider/>
       <MostAnimeList/>
-      <FooterComponent/>
     </v-main>
   </v-layout>
 </template>
