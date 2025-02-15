@@ -1,7 +1,7 @@
 // store/index.ts
 import { createStore } from "vuex";
-import mostAnime from "./modules/mostAnime";
-import topSlider from "./modules/topSlider";
+import mostAnime from "./modules/mostAnime.js";
+import topSlider from "./modules/topSlider.js";
 
 export const state = () => ({});
 
