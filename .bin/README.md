@@ -1,1 +1,0 @@
-# Ota-ku-Nuxt
