@@ -1,5 +1,0 @@
-const root = '@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");@font-face{font-family:Kashima;src:url(' + __buildAssetsURL("Kashima.DzwpGKj7.otf") + ")}*{box-sizing:border-box}*,:after,:before{margin:0;padding:0}@media screen and (max-width:1024px){::-moz-selection{background:transparent}::selection{background:transparent}:active{outline:none!important;text-decoration:none!important}*{-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-ms-touch-action:manipulation}}body{background-color:var(--cl-3);color:var(--cl-2);font-family:Montserrat,sans-serif;font-optical-sizing:auto;font-size:var(--ota-ku-font-clamp);font-style:normal;font-weight:400;min-height:100dvh}body,body #app{scroll-behavior:smooth}body a{color:#fff}";
-export {
-  root as default
-};
-//# sourceMappingURL=entry-styles-1.mjs-CfhKdR9h.js.map
