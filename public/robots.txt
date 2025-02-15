@@ -1,0 +1,29 @@
+User-agent: *
+Disallow: /openAnimeView
+Allow: /catalog
+Disallow: /error
+Disallow: /404
+Disallow: /doc/privacy_policy_ru
+Disallow: /doc/terms_ru
+Disallow: /doc/authors_ru
+
+User-agent: Yandex
+Disallow: /openAnimeView
+Allow: /catalog
+Disallow: /error
+Disallow: /404
+Disallow: /doc/privacy_policy_ru
+Disallow: /doc/terms_ru
+Disallow: /doc/authors_ru
+
+User-agent: Googlebot
+Disallow: /openAnimeView
+Allow: /catalog
+Disallow: /error
+Disallow: /404
+Disallow: /doc/privacy_policy_ru
+Disallow: /doc/terms_ru
+Disallow: /doc/authors_ru
+
+Sitemap: https://ota-ku.ru/sitemap.xml
+Sitemap: https://ota-ku.ru/sitemap_anime.xml
