@@ -5,9 +5,9 @@ export default defineNuxtConfig({
     '~/assets/variables.scss',
   ],
 
-  // generate: {
-  //   routes: ['/', '/catalog', '/openAnimeView']
-  // },
+  generate: {
+    routes: ['/', '/catalog', '/openAnimeView']
+  },
 
   build: {
     transpile: ['vuetify'],
@@ -35,7 +35,6 @@ export default defineNuxtConfig({
   },
 
   ssr: true,
-  components: true,
 
   compatibilityDate: '2024-07-06',
 })
