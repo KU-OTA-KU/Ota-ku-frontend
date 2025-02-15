@@ -258,18 +258,9 @@ export default defineComponent({
         ];
 
         this.mostAnimeList = animeList;
-        await Storage.set({
-          key: 'mostAnimeList',
-          value: JSON.stringify(animeList),
-        });
 
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 2);
-
-        await Storage.set({
-          key: 'mostAnimeListExpirationDate',
-          value: expirationDate.getTime().toString(),
-        });
 
       } catch (error) {
         console.error('Error fetching anime data:', error);

@@ -111,18 +111,9 @@ export default defineComponent({
 
         const animeList = response.data.data.animes;
         this.topSliderAnimeList = animeList;
-        await Storage.set({
-          key: 'topSliderAnimeList',
-          value: JSON.stringify(animeList),
-        });
 
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 2);
-
-        await Storage.set({
-          key: 'topSliderAnimeListExpirationDate',
-          value: expirationDate.getTime().toString(),
-        });
 
       } catch (error) {
         console.error('Error fetching anime data:', error);

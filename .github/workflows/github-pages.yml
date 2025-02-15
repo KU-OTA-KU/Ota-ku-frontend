@@ -39,7 +39,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nuxt-build-
       - name: Install dependencies
-        run: npm install --legacy-peer-deps
+        run: npm i
       - name: Static HTML export with Nuxt
         run: npm run generate
       - name: Upload artifact
