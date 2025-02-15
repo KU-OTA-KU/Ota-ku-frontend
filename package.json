@@ -15,7 +15,6 @@
     "@capacitor/cli": "^6.1.0",
     "@capacitor/core": "^6.1.0",
     "@capacitor/ios": "^6.1.0",
-    "@capacitor/storage": "^1.2.5",
     "@mdi/font": "^7.4.47",
     "axios": "^1.7.2",
     "moment": "^2.30.1",

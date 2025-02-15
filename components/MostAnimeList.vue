@@ -60,9 +60,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue";
+import {defineComponent} from "vue";
 import axios from "axios";
-import {Storage} from "@capacitor/storage";
 import AnimeDialog from "@/components/others/AnimeDialog.vue";
 
 export default defineComponent({
@@ -80,32 +79,14 @@ export default defineComponent({
   },
   methods: {
     async loadData() {
-      try {
-        const {value} = await Storage.get({key: 'mostAnimeList'});
-        const {value: expirationDateString} = await Storage.get({key: 'mostAnimeListExpirationDate'});
-
-        if (value && expirationDateString) {
-          const expirationDate = parseInt(expirationDateString, 10);
-          const currentDate = new Date().getTime();
-
-          if (currentDate < expirationDate) {
-            this.mostAnimeList = JSON.parse(value);
-          } else {
-            await this.fetchAnimeData();
-          }
-        } else {
-          await this.fetchAnimeData();
-        }
-      } catch (error) {
-        console.error('Error fetching anime data:', error);
-      }
+        await this.fetchAnimeData();
     },
     async fetchAnimeData() {
       try {
         const response = await axios.post("https://shikimori.one/api/graphql", {
           query: `
                 query {
-                  ongoingAnime: animes(season: "2023_2024", limit: 6, order: popularity, status: "ongoing", kind: "tv") {
+                  ongoingAnime: animes(season: "2023_2025", limit: 6, order: popularity, status: "ongoing", kind: "tv") {
                     id
                     russian
                     kind
@@ -121,7 +102,7 @@ export default defineComponent({
                       year
                     }
                   }
-                  anonseAnime: animes(season: "2023_2024", limit: 6, order: popularity, status: "anons", kind: "tv,ona,ova") {
+                  anonseAnime: animes(season: "2023_2025", limit: 6, order: popularity, status: "anons", kind: "tv,ona,ova") {
                     id
                     russian
                     kind
@@ -169,7 +150,7 @@ export default defineComponent({
                       year
                     }
                   }
-                  filmsAnime: animes(season: "2020_2024", limit: 6, order: popularity, status: "released", kind: "movie") {
+                  filmsAnime: animes(season: "2020_2025", limit: 6, order: popularity, status: "released", kind: "movie") {
                     id
                     russian
                     kind
@@ -185,7 +166,7 @@ export default defineComponent({
                       year
                     }
                   }
-                  ovaAnime: animes(season: "2022_2024", limit: 6, order: popularity, status: "released", kind: "ova") {
+                  ovaAnime: animes(season: "2022_2025", limit: 6, order: popularity, status: "released", kind: "ova") {
                     id
                     russian
                     kind
@@ -201,7 +182,7 @@ export default defineComponent({
                       year
                     }
                   }
-                  onaAnime: animes(season: "2022_2024", limit: 6, order: popularity, status: "released", kind: "ona") {
+                  onaAnime: animes(season: "2022_2025", limit: 6, order: popularity, status: "released", kind: "ona") {
                     id
                     russian
                     kind

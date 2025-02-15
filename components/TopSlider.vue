@@ -56,9 +56,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, ref} from "vue";
+import {defineComponent} from "vue";
 import axios from "axios";
-import {Storage} from "@capacitor/storage";
 import {cleanDescription} from "~/ts/cleanDescription";
 import {openAnime} from "~/ts/goTo";
 
@@ -80,25 +79,7 @@ export default defineComponent({
 
   methods: {
     async loadData() {
-      try {
-        const {value} = await Storage.get({key: 'topSliderAnimeList'});
-        const {value: expirationDateString} = await Storage.get({key: 'topSliderAnimeListExpirationDate'});
-
-        if (value && expirationDateString) {
-          const expirationDate = parseInt(expirationDateString, 10);
-          const currentDate = new Date().getTime();
-
-          if (currentDate < expirationDate) {
-            this.topSliderAnimeList = JSON.parse(value);
-          } else {
-            await this.fetchAnimeData();
-          }
-        } else {
-          await this.fetchAnimeData();
-        }
-      } catch (error) {
-        console.error('Error fetching anime data:', error);
-      }
+        await this.fetchAnimeData();
     },
     async fetchAnimeData() {
       try {
